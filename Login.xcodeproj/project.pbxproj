@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6AB899E1B51B37D865C33D6C /* Pods_Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3A1E2CF3A2B343D76D1F37 /* Pods_Login.framework */; };
 		6B3417AB1FB2881500C05AC2 /* RentalTableViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3417AA1FB2881500C05AC2 /* RentalTableViewVC.swift */; };
+		6B4FC2BE1FD2114400EF2092 /* RentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC2BD1FD2114400EF2092 /* RentalCell.swift */; };
+		6B4FC2C11FD21B4200EF2092 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC2C01FD21B4200EF2092 /* DataService.swift */; };
 		6BBC048C1FB1446D0002D18F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC048B1FB1446D0002D18F /* AppDelegate.swift */; };
 		6BBC048E1FB1446D0002D18F /* LoginPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC048D1FB1446D0002D18F /* LoginPageVC.swift */; };
 		6BBC04911FB1446D0002D18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBC048F1FB1446D0002D18F /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		3D3A1E2CF3A2B343D76D1F37 /* Pods_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3417AA1FB2881500C05AC2 /* RentalTableViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTableViewVC.swift; sourceTree = "<group>"; };
+		6B4FC2BD1FD2114400EF2092 /* RentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCell.swift; sourceTree = "<group>"; };
+		6B4FC2C01FD21B4200EF2092 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		6BBC04881FB1446D0002D18F /* Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Login.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BBC048B1FB1446D0002D18F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BBC048D1FB1446D0002D18F /* LoginPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageVC.swift; sourceTree = "<group>"; };
@@ -50,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B4FC2BF1FD21B3300EF2092 /* Serv */ = {
+			isa = PBXGroup;
+			children = (
+				6B4FC2C01FD21B4200EF2092 /* DataService.swift */,
+			);
+			path = Serv;
+			sourceTree = "<group>";
+		};
 		6BBC047F1FB1446D0002D18F = {
 			isa = PBXGroup;
 			children = (
@@ -71,11 +83,12 @@
 		6BBC048A1FB1446D0002D18F /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				6B4FC2BF1FD21B3300EF2092 /* Serv */,
 				6BBC04A21FB197DF0002D18F /* View */,
 				6BBC04A01FB197CC0002D18F /* Model */,
-				6BBC048B1FB1446D0002D18F /* AppDelegate.swift */,
 				6BBC049F1FB197AB0002D18F /* Controller */,
 				6BBC04921FB1446E0002D18F /* Assets.xcassets */,
+				6BBC048B1FB1446D0002D18F /* AppDelegate.swift */,
 				6BBC048F1FB1446D0002D18F /* Main.storyboard */,
 				6BBC04941FB1446E0002D18F /* LaunchScreen.storyboard */,
 				6BBC049D1FB18C380002D18F /* GoogleService-Info.plist */,
@@ -106,6 +119,7 @@
 		6BBC04A21FB197DF0002D18F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6B4FC2BD1FD2114400EF2092 /* RentalCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,6 +226,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -223,6 +238,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -277,6 +293,8 @@
 				6BBC04A61FB19C7E0002D18F /* AdvertisingVC.swift in Sources */,
 				6BBC04A41FB198070002D18F /* Rentals.swift in Sources */,
 				6BBC048C1FB1446D0002D18F /* AppDelegate.swift in Sources */,
+				6B4FC2BE1FD2114400EF2092 /* RentalCell.swift in Sources */,
+				6B4FC2C11FD21B4200EF2092 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

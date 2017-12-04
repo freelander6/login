@@ -6,75 +6,61 @@
 //  Copyright © 2017 George Woolley. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import Firebase
 
-
-//struct RentalObjects {
-//
-//
-//    var rentalDictonary = [
-//    "title" : "",
-//    "rentalType" : "",
-//    "dateAval" : "",
-//    "location" : "",
-//    "price" : "",
-//    "bond" : "",
-//    "pets" : "",
-//    "descripton" : ""
-//
-//   ]
-//
-//
-//    var rentalArray = [[:]]
-//
-//    init() {
-//        rentalArray.append(rentalDictonary)
-//    }
-//
-//}
-
-//
-//class Rentals: NSObject {
-//
-//    var title: String?
-//    var rentalType: String?
-//    var dateAval: String?
-//    var location: String?
-//    var price: String?
-//    var bond: String?
-//    var pets: String?
-//    var descripton: String?
-//
-//    init(title: String?, rentalType: String?, dataAval: String?, location: String?, price: String?, bond: String?, pets: String?, description: String?) {
-//        self.title = title
-//        self.rentalType = rentalType
-//        self.dateAval = dataAval
-//        self.location = location
-//        self.price = price
-//        self.bond = bond
-//        self.pets = pets
-//        self.descripton = description
-//
-//        }
-//
-//}
-
-
-  struct RentalObjects {
-
-    var title = [String]()
-    var rentalType = [String]()
-    var dateAval = [String]()
-    var location = [String]()
-    var price = [String]()
-    var bond = [String]()
-    var pets = [String]()
-    var descripton = [String]()
-
-  //  var descripton: [String : AnyObject] = [:]
-
+class Rental {
+    
+    private var _title: String!
+    private var _imgURL: String!
+    private var _price: String!
+    private var _postID: String!
+    private var _postRef: DatabaseReference!
+    
+    var title: String? {
+        return _title
+    }
+    
+    var imageURL: String? {
+        return _imgURL
+    }
+    
+    var price: String {
+        return _price
+    }
+    
+    var postID: String {
+        return _postID
+    }
+    
+    init(title: String, imageURL: String, price: String) {
+        
+        self._title = title
+        self._imgURL = imageURL
+        self._price = price
+    }
+    
+    init(postID: String, userData: Dictionary<String, AnyObject>) {
+        
+        self._postID = postID
+        
+        if let title = userData["title"] as? String {
+            self._title = title
+        }
+        
+        if let imageURL = userData["imageURL"] as? String {
+            self._imgURL = imageURL
+        }
+        
+        if let price = userData["price"] as? String {
+            self._price = price
+        }
+        
+      
+        
+    }
+    
+   
 }
-
-
 
 

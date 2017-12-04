@@ -9,105 +9,95 @@
 import UIKit
 import FBSDKLoginKit
 import Firebase
+import SwiftKeychainWrapper
 
-
-
-class LoginPageVC: UIViewController, FBSDKLoginButtonDelegate {
+class LoginPageVC: UIViewController {
     
-
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil {
-            print("The following eror has occured \(error)")
-            return
-        }
-           print("Success")
-            signUserIntoFB()
-        }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Logged off FB")
-    }
-    
-    
-    func signUserIntoFB() {
-        
-        let accessToken = FBSDKAccessToken.current()                                // This is used to feed into check login cred
-        guard let accessTokenAsString = accessToken?.tokenString else {return}      // Value as a string
-        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenAsString) //Value used to check fb creds
-        
-        Auth.auth().signIn(with: credentials) { (user, err) in           // Checking FB creds
-            if err != nil {
-                print("An error has occured: \(err ?? "" as! Error)")
-                return
-            }
-            print("Successfully signed in FB as:", user ?? "")
-            
-//            self.navigationController?.popViewController(animated: true)
-
-//            self.performSegue(withIdentifier: "optionsVC", sender: nil)
-        }
-        
-        // Sign into Firebase
-        
-        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, email, name"]).start { (connection, result, err) in
-            
-            if err != nil {
-                print("Failed with error", err ?? "")
-                return
-            }
-            print(result ?? "")
-            self.dismiss(animated: true, completion: nil)
-            self.performSegue(withIdentifier: "optionsVC", sender: nil)
-        }
-    }
-    
-
-    let faceBookLoginBtn = FBSDKLoginButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        view.addSubview(faceBookLoginBtn)
-        placementOfFacebookBtn()
-        faceBookLoginBtn.delegate = self
-        //  faceBookLoginBtn.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50
+      }
+    
+   
+   override func viewDidAppear(_ animated: Bool) {
+        
+    if let _  = KeychainWrapper.standard.string(forKey: "uid") {
+        performSegue(withIdentifier: "optionsVC", sender: nil)
+    }
+    
 }
     
-   
-   
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
+    func storeKeychainAndCreateDBUser(id: String, users: Dictionary<String, String>) {
         
+        DataService.ds.createFirebaseDBUser(uid: id, users: users)
+        
+        let val = KeychainWrapper.standard.set(id, forKey: "uid")
+        print("Saved to keychain: \(val)")
+        performSegue(withIdentifier: "optionsVC", sender: nil)
+    }
     
-     
-        if FBSDKAccessToken.current() != nil && userloggedOff.isUserLogggedOff == false  {
-        self.performSegue(withIdentifier: "optionsVC", sender: nil)
+    
+    @IBAction func facebookLoginBnPressed(_ sender: Any) {
+        
+        let fblogin = FBSDKLoginManager()
+        fblogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if error != nil {
+                print("An error has occured logging into facebook")
+            } else {
+                print("Succesfully logged into facebook")
+                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    if error != nil {
+                        print("An error has occured signing into firebase")
+                    } else {
+                        print("Successfully signed in as \(String(describing: user))")
+                        
+                        if let user = user {
+                            let userData = ["provider": user.providerID]
+                            self.storeKeychainAndCreateDBUser(id: user.uid, users: userData)
+                        }
+                        
+                    }
+                })
+            }
         }
         
-        
-        
-    }
-    
-    func placementOfFacebookBtn(){         // Using constraints - Better than frames
-        
-        let horizonalContraints = NSLayoutConstraint(item: faceBookLoginBtn, attribute: .leadingMargin, relatedBy: .equal, toItem: view,   attribute: .leadingMargin, multiplier: 1.0, constant: 20)
-        
-        let horizonal2Contraints = NSLayoutConstraint(item: faceBookLoginBtn, attribute: .trailingMargin, relatedBy: .equal, toItem: view,
-                                                      attribute: .trailingMargin, multiplier: 1.0, constant: -20)
-        
-        let pinTop = NSLayoutConstraint(item: faceBookLoginBtn, attribute: .top, relatedBy: .equal,
-                                        toItem: view, attribute: .top, multiplier: 1.0, constant: 250)
-        
-        faceBookLoginBtn.translatesAutoresizingMaskIntoConstraints = false   // *** NEEDED
-        NSLayoutConstraint.activate([horizonalContraints, horizonal2Contraints,pinTop])
     }
     
     
-    
+    @IBAction func emailLoginBtnPressed(_ sender: Any) {
+        if let email = emailField.text, let pwd = passwordField.text {
+            Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                if error == nil {   //user signed in with existing account
+                    print("Signed in with existing email")
+                    if let user = user {
+                        let userData = ["provider": user.providerID]
+                        self.storeKeychainAndCreateDBUser(id: user.uid, users: userData)
+                    }
+                    
+                } else {
+                    // Authorise with firebase
+                    Auth.auth().createUser(withEmail: email, password: pwd, completion: { (user, error) in
+                        if error != nil {
+                            print("Unable to authenticate with email/password \(error ?? "" as! Error)")
+                        } else {
+                            print("New user account created and signed in ")
+                            // Store login in keychain so that it can be retrieved later
+                            if let user = user {
+                                let userData = ["provider": user.providerID]
+                                self.storeKeychainAndCreateDBUser(id: user.uid, users: userData )
+                            }
+                        }
+                    })
+                }
+            })
+            
+            
+        }
 
+
+    }
 }
-
-
- 

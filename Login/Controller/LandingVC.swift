@@ -8,22 +8,20 @@
 
 import UIKit
 import FBSDKLoginKit
-
-
-struct userLogin {
-    
-    var isUserLogggedOff : Bool
-}
-
-
-var userloggedOff = userLogin(isUserLogggedOff: false)
+import SwiftKeychainWrapper
+import Firebase
 
 
 class LandingVC: UIViewController {
     
   @IBAction func logOffPressed(_ sender: Any) {
-    userloggedOff.isUserLogggedOff = true 
     
+    KeychainWrapper.standard.removeObject(forKey: "uid")
+    performSegue(withIdentifier: "loginVC", sender: nil)
+    let fbLogin = FBSDKLoginManager()
+    fbLogin.logOut()
+    
+    try! Auth.auth().signOut()
 }
     
     @IBAction func pressedLooking(_ sender: Any) {
