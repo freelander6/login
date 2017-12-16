@@ -25,6 +25,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     @IBOutlet weak var rentField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var addImage: UIImageView!
+    @IBOutlet weak var emailField: UITextField!
     
     
     var imageSelected = false
@@ -188,7 +189,8 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         "date": dateAvalField.text as AnyObject,
         "type": rentalTypeField.text as AnyObject,
         "pets": petsField.text as AnyObject,
-        "imageURL": imgURL as AnyObject
+        "imageURL": imgURL as AnyObject,
+        "email": emailField.text as AnyObject
         ]
         
         //Post data
@@ -203,6 +205,8 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         dateAvalField.text = ""
         petsField.text = ""
         furnishedField.text = ""
+        emailField.text = ""
+        addImage.image = #imageLiteral(resourceName: "house")
     }
     
     @IBAction func addImagePressed(_ sender: Any) {

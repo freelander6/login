@@ -43,6 +43,7 @@ class LoginPageVC: UIViewController {
     @IBAction func facebookLoginBnPressed(_ sender: Any) {
         
         let fblogin = FBSDKLoginManager()
+        
         fblogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
             if error != nil {
                 print("An error has occured logging into facebook")

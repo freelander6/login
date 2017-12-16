@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 import Firebase
 
 
-class LandingVC: UIViewController {
+class MyAccountVC: UIViewController {
     
   @IBAction func logOffPressed(_ sender: Any) {
     
@@ -24,13 +24,6 @@ class LandingVC: UIViewController {
     try! Auth.auth().signOut()
 }
     
-    @IBAction func pressedLooking(_ sender: Any) {
-    }
-    
-    @IBAction func pressedAdvertising(_ sender: Any) {
-        
-        performSegue(withIdentifier: "advertising", sender: Any?.self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

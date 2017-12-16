@@ -22,6 +22,7 @@ class Rental {
     private var _pets: String!
     private var _description: String!
     private var _postID: String!
+    private var _email: String!
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -60,6 +61,9 @@ class Rental {
         return _postID
     }
     
+    var email: String? {
+        return _email
+    }
     
     
     init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String) {
@@ -108,6 +112,10 @@ class Rental {
         
         if let description = userData["description"] as? String {
             self._description = description
+        }
+        
+        if let email = userData["email"] as? String {
+            self._email = email
         }
         
       

@@ -7,17 +7,42 @@
 //
 import UIKit
 import FirebaseDatabase
+import MessageUI
 
 
-class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
     var rentalsArray = [Rental]()
+    var currentEmail = ""
+    var index = ""
+
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier ==  "toEmailVC" {
+//            let destination = segue.destination as? EmailVC,
+//            passIndex = tableView.indexPathsForSelectedRow. {
+//                destination?.emailAdress = rentalsArray[passIndex]
+//            }
+//        }
+//    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toEmailVC" {
+            let destination = segue.destination as? EmailVC
+            let value = tableView.indexPathForSelectedRow?.row
+            
+            
+            destination?.emailAdress = rentalsArray[value!].email!
+        }
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,9 +57,14 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
       let rental = rentalsArray[indexPath.row]
         
-     
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? RentalCell {
+            
+            if cell.emailField.text != nil {
+                currentEmail = cell.emailField.text!
+            }
+            
+          
             
             var rentalImage = ""
             
@@ -54,9 +84,11 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         } else {
             return RentalCell()
         }
-    
+        
     } 
     
+    
+  
     
     @IBAction func backPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -91,8 +123,14 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         
         }
-        
-  
-    
     }
+    
+    
+
+    @IBAction func contactBtnPressed(_ sender: Any) {
+    }
+    
+
+    
+    
 }

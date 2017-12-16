@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Foundation
 import Firebase
+import MessageUI
 
 
-class RentalCell: UITableViewCell {
+class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
     
     var rental: Rental!
     
@@ -24,6 +26,7 @@ class RentalCell: UITableViewCell {
     @IBOutlet weak var dateAvalLbl: UILabel!
     @IBOutlet weak var petsLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
+    @IBOutlet weak var emailField: UILabel!
     
     
     @IBOutlet weak var rentalImage: UIImageView!
@@ -32,6 +35,10 @@ class RentalCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    
+ 
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -50,6 +57,7 @@ class RentalCell: UITableViewCell {
         self.dateAvalLbl.text = rental.dateAval
         self.petsLbl.text = rental.pets
         self.descriptionLbl.text = rental.description
+        self.emailField.text = rental.email
     
         if image != nil {
             //Image already in cache
@@ -75,5 +83,8 @@ class RentalCell: UITableViewCell {
         }
         
     }
+    
+
+    
 
 }
