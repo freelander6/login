@@ -13,7 +13,6 @@ import MessageUI
 class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
     var rentalsArray = [Rental]()
-    var currentEmail = ""
     var index = ""
 
   
@@ -35,12 +34,20 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toEmailVC" {
-            let destination = segue.destination as? EmailVC
+        if segue.identifier == "toDetailVC" {
+            let destination = segue.destination as? DetailVC
             let value = tableView.indexPathForSelectedRow?.row
             
             
             destination?.emailAdress = rentalsArray[value!].email!
+            destination?.bond = rentalsArray[value!].bond!
+            destination?.dateAval = rentalsArray[value!].dateAval!
+            destination?.pets = rentalsArray[value!].pets!
+            destination?.rent = rentalsArray[value!].price!
+            destination?.rentalTitle = rentalsArray[value!].title!
+            destination?.imageURL = rentalsArray[value!].imageURL!
+            destination?.des = rentalsArray[value!].description!
+            
         }
     }
     
@@ -57,35 +64,34 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
       let rental = rentalsArray[indexPath.row]
         
-        
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? RentalCell {
-            
-            if cell.emailField.text != nil {
-                currentEmail = cell.emailField.text!
-            }
-            
-          
-            
+
+
+
+
             var rentalImage = ""
-            
+
             if rental.imageURL != nil {
                 rentalImage = rental.imageURL!
             }
-            
-            
+
+
             if let img = RentalTableViewVC.imageCache.object(forKey: rentalImage as NSString) {
                 cell.configureCell(rental: rental, image: img)
+
                 return cell
             } else {
                 cell.configureCell(rental: rental, image: nil)
+
                 return cell
             }
-        
+
         } else {
             return RentalCell()
         }
-        
-    } 
+   
+    }
     
     
   
@@ -125,6 +131,9 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         performSegue(withIdentifier: "toDetailVC" , sender: nil)
+    }
     
 
     @IBAction func contactBtnPressed(_ sender: Any) {

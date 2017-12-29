@@ -34,9 +34,12 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     var databaseRef:DatabaseReference?   //reference to firebase dba
     let rentalTypes = ["Room in shared house", "Entire House","Room Share", "Apartment", "Cottage", "Other"]
     let petsAllowed = ["Yes", "No"]
+    let furnishedStatus  = ["Yes", "No"]
+    
+    
     let rentalTypePicker = UIPickerView()
     let petsAllowedPicker = UIPickerView()
-    
+    let furnishedStatusPicker = UIPickerView()
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -94,6 +97,11 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     func setupPetsAllowedPicker() {
         
+        petsField.inputView = petsAllowedPicker
+        petsAllowedPicker.dataSource = self
+        petsAllowedPicker.delegate = self
+        petsField.textAlignment = .center
+        petsField.placeholder = "Are pets allowed?"
     }
     
     
