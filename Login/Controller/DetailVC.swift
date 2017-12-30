@@ -37,6 +37,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
 
         titleField.text = rentalTitle
         houseTypeField.text = rentalType
