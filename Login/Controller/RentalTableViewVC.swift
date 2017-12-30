@@ -102,7 +102,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         tableView.dataSource = self
         tableView.dataSource = self
         

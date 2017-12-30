@@ -24,9 +24,8 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     @IBOutlet weak var bondField: UITextField!
     @IBOutlet weak var rentField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
-    @IBOutlet weak var addImage: UIImageView!
     @IBOutlet weak var emailField: UITextField!
-    
+    @IBOutlet weak var houseBtnImage: UIButton!
     
     var imageSelected = false
     let datePicker = UIDatePicker()
@@ -107,7 +106,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            addImage.image = image
+            houseBtnImage.setImage(image, for: .normal)
             imageSelected = true
         } else {
             print("Invalid image from picker")
@@ -139,7 +138,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     @IBAction func submitForm(_ sender: Any) {      // Send data to firebase on submit
         
-        guard let img = addImage.image, imageSelected == true else {
+        guard let img = houseBtnImage.currentImage, imageSelected == true else {
           
             let alert = UIAlertController(title: "You must upload one image to proceed", message: "It's recommended you upload one image before continuing.", preferredStyle: .alert)
             
@@ -214,12 +213,16 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         petsField.text = ""
         furnishedField.text = ""
         emailField.text = ""
-        addImage.image = #imageLiteral(resourceName: "house")
+        houseBtnImage.setImage(#imageLiteral(resourceName: "house"), for: .normal)
     }
     
-    @IBAction func addImagePressed(_ sender: Any) {
+    
+    @IBAction func addImageBtnPressed(_ sender: Any) {
         present(imagePicker, animated: true, completion: nil)
     }
+    
+    
+
     
 }
 

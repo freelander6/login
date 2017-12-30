@@ -85,8 +85,8 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
         mailComposerVC.setToRecipients([emailAdress])
-        mailComposerVC.setSubject("Sending you an in-app e-mail...")
-        mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+        mailComposerVC.setSubject("RE WannaRental enquiry ")
+       // mailComposerVC.setMessageBody("Set message body here", isHTML: false)
         
         return mailComposerVC
     }
