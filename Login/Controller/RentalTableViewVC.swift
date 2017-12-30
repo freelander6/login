@@ -47,6 +47,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             destination?.rentalTitle = rentalsArray[value!].title!
             destination?.imageURL = rentalsArray[value!].imageURL!
             destination?.des = rentalsArray[value!].description!
+            destination?.rentalType = rentalsArray[value!].rentalType!
             
         }
     }

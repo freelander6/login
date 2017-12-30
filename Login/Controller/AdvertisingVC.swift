@@ -197,8 +197,9 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         "type": rentalTypeField.text as AnyObject,
         "pets": petsField.text as AnyObject,
         "imageURL": imgURL as AnyObject,
-        "email": emailField.text as AnyObject
-        ]
+        "email": emailField.text as AnyObject,
+        "furnished": furnishedField.text as AnyObject
+        ] 
         
         //Post data
         let postDataTo = DataService.ds.DBrefRentals.childByAutoId()

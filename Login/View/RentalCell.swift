@@ -23,8 +23,8 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var rentalTypeLbl: UILabel!
     @IBOutlet weak var bondLbl: UILabel!
     @IBOutlet weak var dateAvalLbl: UILabel!
-    @IBOutlet weak var petsLbl: UILabel!
-
+    @IBOutlet weak var furnished: UILabel!
+    
     
     
     @IBOutlet weak var rentalImage: UIImageView!
@@ -48,11 +48,12 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
         self.rental = rental
         
         self.rentalTitleLbl.text = rental.title
-        self.rentalPriceLbl.text = rental.price
+        self.rentalPriceLbl.text = "$\(rental.price!) p/w"
         self.rentalTypeLbl.text = rental.rentalType
         self.bondLbl.text = rental.bond
         self.dateAvalLbl.text = rental.dateAval
-        self.petsLbl.text = rental.pets
+        self.furnished.text = rental.furnished
+      //  self.petsLbl.text = rental.pets
 
     
         if image != nil {

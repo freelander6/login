@@ -23,6 +23,7 @@ class Rental {
     private var _description: String!
     private var _postID: String!
     private var _email: String!
+    private var _furnished: String!
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -65,8 +66,12 @@ class Rental {
         return _email
     }
     
+    var furnished: String? {
+        return _furnished
+    }
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String) {
+    
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String) {
         
         self._title = title
         self._imgURL = imageURL
@@ -76,6 +81,7 @@ class Rental {
         self._dateAval = dateAval
         self._pets = pets
         self._description = description
+        self._furnished = furnished
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -94,7 +100,7 @@ class Rental {
             self._price = price
         }
         
-        if let rentalType = userData["price"] as? String {
+        if let rentalType = userData["type"] as? String {
             self._rentalType = rentalType
         }
         
@@ -118,6 +124,9 @@ class Rental {
             self._email = email
         }
         
+        if let furnished = userData["furnished"] as? String {
+            self._furnished = furnished
+        }
       
         
     }

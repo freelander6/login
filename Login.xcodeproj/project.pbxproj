@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E2CFA3F1FF602A800A0BE83 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */; };
+		5E65E9141FF7497A00ADDFDF /* CurvedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */; };
 		5E8CF3FE1FF501610097B97F /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8CF3FD1FF501610097B97F /* RoundedButton.swift */; };
 		5EAB65551FE31E97009975C2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB65541FE31E97009975C2 /* DetailVC.swift */; };
 		6AB899E1B51B37D865C33D6C /* Pods_Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3A1E2CF3A2B343D76D1F37 /* Pods_Login.framework */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		3D3A1E2CF3A2B343D76D1F37 /* Pods_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
+		5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedImage.swift; sourceTree = "<group>"; };
 		5E8CF3FD1FF501610097B97F /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5EAB65541FE31E97009975C2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5EBC38E51FE13B3500EF3EAD /* Login.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Login.entitlements; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				6B4FC2BD1FD2114400EF2092 /* RentalCell.swift */,
 				5E8CF3FD1FF501610097B97F /* RoundedButton.swift */,
 				5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */,
+				5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E65E9141FF7497A00ADDFDF /* CurvedImage.swift in Sources */,
 				6BBC048E1FB1446D0002D18F /* LoginPageVC.swift in Sources */,
 				5E8CF3FE1FF501610097B97F /* RoundedButton.swift in Sources */,
 				6BBC04AA1FB1B55C0002D18F /* MyAccountVC.swift in Sources */,
