@@ -15,7 +15,7 @@ class CurvedView: UIView {
         layer.cornerRadius = 10
         layer.borderWidth = 0.5
         layer.masksToBounds = false
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderColor = UIColor(displayP3Red: SHADOW_GREY, green: SHADOW_GREY, blue: SHADOW_GREY, alpha: 0.9).cgColor
     }
     
 

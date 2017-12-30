@@ -236,7 +236,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hav-1H-fpa">
-                                                            <rect key="frame" x="202" y="156" width="134" height="42"/>
+                                                            <rect key="frame" x="209" y="156" width="127" height="42"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGt-qY-DL2">
                                                                     <rect key="frame" x="0.0" y="0.0" width="72.5" height="21"/>
@@ -301,7 +301,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vmo-JS-wjG">
-                                                            <rect key="frame" x="28" y="156" width="124" height="42"/>
+                                                            <rect key="frame" x="35" y="156" width="124" height="42"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcp-em-R2r">
                                                                     <rect key="frame" x="0.0" y="0.0" width="124" height="21"/>
@@ -370,7 +370,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="vmo-JS-wjG" secondAttribute="bottom" constant="5" id="Z7w-xc-xdL"/>
                                                         <constraint firstItem="Hav-1H-fpa" firstAttribute="leading" secondItem="vmo-JS-wjG" secondAttribute="trailing" constant="50" id="ifM-sn-Hu5"/>
                                                         <constraint firstItem="Krz-aE-tNR" firstAttribute="top" secondItem="090-b1-8fQ" secondAttribute="top" constant="98" id="lSz-eB-xNQ"/>
-                                                        <constraint firstItem="vmo-JS-wjG" firstAttribute="leading" secondItem="090-b1-8fQ" secondAttribute="leading" constant="28" id="lml-b3-OvZ"/>
+                                                        <constraint firstItem="vmo-JS-wjG" firstAttribute="leading" secondItem="090-b1-8fQ" secondAttribute="leading" constant="35" id="lml-b3-OvZ"/>
                                                         <constraint firstAttribute="trailing" secondItem="8PY-05-ZyZ" secondAttribute="trailing" constant="10" id="rIr-cI-L0Z"/>
                                                         <constraint firstItem="keT-3d-v1k" firstAttribute="leading" secondItem="090-b1-8fQ" secondAttribute="leading" constant="28" id="ro1-dA-iaZ"/>
                                                         <constraint firstItem="keT-3d-v1k" firstAttribute="top" secondItem="BWH-6s-Ljg" secondAttribute="bottom" constant="8" symbolic="YES" id="sJh-Vs-nmi"/>
@@ -869,6 +869,7 @@
         <image name="house" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bab-rm-yx9"/>
         <segue reference="vrN-cU-dig"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -109,7 +109,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
             
-           // self.posts = []
+            self.rentalsArray = []
             
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
