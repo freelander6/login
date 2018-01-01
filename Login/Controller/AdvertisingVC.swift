@@ -129,6 +129,12 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         //rentalTypePicker
         setupRentalTypePicker()
         
+        
+         self.descriptionField.layer.cornerRadius = 10
+         self.descriptionField.layer.borderWidth = 0.5
+         self.descriptionField.layer.borderColor = UIColor(displayP3Red: SHADOW_GREY, green: SHADOW_GREY, blue: SHADOW_GREY, alpha: 0.3).cgColor
+
+        
     }
 
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -203,6 +209,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         
         //Post data
         let postDataTo = DataService.ds.DBrefRentals.childByAutoId()
+        print("NEWKEY\(postDataTo.key)")
         postDataTo.setValue(data)
         //Clear screen
         titleField.text = ""
@@ -214,7 +221,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         petsField.text = ""
         furnishedField.text = ""
         emailField.text = ""
-        houseBtnImage.setImage(#imageLiteral(resourceName: "house"), for: .normal)
+       // houseBtnImage.setImage(#imageLiteral(resourceName: "house"), for: .normal)
     }
     
     

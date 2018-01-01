@@ -15,6 +15,6 @@ pod 'Firebase/Database’
 pod ‘Firebase/Core’
 pod ‘Firebase/Storage’
 pod 'SwiftKeychainWrapper'
-
+pod 'SimpleImageViewer'
 
 end

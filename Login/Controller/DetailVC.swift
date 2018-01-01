@@ -9,6 +9,8 @@
 import UIKit
 import MessageUI
 import Firebase
+import SimpleImageViewer
+
 
 
 class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
@@ -103,5 +105,20 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     
+    
+    @IBAction func imageGestureTapped(_ sender: Any) {
+        print("pressed")
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = image
+        }
+        
+        let imageViewerController = ImageViewerController(configuration: configuration)
+        
+        present(imageViewerController, animated: true)
+    }
+    
+
+    
+
 
 }
