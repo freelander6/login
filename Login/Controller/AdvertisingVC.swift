@@ -25,8 +25,9 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     @IBOutlet weak var rentField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var houseBtnImage: UIButton!
+    @IBOutlet weak var uploadImageBtn: UIButton!
     
+    var imageToUpload: UIImage?
     var imageSelected = false
     let datePicker = UIDatePicker()
     var imagePicker: UIImagePickerController!
@@ -106,8 +107,9 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            houseBtnImage.setImage(image, for: .normal)
+            imageToUpload = image
             imageSelected = true
+            
         } else {
             print("Invalid image from picker")
         }
@@ -144,20 +146,23 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     @IBAction func submitForm(_ sender: Any) {      // Send data to firebase on submit
         
-        guard let img = houseBtnImage.currentImage, imageSelected == true else {
-          
-            let alert = UIAlertController(title: "You must upload one image to proceed", message: "It's recommended you upload one image before continuing.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-         
-            
-            self.present(alert, animated: true)
-            
-            return
-        }
+//        guard let img = houseBtnImage.currentImage, imageSelected == true else {
+//
+//            let alert = UIAlertController(title: "You must upload one image to proceed", message: "It's recommended you upload one image before continuing.", preferredStyle: .alert)
+//
+//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//
+//
+//            self.present(alert, animated: true)
+//
+//            return
+//        }
         
         //Upload image with unique ID as a key
-        if let imageData = UIImageJPEGRepresentation(img, 0.2) {
+        if let uploadImage = imageToUpload {
+            
+        
+        if let imageData = UIImageJPEGRepresentation(uploadImage, 0.2) {
             
             let imageUID = UUID().uuidString
             let metaData = StorageMetadata()
@@ -168,11 +173,12 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
                     print("Error occured uploading data to firebase")
                 } else {
                     print("Successfully uploaded image")
-                    
+                   
                     let downloadURL = metadata?.downloadURL()?.absoluteString
                     
                     if let url = downloadURL {
                         self.postDataToFirbase(imgURL: url)
+                        
                     }
                     
                 }
@@ -180,7 +186,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
             }
             
         }
-        
+    }
         
     
         
@@ -208,9 +214,13 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         ] 
         
         //Post data
-        let postDataTo = DataService.ds.DBrefRentals.childByAutoId()
-        print("NEWKEY\(postDataTo.key)")
-        postDataTo.setValue(data)
+        let postDataToRentals = DataService.ds.DBrefRentals.childByAutoId()
+        
+        postDataToRentals.setValue(data)
+        
+        let postDataToUsers = DataService.ds.DBCurrentUser.child("MyRentals").childByAutoId()
+        postDataToUsers.setValue(postDataToRentals.key)
+        
         //Clear screen
         titleField.text = ""
         rentField.text = ""
@@ -221,12 +231,19 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         petsField.text = ""
         furnishedField.text = ""
         emailField.text = ""
-       // houseBtnImage.setImage(#imageLiteral(resourceName: "house"), for: .normal)
+        toggleImageBtn()
     }
     
+    func toggleImageBtn() {
+        if uploadImageBtn.currentTitle == "Upload photo" {
+            uploadImageBtn.setTitle("Photo selected", for: .normal)
+        } else {
+            uploadImageBtn.setTitle("Upload photo", for: .normal)
+        }
+    }
     
     @IBAction func addImageBtnPressed(_ sender: Any) {
-        present(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: toggleImageBtn)
     }
     
     

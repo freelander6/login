@@ -14,6 +14,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     var rentalsArray = [Rental]()
     var index = ""
+    var myRentals = [String]()
 
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
@@ -130,6 +131,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         
         }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
