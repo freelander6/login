@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import SwiftKeychainWrapper
 
 
 class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -35,7 +36,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let rentalTypes = ["Room in shared house", "Entire House","Room Share", "Apartment", "Cottage", "Other"]
     let petsAllowed = ["Yes", "No"]
     let furnishedStatus  = ["Yes", "No"]
-    
+
     
     let rentalTypePicker = UIPickerView()
     let petsAllowedPicker = UIPickerView()
@@ -177,7 +178,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
                     let downloadURL = metadata?.downloadURL()?.absoluteString
                     
                     if let url = downloadURL {
-                        self.postDataToFirbase(imgURL: url)
+                        self.postDataToFirbase(imgURL: url, imageID: imageUID)
                         
                     }
                     
@@ -198,7 +199,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         
     }
     
-    func postDataToFirbase(imgURL: String) {
+    func postDataToFirbase(imgURL: String, imageID: String) {
         
         let data: Dictionary<String, AnyObject> = [
        "title": titleField.text as AnyObject,
@@ -210,15 +211,18 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         "pets": petsField.text as AnyObject,
         "imageURL": imgURL as AnyObject,
         "email": emailField.text as AnyObject,
-        "furnished": furnishedField.text as AnyObject
-        ] 
+        "furnished": furnishedField.text as AnyObject,
+        "ImageID": imageID as AnyObject
+        ]
         
         //Post data
         let postDataToRentals = DataService.ds.DBrefRentals.childByAutoId()
         
         postDataToRentals.setValue(data)
         
-        let postDataToUsers = DataService.ds.DBCurrentUser.child("MyRentals").childByAutoId()
+   
+        
+        let postDataToUsers = DataService.ds.DBCurrentUser.child("MyRentals").child(postDataToRentals.key)
         postDataToUsers.setValue(postDataToRentals.key)
         
         //Clear screen

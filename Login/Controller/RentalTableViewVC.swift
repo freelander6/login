@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseDatabase
 import MessageUI
+import SwiftKeychainWrapper
 
 
 class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
@@ -136,6 +137,12 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        rentalsArray[indexPath.row].incrimentViews()
+       
+        let postViewsToFB = DataService.ds.DBrefRentals.child(rentalsArray[indexPath.row].postID!)
+        
+        postViewsToFB.child("views").setValue(rentalsArray[indexPath.row].views)
+        
          performSegue(withIdentifier: "toDetailVC" , sender: nil)
     }
     

@@ -15,6 +15,7 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     var rentalsArray = [Rental]()
     var myRentals = [Rental]()
     
+
     @IBOutlet weak var myRentalsTableView: UITableView!
     
     
@@ -42,10 +43,18 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         if editingStyle == .delete {
             let postID = myRentals[indexPath.row].postID
-            let ref = DataService.ds.DBrefRentals
-            ref.child(postID!).removeValue()
-            
-         //   removeDataFromFirebase(postID: postID!)
+            let imageID = myRentals[indexPath.row].ImageID
+            let refRental = DataService.ds.DBrefRentals
+            let refUsers = DataService.ds.DBCurrentUser.child("MyRentals")
+            let refFBstorage = DataService.ds.StorageREF
+            refRental.child(postID!).removeValue()
+            refUsers.child(postID!).removeValue()
+            refFBstorage.child(imageID).delete(completion: { (error) in
+                if error != nil {
+                    print("There was an error deleting the image")
+                }
+            })
+    
             
             // remove the item from the data model
             myRentals.remove(at: indexPath.row)
@@ -56,9 +65,7 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             // delete the table view row
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-        } else if editingStyle == .insert {
-            // Not used in our example, but if you were adding a new row, this is where you would do it.
-        }
+        } 
     }
     
 

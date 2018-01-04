@@ -24,6 +24,8 @@ class Rental {
     private var _postID: String!
     private var _email: String!
     private var _furnished: String!
+    private var _views = 0
+    private var _ImageID: String!
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -70,8 +72,16 @@ class Rental {
         return _furnished
     }
     
+    var views: Int? {
+        return _views
+    }
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String) {
+    var ImageID: String {
+        return _ImageID
+    }
+    
+    
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String) {
         
         self._title = title
         self._imgURL = imageURL
@@ -82,6 +92,8 @@ class Rental {
         self._pets = pets
         self._description = description
         self._furnished = furnished
+        self._views = views
+        self._ImageID = ImageID
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -127,8 +139,19 @@ class Rental {
         if let furnished = userData["furnished"] as? String {
             self._furnished = furnished
         }
-      
         
+        if let views = userData["views"] as? Int {
+            self._views = views
+        }
+        
+        if let imageID = userData["ImageID"] as? String {
+            self._ImageID = imageID
+        }
+      
+    }
+    
+    func incrimentViews() {
+        self._views += 1
     }
     
    

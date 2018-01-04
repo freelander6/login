@@ -15,7 +15,7 @@ class MyRentalCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var price: UILabel!
-    
+    @IBOutlet weak var views: UILabel!
     
     
     func configureCell(rental : Rental) {
@@ -26,6 +26,10 @@ class MyRentalCell: UITableViewCell {
         
         if let price = rental.price {
             self.price.text = price
+        }
+        
+        if let views = rental.views {
+            self.views.text = "\(views) Views"
         }
         
      
