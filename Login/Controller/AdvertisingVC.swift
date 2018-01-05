@@ -121,6 +121,8 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
@@ -201,6 +203,8 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     func postDataToFirbase(imgURL: String, imageID: String) {
         
+       
+        
         let data: Dictionary<String, AnyObject> = [
        "title": titleField.text as AnyObject,
         "price": rentField.text as AnyObject,
@@ -217,13 +221,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         
         //Post data
         let postDataToRentals = DataService.ds.DBrefRentals.childByAutoId()
-        
         postDataToRentals.setValue(data)
-        
-   
-        
-        let postDataToUsers = DataService.ds.DBCurrentUser.child("MyRentals").child(postDataToRentals.key)
-        postDataToUsers.setValue(postDataToRentals.key)
         
         //Clear screen
         titleField.text = ""
@@ -236,6 +234,12 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         furnishedField.text = ""
         emailField.text = ""
         toggleImageBtn()
+        
+        let postDataToUsers = DataService.ds.DBCurrentUser.child("MyRentals").child(postDataToRentals.key)
+        postDataToUsers.setValue(postDataToRentals.key)
+        
+        
+        
     }
     
     func toggleImageBtn() {
