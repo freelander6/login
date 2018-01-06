@@ -26,6 +26,7 @@ class Rental {
     private var _furnished: String!
     private var _views = 0
     private var _ImageID: String!
+    private var _address: String!
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -76,12 +77,16 @@ class Rental {
         return _views
     }
     
-    var ImageID: String {
+    var ImageID: String? {
         return _ImageID
     }
     
+    var address: String? {
+        return _address
+    }
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String) {
+    
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, address: String) {
         
         self._title = title
         self._imgURL = imageURL
@@ -94,6 +99,7 @@ class Rental {
         self._furnished = furnished
         self._views = views
         self._ImageID = ImageID
+        self._address = address
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -146,6 +152,10 @@ class Rental {
         
         if let imageID = userData["ImageID"] as? String {
             self._ImageID = imageID
+        }
+        
+        if let address = userData["address"] as? String {
+            self._address = address
         }
       
     }

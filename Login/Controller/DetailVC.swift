@@ -6,10 +6,11 @@
 //  Copyright © 2017 George Woolley. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import MessageUI
 import Firebase
 import SimpleImageViewer
+import MapKit
 
 
 
@@ -24,7 +25,9 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     var pets = ""
     var des = ""
     var imageURL = ""
+    var address = "" 
     
+    @IBOutlet weak var map: MKMapView!
     
 
     @IBOutlet weak var titleField: UILabel!
@@ -36,9 +39,26 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var petsField: UILabel!
     @IBOutlet weak var descriptionField: UILabel!
     
+    
+    
+    
+//    final class rentalAnnotation: NSObject, MKAnnotation {
+//        var coordinate: CLLocationCoordinate2D
+//        var title: String?
+//        var subtitle: String?
+//
+//        init(coord: CLLocationCoordinate2D, title: String, subtitle: String) {
+//            self.coordinate = coord
+//            self.title = title
+//            self.subtitle = subtitle
+//
+//            super.init()
+//        }
+//
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
 
         titleField.text = rentalTitle
@@ -48,6 +68,8 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
         dateAvalField.text = dateAval
         petsField.text = pets
         descriptionField.text = des
+        
+        addMapAnnotation()
      
         if let img = RentalTableViewVC.imageCache.object(forKey: imageURL as NSString) {
             image.image = img
@@ -71,6 +93,10 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
         
     }
 
+    
+   
+    
+    
     
     @IBAction func contactBtnPressed(_ sender: Any) {
         
@@ -118,6 +144,23 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
 
+    func addMapAnnotation() {
+        let geocoder = CLGeocoder()
+        
+        geocoder.geocodeAddressString(address) { (placemarks, error) in
+            
+            if error != nil {
+                //Deal with error here
+            } else if let placemarks = placemarks {
+                
+                if let coordinate = placemarks.first?.location?.coordinate {
+                    let pin = PinAnnotation(title: "WannaRental Property", subtitle: "wanaka", coordinate: coordinate)
+                    self.map.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500), animated: true)
+                    self.map.addAnnotation(pin)
+                }
+            }
+        }
+    }
     
 
 

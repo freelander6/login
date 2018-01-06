@@ -49,7 +49,7 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let refFBstorage = DataService.ds.StorageREF
             refRental.child(postID!).removeValue()
             refUsers.child(postID!).removeValue()
-            refFBstorage.child(imageID).delete(completion: { (error) in
+            refFBstorage.child(imageID!).delete(completion: { (error) in
                 if error != nil {
                     print("There was an error deleting the image")
                 }

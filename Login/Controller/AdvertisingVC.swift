@@ -27,6 +27,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var uploadImageBtn: UIButton!
+    @IBOutlet weak var address: UITextField!
     
     var imageToUpload: UIImage?
     var imageSelected = false
@@ -110,6 +111,7 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageToUpload = image
             imageSelected = true
+            uploadImageBtn.setImage(image, for: .normal)
             
         } else {
             print("Invalid image from picker")
@@ -216,7 +218,8 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         "imageURL": imgURL as AnyObject,
         "email": emailField.text as AnyObject,
         "furnished": furnishedField.text as AnyObject,
-        "ImageID": imageID as AnyObject
+        "ImageID": imageID as AnyObject,
+        "address": address.text as AnyObject
         ]
         
         //Post data
@@ -233,7 +236,9 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         petsField.text = ""
         furnishedField.text = ""
         emailField.text = ""
-        toggleImageBtn()
+        address.text = "" 
+        uploadImageBtn.setImage(#imageLiteral(resourceName: "house"), for: .normal)
+      
         
         let postDataToUsers = DataService.ds.DBCurrentUser.child("MyRentals").child(postDataToRentals.key)
         postDataToUsers.setValue(postDataToRentals.key)
@@ -242,16 +247,16 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         
     }
     
-    func toggleImageBtn() {
-        if uploadImageBtn.currentTitle == "Upload photo" {
-            uploadImageBtn.setTitle("Photo selected", for: .normal)
-        } else {
-            uploadImageBtn.setTitle("Upload photo", for: .normal)
-        }
-    }
+//    func toggleImageBtn() {
+//        if uploadImageBtn.currentTitle == "Upload photo" {
+//            uploadImageBtn.setTitle("Photo selected", for: .normal)
+//        } else {
+//            uploadImageBtn.setTitle("Upload photo", for: .normal)
+//        }
+//    }
     
     @IBAction func addImageBtnPressed(_ sender: Any) {
-        present(imagePicker, animated: true, completion: toggleImageBtn)
+        present(imagePicker, animated: true, completion: nil)
     }
     
     
