@@ -26,7 +26,9 @@ class Rental {
     private var _furnished: String!
     private var _views = 0
     private var _ImageID: String!
-    private var _address: String!
+    private var _streetName: String!
+    private var _city: String!
+    private var _postcode:String!
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -81,12 +83,19 @@ class Rental {
         return _ImageID
     }
     
-    var address: String? {
-        return _address
+    var streetName: String? {
+        return _streetName
     }
     
+    var city: String? {
+        return _city
+    }
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, address: String) {
+    var postcode: String? {
+        return _postcode
+    }
+    
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, streetName: String, city: String, postcode: String) {
         
         self._title = title
         self._imgURL = imageURL
@@ -99,7 +108,9 @@ class Rental {
         self._furnished = furnished
         self._views = views
         self._ImageID = ImageID
-        self._address = address
+        self._streetName = streetName
+        self._city = city
+        self._postcode = postcode
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -154,10 +165,17 @@ class Rental {
             self._ImageID = imageID
         }
         
-        if let address = userData["address"] as? String {
-            self._address = address
+        if let streetName = userData["street"] as? String {
+            self._streetName = streetName
         }
-      
+        
+        if let city = userData["city"] as? String {
+            self._city = city
+        }
+        
+        if let postcode = userData["postcode"] as? String {
+            self._postcode = postcode
+        }
     }
     
     func incrimentViews() {

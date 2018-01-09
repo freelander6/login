@@ -16,5 +16,6 @@ pod ‘Firebase/Core’
 pod ‘Firebase/Storage’
 pod 'SwiftKeychainWrapper'
 pod 'SimpleImageViewer'
-
+pod 'Eureka'
+pod 'ImageRow'
 end

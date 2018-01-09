@@ -15,6 +15,7 @@
 		5E65E9161FF81B0400ADDFDF /* CurvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9151FF81B0400ADDFDF /* CurvedView.swift */; };
 		5E65E9181FF8303000ADDFDF /* CurvedBorderForLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9171FF8303000ADDFDF /* CurvedBorderForLabel.swift */; };
 		5E65E91B1FF8351500ADDFDF /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E91A1FF8351500ADDFDF /* constants.swift */; };
+		5E6EC54020056E5700AD7979 /* AdvertFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */; };
 		5E7134FB200229E200C59EF0 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7134FA200229E200C59EF0 /* CustomTextField.swift */; };
 		5E8CF3FE1FF501610097B97F /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8CF3FD1FF501610097B97F /* RoundedButton.swift */; };
 		5EAB65551FE31E97009975C2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB65541FE31E97009975C2 /* DetailVC.swift */; };
@@ -46,6 +47,7 @@
 		5E65E9151FF81B0400ADDFDF /* CurvedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedView.swift; sourceTree = "<group>"; };
 		5E65E9171FF8303000ADDFDF /* CurvedBorderForLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedBorderForLabel.swift; sourceTree = "<group>"; };
 		5E65E91A1FF8351500ADDFDF /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertFormVC.swift; sourceTree = "<group>"; };
 		5E7134FA200229E200C59EF0 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		5E8CF3FD1FF501610097B97F /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5EAB65541FE31E97009975C2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				6B3417AA1FB2881500C05AC2 /* RentalTableViewVC.swift */,
 				5EAB65541FE31E97009975C2 /* DetailVC.swift */,
 				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
+				5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,11 +285,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Login/Pods-Login-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ImageRow/ImageRow.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -295,11 +300,13 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageRow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -362,6 +369,7 @@
 				5E29B8321FF9699E008245AE /* CurvedTextView.swift in Sources */,
 				5E65E91B1FF8351500ADDFDF /* constants.swift in Sources */,
 				6BBC048C1FB1446D0002D18F /* AppDelegate.swift in Sources */,
+				5E6EC54020056E5700AD7979 /* AdvertFormVC.swift in Sources */,
 				5EE0B2E42000AC8200ED2003 /* PinAnnotation.swift in Sources */,
 				6B4FC2BE1FD2114400EF2092 /* RentalCell.swift in Sources */,
 				5E7134FB200229E200C59EF0 /* CustomTextField.swift in Sources */,

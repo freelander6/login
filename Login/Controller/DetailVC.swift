@@ -25,7 +25,13 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     var pets = ""
     var des = ""
     var imageURL = ""
-    var address = "" 
+    var streetName = ""
+    var city = ""
+    var postcode = ""
+    
+    var address: String {
+        return "\(streetName), \(city), \(postcode)"
+    }
     
     @IBOutlet weak var map: MKMapView!
     

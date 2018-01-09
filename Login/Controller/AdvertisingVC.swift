@@ -5,7 +5,7 @@
 //  Created by George Woolley on 07/11/2017.
 //  Copyright © 2017 George Woolley. All rights reserved.
 //
-
+/*
 import UIKit
 import Firebase
 import FirebaseDatabase
@@ -15,28 +15,9 @@ import SwiftKeychainWrapper
 class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
    
     
-    
 
-    @IBOutlet weak var titleField: UITextField!
-    @IBOutlet weak var dateAvalField: UITextField!
-    @IBOutlet weak var rentalTypeField: UITextField!
-    @IBOutlet weak var petsField: UITextField!
-    @IBOutlet weak var furnishedField: UITextField!
-    @IBOutlet weak var bondField: UITextField!
-    @IBOutlet weak var rentField: UITextField!
-    @IBOutlet weak var descriptionField: UITextView!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var uploadImageBtn: UIButton!
-    @IBOutlet weak var address: UITextField!
-    
-    var imageToUpload: UIImage?
-    var imageSelected = false
-    let datePicker = UIDatePicker()
-    var imagePicker: UIImagePickerController!
     var databaseRef:DatabaseReference?   //reference to firebase dba
-    let rentalTypes = ["Room in shared house", "Entire House","Room Share", "Apartment", "Cottage", "Other"]
-    let petsAllowed = ["Yes", "No"]
-    let furnishedStatus  = ["Yes", "No"]
+
 
     
     let rentalTypePicker = UIPickerView()
@@ -263,4 +244,4 @@ class AvertisingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
 
     
 }
-
+*/
