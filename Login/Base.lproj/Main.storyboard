@@ -261,10 +261,10 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UND-Eh-hgO">
-                                                                    <rect key="frame" x="0.0" y="21" width="89" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="21" width="127" height="21"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  🛋 Furshished: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWc-1H-Y8t">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="75" id="FcD-BF-49N"/>
                                                                             </constraints>
@@ -273,7 +273,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uz3-ay-sQ7">
-                                                                            <rect key="frame" x="75" y="0.0" width="14" height="21"/>
+                                                                            <rect key="frame" x="52" y="0.0" width="75" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="75" id="5P0-BR-Nj5"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="g7o-8a-3xc"/>
@@ -487,12 +487,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="7Mh-aR-DiN" customClass="CurvedImage" customModule="Login" customModuleProvider="target">
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="7Mh-aR-DiN" customClass="CurvedImage" customModule="Login" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="193" width="360" height="290"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="290" id="80W-y9-dDg"/>
                                                     <constraint firstAttribute="width" constant="360" id="so2-PW-eTW"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="sub-bf-Ilb" appends="YES" id="WT7-lp-P0E"/>
+                                                </connections>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jS7-Bs-LVO">
                                                 <rect key="frame" x="197" y="491" width="74.5" height="140"/>
@@ -684,9 +688,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hbg-Rv-G2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="MKr-TA-6lx">
+                <tapGestureRecognizer id="sub-bf-Ilb">
                     <connections>
-                        <action selector="imageGestureTapped:" destination="7HW-B6-amA" id="lgY-7h-N59"/>
+                        <action selector="imageGestureTapped:" destination="7HW-B6-amA" id="djw-Jf-7Yc"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -715,7 +719,6 @@
         <!--Item-->
         <scene sceneID="7Ht-Ar-g4U">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kTj-kM-joD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Cib-RW-70F" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="t7N-Wh-5Vb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ljU-TT-f64">
@@ -726,6 +729,7 @@
                         <segue destination="uJY-3v-paO" kind="relationship" relationship="rootViewController" id="x3D-IN-4DL"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kTj-kM-joD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="633" y="989"/>
         </scene>
@@ -865,7 +869,6 @@
         <image name="house" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cwt-cC-ckv"/>
         <segue reference="3Rm-jT-ttd"/>
     </inferredMetricsTieBreakers>
 </document>
