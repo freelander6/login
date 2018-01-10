@@ -70,10 +70,6 @@ class AdvertFormVC: FormViewController {
     
     var rentalImage: UIImage?
     
-    var isEmailValid = false
-    var isRentValid = false
-    var isBondValid = false
-    
     var databaseRef:DatabaseReference?   //reference to firebase dba
     
     
@@ -229,18 +225,26 @@ class AdvertFormVC: FormViewController {
                 $0.title = "Rental Title:"
                 
                 $0.placeholder = "A short descriptive title"
-                }
+                $0.add(rule: RuleRequired())
+                      }
                 .cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "plus_image")
                     cell.textField.font = myFont
-            }
-            
-            
+                    
+                    }
+                
+                .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
+                }
+                    
             <<< IntRow("rent"){
                 $0.title = "Rent"
                 $0.placeholder = "Price per week"
                 $0.add(rule: RuleGreaterThan(min: 1))
                 $0.add(rule: RuleSmallerThan(max: 9999))
+                $0.add(rule: RuleRequired())
                 let formatter = NumberFormatter()
                 formatter.locale = .current
                 formatter.numberStyle = .currency
@@ -249,9 +253,6 @@ class AdvertFormVC: FormViewController {
                 .cellUpdate { cell, row in
                     if !row.isValid {
                         cell.titleLabel?.textColor = .red
-                        self.isRentValid = false
-                    } else {
-                        self.isRentValid = true
                     }
             }
             
@@ -261,6 +262,7 @@ class AdvertFormVC: FormViewController {
                 $0.placeholder = "Inital bond amount required"
                 $0.add(rule: RuleGreaterThan(min: 2))
                 $0.add(rule: RuleSmallerThan(max: 9999))
+                $0.add(rule: RuleRequired())
                 let formatter = NumberFormatter()
                 formatter.locale = .current
                 formatter.numberStyle = .currency
@@ -269,9 +271,6 @@ class AdvertFormVC: FormViewController {
                 .cellUpdate { cell, row in
                     if !row.isValid {
                         cell.titleLabel?.textColor = .red
-                        self.isBondValid = false
-                    } else {
-                        self.isBondValid = true
                     }
             }
             
@@ -292,6 +291,8 @@ class AdvertFormVC: FormViewController {
                 $0.options = ["Entire House", "Room in Shared House", "Shared Room", "Flat", "Apartment", "Other"]
                 $0.value = ""
                 $0.selectorTitle = "Select the rental type"
+                $0.add(rule: RuleRequired())
+                
                 }.onPresent { from, to in
                     
                     to.selectableRowCellUpdate = { cell, row in
@@ -300,17 +301,19 @@ class AdvertFormVC: FormViewController {
                     }
                     to.dismissOnSelection = false
                     to.dismissOnChange = false
-                    
+                } .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
             }
-            
-            
-            
             
             <<< PushRow<String>("pet") {
                 $0.title = "Pet Policy"
                 $0.options = ["Yes", "No"]
                 $0.value = ""
                 $0.selectorTitle = "Are pets allowed?"
+                $0.add(rule: RuleRequired())
+                
                 }.onPresent { from, to in
                     
                     to.selectableRowCellUpdate = { cell, row in
@@ -319,6 +322,10 @@ class AdvertFormVC: FormViewController {
                     }
                     to.dismissOnSelection = false
                     to.dismissOnChange = false
+                }   .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
             }
             
             <<< PushRow<String>("furnished") {
@@ -326,6 +333,8 @@ class AdvertFormVC: FormViewController {
                 $0.options = ["Fully Furnished", "Partly Furnished", "Appliances Only", "Not Furnished"]
                 $0.value = ""
                 $0.selectorTitle = "Is the rental furnished?"
+                $0.add(rule: RuleRequired())
+                
                 }.onPresent { from, to in
                     
                     to.selectableRowCellUpdate = { cell, row in
@@ -334,8 +343,11 @@ class AdvertFormVC: FormViewController {
                     }
                     to.dismissOnSelection = false
                     to.dismissOnChange = false
+                }       .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
         }
-        
         form +++
             
             Section(footer: "Include any addtional information viewers may be interested in.")
@@ -352,13 +364,22 @@ class AdvertFormVC: FormViewController {
             }
             <<< TextAreaRow("rentalDescription") {
                 $0.value = ""
+                $0.placeholder = "Enter a detailed description of your Rental."
+                
+                $0.add(rule: RuleRequired())
+                
                 }
                 .cellSetup({ (cell, row) -> () in
                     cell.textLabel?.font = myFont
+                    cell.placeholderLabel?.font = placeHolderFont
                     cell.detailTextLabel?.font = myFont
                     
                 })
-        
+                .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.placeholderLabel?.textColor = .red
+                    }
+        }
         form +++
             
             Section(footer: "Let viewers know where the rental is located.")
@@ -377,25 +398,42 @@ class AdvertFormVC: FormViewController {
             <<< NameRow("street") {
                 $0.title = "Street Name:"
                 $0.placeholder = "Street name for the property"
+                 $0.add(rule: RuleRequired())
+                
                 }
                 .cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "plus_image")
+                }     .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
             }
             
             <<< NameRow("city") {
                 $0.title = "City"
                 $0.placeholder = "City"
+                $0.add(rule: RuleRequired())
+                
                 }
                 .cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "plus_image")
+                }.cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
             }
             
             <<< NameRow("postcode") {
                 $0.title = "Post Code "
                 $0.placeholder = "Post Code"
+                $0.add(rule: RuleRequired())
                 }
                 .cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "plus_image")
+                }    .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
             }
             
             <<< SwitchRow("switchRowTag"){
@@ -429,11 +467,15 @@ class AdvertFormVC: FormViewController {
                 $0.title = "Select a photo"
                 $0.sourceTypes = .PhotoLibrary
                 $0.clearAction = .no
+                $0.add(rule: RuleRequired())
+                
                 }
                 .cellUpdate { cell, row in
                     cell.accessoryView?.layer.cornerRadius = 17
                     cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
-                    
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
                 }
                 .cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "plus_image")
@@ -542,11 +584,7 @@ class AdvertFormVC: FormViewController {
                 .cellUpdate { cell, row in
                     if !row.isValid {
                         cell.titleLabel?.textColor = .red
-                        self.isEmailValid = false
-                    } else {
-                        self.isEmailValid = true
-                    }
-        }
+                    }        }
         
         
         form +++
@@ -556,32 +594,56 @@ class AdvertFormVC: FormViewController {
                 $0.title = "Submit and list Rental"
                 }
                 
-                .onCellSelection({ (cell, row) in
+                .onCellSelection { cell, row in
+                    if row.section?.form?.validate().count != 0 {
+                        print("Form Validation Failed")
+                        row.section?.form?.validate()
+                        
+                    } else {
+                        print("Form validaton successful")
+                        self.getFormValues()
+                        self.clearScreen()
+                        self.upLoadImageAndDataToFirebase()
+                        
+                    }
+                }
+                
+        
                     
-                    print("brn pressed")
-                    let formValues = self.form.values()
-                    if let title = formValues["title"] { self._rentalTitle = title as! String }
-                    if let rent = formValues["rent"] { self._price = String(describing: rent!) }
-                    if let bond = formValues["bond"] { self._bond = String(describing: bond!) }
+                 
+        
                     
-                    if let date = formValues["date"] {
-                    self._dateAval = String(describing: date!)
-                        }
-                    
-                    
-                    if let rental = formValues["rentalType"] { self._type = rental as! String }
-                    if let pet = formValues["pet"] { self._pets = pet as! String }
-                    if let furnished = formValues["furnished"] { self._furnished = furnished as! String }
-                    if let street = formValues["street"] { self._street = street as! String }
-                    if let city = formValues["city"] { self._city = city as! String }
-                    if let postcode = formValues["postcode"] { self._postcode = postcode as! String }
-                    if let description = formValues["rentalDescription"] {self._rentalDescription = description as! String }
-                    
-                    if let image = formValues["image1"] {self.rentalImage = image as? UIImage}
-                    if let email = formValues["email"] {self._email = email as! String}
-                    self.upLoadImageAndDataToFirebase()
-                    
-                })
+            }
+    
+    
+    func getFormValues() {
+        
+        let formValues = self.form.values()
+        if let title = formValues["title"] { self._rentalTitle = title as! String }
+        if let rent = formValues["rent"] { self._price = String(describing: rent!) }
+        if let bond = formValues["bond"] { self._bond = String(describing: bond!) }
+        
+        if let date = formValues["date"] {
+            self._dateAval = String(describing: date!)
+        }
+        
+        
+        if let rental = formValues["rentalType"] { self._type = rental as! String }
+        if let pet = formValues["pet"] { self._pets = pet as! String }
+        if let furnished = formValues["furnished"] { self._furnished = furnished as! String }
+        if let street = formValues["street"] { self._street = street as! String }
+        if let city = formValues["city"] { self._city = city as! String }
+        if let postcode = formValues["postcode"] { self._postcode = postcode as! String }
+        if let description = formValues["rentalDescription"] {self._rentalDescription = description as! String }
+        
+        if let image = formValues["image1"] {self.rentalImage = image as? UIImage}
+        if let email = formValues["email"] {self._email = email as! String}
+        
+    }
+    
+    func clearScreen() {
+        form.setValues(["title" : "", "rent" : nil, "bond" : nil, "date" : Date(), "rentalType" : "", "pet" : "", "furnished": "", "street" : "", "city" : "", "postcode" : "", "rentalDescription" : "", "image1" : nil, "email" : ""])
+        tableView.reloadData()
     }
     
 
