@@ -181,6 +181,35 @@
             </objects>
             <point key="canvasLocation" x="808.79999999999995" y="-742.5787106446777"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="LeR-y1-PhK">
+            <objects>
+                <viewController id="5k5-2b-XYp" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6ND-UT-8uo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHs-PF-VeM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.64705882349999999" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="T1s-bJ-cp6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aHs-PF-VeM" firstAttribute="leading" secondItem="mQE-ha-PVe" secondAttribute="leading" id="F4n-LF-Q1L"/>
+                            <constraint firstItem="aHs-PF-VeM" firstAttribute="trailing" secondItem="mQE-ha-PVe" secondAttribute="trailing" id="V7m-1h-XlP"/>
+                            <constraint firstItem="aHs-PF-VeM" firstAttribute="top" secondItem="6ND-UT-8uo" secondAttribute="top" id="ety-by-ssg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mQE-ha-PVe"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEE-at-Z46" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1853.5999999999999" y="-1062.8185907046477"/>
+        </scene>
         <!--Rental Table ViewVC-->
         <scene sceneID="2Vv-aO-PEX">
             <objects>
@@ -406,11 +435,23 @@
                                     <outlet property="delegate" destination="gVu-cB-u0k" id="Q3w-oU-wsY"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXd-Ny-gOt">
+                                <rect key="frame" x="319" y="108" width="35" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tse-ln-7Q7"/>
+                                    <constraint firstAttribute="width" constant="35" id="el0-rx-AVh"/>
+                                </constraints>
+                                <state key="normal" title="Filter"/>
+                                <connections>
+                                    <segue destination="5k5-2b-XYp" kind="show" id="DsQ-k3-Zr3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="t5i-of-0oh" firstAttribute="leading" secondItem="JCq-nH-en5" secondAttribute="leading" constant="22" id="0Fk-We-Jw2"/>
                             <constraint firstItem="iEd-hi-vef" firstAttribute="leading" secondItem="JCq-nH-en5" secondAttribute="leading" id="Eat-UE-S5H"/>
+                            <constraint firstItem="eXd-Ny-gOt" firstAttribute="top" secondItem="Pld-bb-raX" secondAttribute="bottom" constant="8" id="GZg-1s-wxy"/>
                             <constraint firstItem="iEd-hi-vef" firstAttribute="top" secondItem="t5i-of-0oh" secondAttribute="bottom" constant="19" id="H7p-A4-LWF"/>
                             <constraint firstItem="t5i-of-0oh" firstAttribute="top" secondItem="Pld-bb-raX" secondAttribute="bottom" constant="8" symbolic="YES" id="Jvu-2f-GIJ"/>
                             <constraint firstItem="iEd-hi-vef" firstAttribute="leading" secondItem="JCq-nH-en5" secondAttribute="leading" id="S22-pu-vh3"/>
@@ -424,6 +465,7 @@
                             <constraint firstItem="iEd-hi-vef" firstAttribute="trailing" secondItem="JCq-nH-en5" secondAttribute="trailing" id="pIl-mz-ptH"/>
                             <constraint firstItem="iEd-hi-vef" firstAttribute="trailing" secondItem="JCq-nH-en5" secondAttribute="trailing" id="uck-8A-yNy"/>
                             <constraint firstItem="Pld-bb-raX" firstAttribute="top" secondItem="ANZ-lt-YtZ" secondAttribute="top" id="v7o-at-eV1"/>
+                            <constraint firstItem="JCq-nH-en5" firstAttribute="trailing" secondItem="eXd-Ny-gOt" secondAttribute="trailing" constant="21" id="wMo-Bz-MzA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JCq-nH-en5"/>
                     </view>
@@ -694,7 +736,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2844" y="-404.79760119940033"/>
+            <point key="canvasLocation" x="3094" y="-367"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1tR-ug-CMS">
