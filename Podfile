@@ -18,4 +18,5 @@ pod 'SwiftKeychainWrapper'
 pod 'SimpleImageViewer'
 pod 'Eureka'
 pod 'ImageRow'
+pod 'HidingNavigationBar'
 end

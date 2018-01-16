@@ -9,6 +9,7 @@ import UIKit
 import FirebaseDatabase
 import MessageUI
 import SwiftKeychainWrapper
+import HidingNavigationBar
 
 
 class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
@@ -23,16 +24,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier ==  "toEmailVC" {
-//            let destination = segue.destination as? EmailVC,
-//            passIndex = tableView.indexPathsForSelectedRow. {
-//                destination?.emailAdress = rentalsArray[passIndex]
-//            }
-//        }
-//    }
-    
+    var hidingBarMangar: HidingNavigationBarManager?
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -106,8 +98,24 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         dismiss(animated: true, completion: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hidingBarMangar?.viewWillAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        hidingBarMangar?.viewDidLayoutSubviews()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hidingBarMangar?.viewWillDisappear(animated)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
        
         tableView.dataSource = self
         tableView.dataSource = self
@@ -135,8 +143,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         
         }
-        
-        
+        addHidingBar()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -154,6 +161,20 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
 
+    func addHidingBar() {
+      
+        
+        let extensionView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
+        extensionView.layer.borderColor = UIColor.lightGray.cgColor
+        extensionView.layer.borderWidth = 1
+        extensionView.backgroundColor = UIColor(white: 230/255, alpha: 1)
+        let label = UILabel(frame: extensionView.frame)
+        label.text = "Extension View"
+        label.textAlignment = NSTextAlignment.center
+        extensionView.addSubview(label)
+        
+        hidingBarMangar = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+        hidingBarMangar?.addExtensionView(extensionView)    }
     
     
 }
