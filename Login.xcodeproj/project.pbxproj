@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E29B8321FF9699E008245AE /* CurvedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E29B8311FF9699E008245AE /* CurvedTextView.swift */; };
 		5E2CFA3F1FF602A800A0BE83 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */; };
+		5E352F4D200D96BC00A2306B /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E352F4C200D96BC00A2306B /* FilterVC.swift */; };
 		5E51D0C81FFC43FD00E0C211 /* MyRentalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */; };
 		5E51D0CA1FFC583900E0C211 /* MyRentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D0C91FFC583900E0C211 /* MyRentalCell.swift */; };
 		5E65E9141FF7497A00ADDFDF /* CurvedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */; };
@@ -41,6 +42,7 @@
 		3D3A1E2CF3A2B343D76D1F37 /* Pods_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E29B8311FF9699E008245AE /* CurvedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTextView.swift; sourceTree = "<group>"; };
 		5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
+		5E352F4C200D96BC00A2306B /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 		5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalsVC.swift; sourceTree = "<group>"; };
 		5E51D0C91FFC583900E0C211 /* MyRentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalCell.swift; sourceTree = "<group>"; };
 		5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedImage.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				5EAB65541FE31E97009975C2 /* DetailVC.swift */,
 				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
 				5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */,
+				5E352F4C200D96BC00A2306B /* FilterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			files = (
 				5E65E9141FF7497A00ADDFDF /* CurvedImage.swift in Sources */,
 				6BBC048E1FB1446D0002D18F /* LoginPageVC.swift in Sources */,
+				5E352F4D200D96BC00A2306B /* FilterVC.swift in Sources */,
 				5E8CF3FE1FF501610097B97F /* RoundedButton.swift in Sources */,
 				6BBC04AA1FB1B55C0002D18F /* MyAccountVC.swift in Sources */,
 				6B3417AB1FB2881500C05AC2 /* RentalTableViewVC.swift in Sources */,

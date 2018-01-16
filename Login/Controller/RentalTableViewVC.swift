@@ -168,13 +168,27 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         extensionView.layer.borderColor = UIColor.lightGray.cgColor
         extensionView.layer.borderWidth = 1
         extensionView.backgroundColor = UIColor(white: 230/255, alpha: 1)
-        let label = UILabel(frame: extensionView.frame)
+        /*let label = UILabel(frame: extensionView.frame)
         label.text = "Extension View"
         label.textAlignment = NSTextAlignment.center
-        extensionView.addSubview(label)
+        extensionView.addSubview(label) */
         
+        let btn = UIButton(frame: CGRect(x: 20, y: 15, width: 75, height: 10))
+        btn.setTitle("Filter", for: .normal)
+        let btnColour = UIColor(displayP3Red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        btn.setTitleColor(btnColour, for: .normal)
+        btn.titleLabel?.font = headerFont
+        btn.addTarget(self, action: #selector(filterBtnPressed), for: .touchUpInside)
+        
+        extensionView.addSubview(btn)
         hidingBarMangar = HidingNavigationBarManager(viewController: self, scrollView: tableView)
-        hidingBarMangar?.addExtensionView(extensionView)    }
+        hidingBarMangar?.addExtensionView(extensionView)
+        
+    }
+    
+    @objc func filterBtnPressed() {
+        
+    }
     
     
 }
