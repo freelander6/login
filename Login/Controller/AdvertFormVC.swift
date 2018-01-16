@@ -189,7 +189,7 @@ class AdvertFormVC: FormViewController {
         }
         
         
-        form +++
+      /*  form +++
             
             // Custom UI View for top bar
             
@@ -204,7 +204,7 @@ class AdvertFormVC: FormViewController {
                     return header
                 }()
                 
-        }
+        } */
         
         form +++
             

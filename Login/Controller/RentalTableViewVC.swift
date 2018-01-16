@@ -15,9 +15,13 @@ import HidingNavigationBar
 class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
     var rentalsArray = [Rental]()
+    var filteredArrary = [Rental]()
     var index = ""
     var myRentals = [String]()
 
+    var filterByPrice: Float?
+    var filterByRentalType: String?
+    var test = "" 
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -131,9 +135,9 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         let key = snap.key
                         
                         let rental = Rental(postID: key, userData: dicOfRentals)
-                       
-                        
                         self.rentalsArray.append(rental)
+                        
+                        
                         
                     }
                 }
@@ -144,7 +148,15 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         }
         addHidingBar()
+        
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("**********\(String(describing: filterByPrice)))")
+    }
+    
+ 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         rentalsArray[indexPath.row].incrimentViews()
@@ -157,8 +169,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
 
-    @IBAction func contactBtnPressed(_ sender: Any) {
-    }
+
     
 
     func addHidingBar() {
@@ -187,7 +198,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @objc func filterBtnPressed() {
-        
+        performSegue(withIdentifier: "toFilterVC", sender: nil)
     }
     
     

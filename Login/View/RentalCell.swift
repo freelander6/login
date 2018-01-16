@@ -47,6 +47,8 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
     func configureCell(rental: Rental, image: UIImage?) {
         self.rental = rental
         
+        
+        
         self.rentalTitleLbl.text = rental.title
         self.rentalPriceLbl.text = "$\(rental.price!) p/w"
         self.rentalTypeLbl.text = rental.rentalType
