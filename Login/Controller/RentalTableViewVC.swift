@@ -16,12 +16,11 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     var rentalsArray = [Rental]()
     var filteredArrary = [Rental]()
-    var index = ""
     var myRentals = [String]()
 
     var filterByPrice: Float?
     var filterByRentalType: String?
-    var test = "" 
+ 
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -36,26 +35,45 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             let destination = segue.destination as? DetailVC
             let value = tableView.indexPathForSelectedRow?.row
             
-            
-            destination?.emailAdress = rentalsArray[value!].email!
-            destination?.bond = rentalsArray[value!].bond!
-            destination?.dateAval = rentalsArray[value!].dateAval!
-            destination?.pets = rentalsArray[value!].pets!
-            destination?.rent = rentalsArray[value!].price!
-            destination?.rentalTitle = rentalsArray[value!].title!
-            destination?.imageURL = rentalsArray[value!].imageURL!
-            destination?.des = rentalsArray[value!].description!
-            destination?.rentalType = rentalsArray[value!].rentalType!
-            destination?.streetName = rentalsArray[value!].streetName!
-            destination?.city = rentalsArray[value!].city!
-            destination?.postcode = rentalsArray[value!].postcode!
-            
+            if filteredArrary.count != 0 {
+                
+                destination?.emailAdress = filteredArrary[value!].email!
+                destination?.bond = filteredArrary[value!].bond!
+                destination?.dateAval = filteredArrary[value!].dateAval!
+                destination?.pets = filteredArrary[value!].pets!
+                destination?.rent = filteredArrary[value!].price!
+                destination?.rentalTitle = filteredArrary[value!].title!
+                destination?.imageURL = filteredArrary[value!].imageURL!
+                destination?.des = filteredArrary[value!].description!
+                destination?.rentalType = filteredArrary[value!].rentalType!
+                destination?.streetName = filteredArrary[value!].streetName!
+                destination?.city = filteredArrary[value!].city!
+                destination?.postcode = filteredArrary[value!].postcode!
+            } else {
+                destination?.emailAdress = rentalsArray[value!].email!
+                destination?.bond = rentalsArray[value!].bond!
+                destination?.dateAval = rentalsArray[value!].dateAval!
+                destination?.pets = rentalsArray[value!].pets!
+                destination?.rent = rentalsArray[value!].price!
+                destination?.rentalTitle = rentalsArray[value!].title!
+                destination?.imageURL = rentalsArray[value!].imageURL!
+                destination?.des = rentalsArray[value!].description!
+                destination?.rentalType = rentalsArray[value!].rentalType!
+                destination?.streetName = rentalsArray[value!].streetName!
+                destination?.city = rentalsArray[value!].city!
+                destination?.postcode = rentalsArray[value!].postcode!
+            }
         }
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rentalsArray.count
+        if filteredArrary.count != 0 {
+            return filteredArrary.count
+        } else {
+            return rentalsArray.count
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +82,11 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-      let rental = rentalsArray[indexPath.row]
+      var rental = rentalsArray[indexPath.row]
+        
+        if filteredArrary.count != 0 {
+            rental = filteredArrary[indexPath.row]
+        }
         
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? RentalCell {
@@ -127,6 +149,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
             
             self.rentalsArray = []
+            self.filteredArrary = []
             
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
@@ -137,7 +160,12 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         let rental = Rental(postID: key, userData: dicOfRentals)
                         self.rentalsArray.append(rental)
                         
-                        
+                        if self.filterByPrice != nil {
+                            let priceAsFloat = (rental.price! as NSString).floatValue
+                            if self.filterByPrice! >= priceAsFloat {
+                                self.filteredArrary.append(rental)
+                            }
+                        }
                         
                     }
                 }
