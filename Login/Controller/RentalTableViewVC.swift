@@ -84,7 +84,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
       var rental = rentalsArray[indexPath.row]
         
-        if filteredArrary.count != 0 {
+        if self.filteredArrary.count != 0 {
             rental = filteredArrary[indexPath.row]
         }
         
@@ -164,7 +164,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         //Placing filtered items in the filtered array
                         if self.filterByPrice != nil {
                             let priceAsFloat = (rental.price! as NSString).floatValue
-                            self.filteredArrary.append(rental)
+                            
                             if self.filterByPrice! >= priceAsFloat {
                                 self.filteredArrary.append(rental)
                             }
