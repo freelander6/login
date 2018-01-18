@@ -19,7 +19,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     var myRentals = [String]()
 
     var filterByPrice: Float?
-    var filterByRentalType: String?
+ //   var filteredRentalTypes: Set<String>?
  
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
@@ -146,6 +146,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         tableView.dataSource = self
         tableView.dataSource = self
         
+        //Firebase observer
         DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
             
             self.rentalsArray = []
@@ -160,12 +161,16 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         let rental = Rental(postID: key, userData: dicOfRentals)
                         self.rentalsArray.append(rental)
                         
+                        //Placing filtered items in the filtered array
                         if self.filterByPrice != nil {
                             let priceAsFloat = (rental.price! as NSString).floatValue
+                            self.filteredArrary.append(rental)
                             if self.filterByPrice! >= priceAsFloat {
                                 self.filteredArrary.append(rental)
                             }
+                            
                         }
+                     
                         
                     }
                 }

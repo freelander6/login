@@ -12,6 +12,8 @@ import Eureka
 
 class FilterVC: FormViewController {
     
+    
+    var rentalTypes = Set<String>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,17 +26,14 @@ class FilterVC: FormViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filterResults"  {
           let destination = segue.destination as! RentalTableViewVC
-            let formValues = self.form.values()
+     //       destination.filteredRentalTypes = rentalTypes
+            let formValues = self.form.values() 
             
             if let price = formValues["price"] as? Float {
                 destination.filterByPrice = price
             }
-         /*   if let test = formValues["test"] as? String {
-                destination.test = test
-            }
-            if let test = formValues["test"] as? String {
-                destination.test = test
-            } */
+        
+          
             
         }
     }
@@ -51,12 +50,22 @@ class FilterVC: FormViewController {
                 $0.minimumValue = 1
                 $0.maximumValue = 2000
             }
+            
+            
+   
+
+            
+            
         
             <<< MultipleSelectorRow<String>("type") {
                 $0.title = "Filter by rental type"
                 $0.options = ["Entire House", "Room in Shared House", "Shared Room", "Flat", "Apartment", "Other"]
        
-                }
+                } .onChange({ (row) in
+                    if let val = row.value {
+                        self.rentalTypes = val
+                    }
+                })
             
             
         
