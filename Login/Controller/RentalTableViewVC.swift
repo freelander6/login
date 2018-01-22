@@ -18,9 +18,12 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     var filteredArrary = [Rental]()
     var myRentals = [String]()
 
+    var isFilterEnabled: Bool? 
     var filterByPrice: Float?
- //   var filteredRentalTypes: Set<String>?
- 
+    var filteredRentalTypes: Set<String>?
+    var filteredFurnishedType: Set<String>?
+    var filteredBillType: Set<String>?
+    var filteredPetPolicy: Set<String>?
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -68,7 +71,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filteredArrary.count != 0 {
+        if self.isFilterEnabled == true {
             return filteredArrary.count
         } else {
             return rentalsArray.count
@@ -84,7 +87,11 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
       var rental = rentalsArray[indexPath.row]
         
-        if self.filteredArrary.count != 0 {
+//        if  indexPath.row < self.filteredArrary.count  {
+//            rental = filteredArrary[indexPath.row]
+//        }
+       
+        if isFilterEnabled == true {
             rental = filteredArrary[indexPath.row]
         }
         
@@ -161,15 +168,10 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         let rental = Rental(postID: key, userData: dicOfRentals)
                         self.rentalsArray.append(rental)
                         
-                        //Placing filtered items in the filtered array
-                        if self.filterByPrice != nil {
-                            let priceAsFloat = (rental.price! as NSString).floatValue
-                            
-                            if self.filterByPrice! >= priceAsFloat {
-                                self.filteredArrary.append(rental)
-                            }
-                            
+                        if self.filterByPrice != nil && self.filteredRentalTypes != nil {
+                            self.applyFilters(rental: rental)
                         }
+
                      
                         
                     }
@@ -184,6 +186,32 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         
     }
+    
+    func filterByPrice(rental: Rental) {
+        let priceAsFloat = (rental.price! as NSString).floatValue
+        if self.filterByPrice! >= priceAsFloat {
+            self.filteredArrary.append(rental)
+        }
+    }
+    
+    func applyFilters(rental: Rental) {
+        let priceAsFloat = (rental.price! as NSString).floatValue
+        for rentals in self.filteredRentalTypes! {
+            for furn in self.filteredFurnishedType! {
+                for pet in self.filteredPetPolicy! {
+            if rental.rentalType == rentals, self.filterByPrice! >= priceAsFloat, rental.furnished == furn, rental.pets == pet {
+                print("******hh\(String(describing: self.filteredRentalTypes))")
+                self.filteredArrary.append(rental)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+   
+
+    
     
     override func viewDidAppear(_ animated: Bool) {
         print("**********\(String(describing: filterByPrice)))")

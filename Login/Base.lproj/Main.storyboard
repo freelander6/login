@@ -29,12 +29,34 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdU-e0-Fuw">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
-                                        <color key="backgroundColor" red="0.0" green="0.58431372549019611" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="WanaRental_1_1" translatesAutoresizingMaskIntoConstraints="NO" id="IoE-NN-4ge">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WannaRental" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZ6-xD-20p">
+                                                <rect key="frame" x="87" y="107" width="200" height="43"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="27"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.68274921180000003" green="0.78177994490000002" blue="0.93144685029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="WLq-yA-rc8"/>
+                                            <constraint firstAttribute="height" constant="150" id="2KI-C7-754"/>
+                                            <constraint firstAttribute="bottom" secondItem="IoE-NN-4ge" secondAttribute="bottom" id="X3g-SA-CLu"/>
+                                            <constraint firstItem="IoE-NN-4ge" firstAttribute="leading" secondItem="hdU-e0-Fuw" secondAttribute="leading" id="aWC-M4-pdk"/>
+                                            <constraint firstItem="IoE-NN-4ge" firstAttribute="centerY" secondItem="hdU-e0-Fuw" secondAttribute="centerY" id="dfV-4r-b8g"/>
+                                            <constraint firstItem="IoE-NN-4ge" firstAttribute="height" secondItem="hdU-e0-Fuw" secondAttribute="height" id="sje-0c-ck5"/>
+                                            <constraint firstItem="IoE-NN-4ge" firstAttribute="top" secondItem="hdU-e0-Fuw" secondAttribute="top" id="yOe-aZ-IaV"/>
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="hdU-e0-Fuw" firstAttribute="leading" secondItem="waM-Uc-K34" secondAttribute="leading" id="SFW-xf-OmU"/>
+                                    <constraint firstItem="hdU-e0-Fuw" firstAttribute="top" secondItem="waM-Uc-K34" secondAttribute="top" id="aR4-O6-M2O"/>
+                                    <constraint firstAttribute="trailing" secondItem="hdU-e0-Fuw" secondAttribute="trailing" id="mOM-yf-yD9"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="g24-Va-Lk8">
                                 <rect key="frame" x="35" y="455" width="305" height="119"/>
@@ -87,7 +109,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1450980392" green="0.77647058820000003" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="Sff-Ez-3Ho"/>
                                 </constraints>
@@ -192,7 +213,11 @@
                         <viewLayoutGuide key="safeArea" id="IKe-1U-WvQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Vvg-Ea-oIc">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="MCA-u2-WPB"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="MCA-u2-WPB">
+                            <connections>
+                                <segue destination="yHp-bv-bRw" kind="show" id="fg4-64-GZv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="gVu-cB-u0k" kind="show" identifier="filterResults" id="RoY-hp-cyA"/>
@@ -902,11 +927,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="WanaRental_1_1" width="2700" height="1500"/>
         <image name="f" width="352" height="328"/>
         <image name="house" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Rm-jT-ttd"/>
+        <segue reference="fg4-64-GZv"/>
+        <segue reference="6Bx-ee-A2T"/>
         <segue reference="RoY-hp-cyA"/>
     </inferredMetricsTieBreakers>
 </document>

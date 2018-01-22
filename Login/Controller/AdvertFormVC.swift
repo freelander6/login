@@ -189,23 +189,6 @@ class AdvertFormVC: FormViewController {
         }
         
         
-      /*  form +++
-            
-            // Custom UI View for top bar
-            
-            Section(){ section in
-                section.header = {
-                    var header = HeaderFooterView<UIView>(.callback({
-                        let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-                        view.backgroundColor = topBarColour
-                        return view
-                    }))
-                    header.height = { 100 }
-                    return header
-                }()
-                
-        } */
-        
         form +++
             
             Section(){ section in
@@ -288,7 +271,7 @@ class AdvertFormVC: FormViewController {
             
             <<< PushRow<String>("rentalType") {
                 $0.title = "Rental Type"
-                $0.options = ["Entire House", "Room in Shared House", "Shared Room", "Flat", "Apartment", "Other"]
+                $0.options = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
                 $0.value = ""
                 $0.selectorTitle = "Select the rental type"
                 $0.add(rule: RuleRequired())
@@ -309,9 +292,9 @@ class AdvertFormVC: FormViewController {
             
             <<< PushRow<String>("pet") {
                 $0.title = "Pet Policy"
-                $0.options = ["Yes", "No"]
+                $0.options = ["Pets allowed", "No pets allowed"]
                 $0.value = ""
-                $0.selectorTitle = "Are pets allowed?"
+                $0.selectorTitle = "Pet policy"
                 $0.add(rule: RuleRequired())
                 
                 }.onPresent { from, to in
@@ -330,9 +313,9 @@ class AdvertFormVC: FormViewController {
             
             <<< PushRow<String>("furnished") {
                 $0.title = "Furnished"
-                $0.options = ["Fully Furnished", "Partly Furnished", "Appliances Only", "Not Furnished"]
+                $0.options = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
                 $0.value = ""
-                $0.selectorTitle = "Is the rental furnished?"
+                $0.selectorTitle = "Furnished status"
                 $0.add(rule: RuleRequired())
                 
                 }.onPresent { from, to in

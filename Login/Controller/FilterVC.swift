@@ -14,7 +14,10 @@ class FilterVC: FormViewController {
     
     
     var rentalTypes = Set<String>()
-
+    var furnishedTypes = Set<String>()
+    var billType =  Set<String>()
+    var petPolicy =  Set<String>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,13 +29,43 @@ class FilterVC: FormViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filterResults"  {
           let destination = segue.destination as! RentalTableViewVC
-     //       destination.filteredRentalTypes = rentalTypes
-            let formValues = self.form.values() 
+            destination.isFilterEnabled = true
+            
+            if rentalTypes.isEmpty == false {
+                 destination.filteredRentalTypes = rentalTypes
+            } else {
+                destination.filteredRentalTypes = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
+                
+            }
+           
+            if billType.isEmpty == false {
+                destination.filteredBillType = billType
+            } else {
+                destination.filteredBillType = ["All bills inluded", "No bills included"]
+            }
+            
+            if furnishedTypes.isEmpty == false {
+                destination.filteredFurnishedType = furnishedTypes
+            } else {
+                destination.filteredFurnishedType = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
+            }
+            
+            if petPolicy.isEmpty == false {
+                destination.filteredPetPolicy = petPolicy 
+            } else {
+                destination.filteredPetPolicy = ["Pets allowed", "No pets allowed"]
+            }
+            
+            
+            let formValues = self.form.values()
             
             if let price = formValues["price"] as? Float {
                 destination.filterByPrice = price
             }
+            
+          
         
+            
           
             
         }
@@ -53,28 +86,22 @@ class FilterVC: FormViewController {
             
             
    
-
-            
-            
         
             <<< MultipleSelectorRow<String>("type") {
                 $0.title = "Filter by rental type"
-                $0.options = ["Entire House", "Room in Shared House", "Shared Room", "Flat", "Apartment", "Other"]
+                $0.options = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
        
                 } .onChange({ (row) in
                     if let val = row.value {
                         self.rentalTypes = val
-                    }
-                })
+                    }                 })
             
             
-        
-            <<< PushRow<String>("pet") {
-                $0.title = "Pet policy"
-                $0.options = ["Pets allowed", "No preference"]
-                $0.value = ""
+            <<< MultipleSelectorRow<String>("pet") {
+                $0.title = "Pet Policy"
+                $0.options = ["Pets allowed", "No pets allowed"]
                 $0.selectorTitle = "Filter based on pet policy"
-           
+                
                 
                 }.onPresent { from, to in
                     
@@ -82,13 +109,16 @@ class FilterVC: FormViewController {
                         cell.textLabel!.font = myFont
                         //cell.textLabel!.textColor = ...
                     }
-        
- 
-    }
-        
+                    
+                }   .onChange({ (row) in
+                    if let val = row.value {
+                        self.petPolicy = val
+                    }
+                })
+            
             <<< MultipleSelectorRow<String>("furnished") {
                 $0.title = "Furnished Status"
-                $0.options = ["Fully Furnished", "Partly Furnished", "Appliances Only", "Not Furnished"]
+                $0.options = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
                // $0.value = ""
                 $0.selectorTitle = "Filter based on furnished status"
               
@@ -100,11 +130,16 @@ class FilterVC: FormViewController {
                         //cell.textLabel!.textColor = ...
                     }
                     
-        }
-        
+                }   .onChange({ (row) in
+                    if let val = row.value {
+                        self.furnishedTypes = val
+                    }
+                })
+            
+            
             <<< MultipleSelectorRow<String>("Bills inluded") {
                 $0.title = "Bills included"
-                $0.options = ["All bills inluded", "No bills included", "No preference"]
+                $0.options = ["All bills inluded", "No bills included"]
                 // $0.value = ""
                 $0.selectorTitle = "Filter based on furnished status"
                 
@@ -116,7 +151,12 @@ class FilterVC: FormViewController {
                         //cell.textLabel!.textColor = ...
                     }
                     
-        }
+                }        .onChange({ (row) in
+                    if let val = row.value {
+                        self.billType = val
+                    }
+                })
+        
         
         form +++
             
@@ -128,6 +168,7 @@ class FilterVC: FormViewController {
                 .onCellSelection({ (cell, row) in
                     
                     self.performSegue(withIdentifier: "filterResults", sender: nil)
+                    
                 })
         
     }
