@@ -406,6 +406,27 @@ class AdvertFormVC: FormViewController {
                     }
             }
             
+            <<< PushRow<String>("Location") {
+                $0.title = "Location"
+                $0.options = ["Northland","Auckland","Waikato","Bay of Plenty","Gisborne","Hawke's Bay","Taranaki","Manawatu-Wanganui","Wellington","Tasman","Nelson","Marlborough","West Coast","Canterbury","Otago","Southland"]
+                $0.value = ""
+                $0.selectorTitle = "Select Region"
+              
+                }.onPresent { from, to in
+                    
+                    to.selectableRowCellUpdate = { cell, row in
+                        cell.textLabel!.font = myFont
+                        //cell.textLabel!.textColor = ...
+                    }
+                    to.dismissOnSelection = false
+                    to.dismissOnChange = false
+                } .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
+            }
+
+            
             <<< NameRow("postcode") {
                 $0.title = "Post Code "
                 $0.placeholder = "Post Code"
