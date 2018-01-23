@@ -77,6 +77,8 @@ class FilterVC: FormViewController {
             
             Section()
             
+        
+            
             <<< SliderRow("price") {
                 $0.title = "Maximum Rent Per Week ($)"
                 $0.value = 2000

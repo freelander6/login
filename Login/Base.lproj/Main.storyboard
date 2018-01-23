@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Medium</string>
+        </array>
         <array key="AvenirNext.ttc">
             <string>AvenirNext-Medium</string>
             <string>AvenirNext-Regular</string>
@@ -30,13 +33,13 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdU-e0-Fuw">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="WanaRental_1_1" translatesAutoresizingMaskIntoConstraints="NO" id="IoE-NN-4ge">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="WanaRental_1_4 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="IoE-NN-4ge">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WannaRental" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZ6-xD-20p">
-                                                <rect key="frame" x="87" y="107" width="200" height="43"/>
+                                                <rect key="frame" x="74" y="99" width="227" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="27"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -52,11 +55,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="hdU-e0-Fuw" firstAttribute="leading" secondItem="waM-Uc-K34" secondAttribute="leading" id="SFW-xf-OmU"/>
-                                    <constraint firstItem="hdU-e0-Fuw" firstAttribute="top" secondItem="waM-Uc-K34" secondAttribute="top" id="aR4-O6-M2O"/>
-                                    <constraint firstAttribute="trailing" secondItem="hdU-e0-Fuw" secondAttribute="trailing" id="mOM-yf-yD9"/>
-                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="g24-Va-Lk8">
                                 <rect key="frame" x="35" y="455" width="305" height="119"/>
@@ -1112,7 +1110,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="WanaRental_1_1" width="2700" height="1500"/>
+        <image name="WanaRental_1_4 (1)" width="2700" height="1500"/>
         <image name="f" width="352" height="328"/>
         <image name="house" width="200" height="200"/>
     </resources>

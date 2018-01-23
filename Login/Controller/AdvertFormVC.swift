@@ -28,6 +28,7 @@ class AdvertFormVC: FormViewController {
     private var _city: String!
     private var _postcode: String!
     private var _rentalDescription: String!
+    private var _region: String!
     
     var rentalTitle: String? {
         return _rentalTitle
@@ -64,6 +65,11 @@ class AdvertFormVC: FormViewController {
     var postcode: String? {
         return _postcode
     }
+    
+    var region: String? {
+        return _region
+    }
+    
     var rentalDescription: String? {
         return _rentalDescription
     }
@@ -133,7 +139,8 @@ class AdvertFormVC: FormViewController {
             "ImageID": imageID as AnyObject,
             "street": street as AnyObject,
             "postcode": postcode as AnyObject,
-            "city": city as AnyObject
+            "city": city as AnyObject,
+            "region": region as AnyObject
         ]
         
         //Post data
@@ -406,8 +413,9 @@ class AdvertFormVC: FormViewController {
                     }
             }
             
-            <<< PushRow<String>("Location") {
-                $0.title = "Location"
+            
+            <<< PushRow<String>("region") {
+                $0.title = "Region"
                 $0.options = ["Northland","Auckland","Waikato","Bay of Plenty","Gisborne","Hawke's Bay","Taranaki","Manawatu-Wanganui","Wellington","Tasman","Nelson","Marlborough","West Coast","Canterbury","Otago","Southland"]
                 $0.value = ""
                 $0.selectorTitle = "Select Region"
@@ -637,6 +645,7 @@ class AdvertFormVC: FormViewController {
         if let furnished = formValues["furnished"] { self._furnished = furnished as! String }
         if let street = formValues["street"] { self._street = street as! String }
         if let city = formValues["city"] { self._city = city as! String }
+        if let region = formValues["region"] { self._region = region as! String}
         if let postcode = formValues["postcode"] { self._postcode = postcode as! String }
         if let description = formValues["rentalDescription"] {self._rentalDescription = description as! String }
         

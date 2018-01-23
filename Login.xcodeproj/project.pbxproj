@@ -35,7 +35,6 @@
 		6BBC04961FB1446E0002D18F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBC04941FB1446E0002D18F /* LaunchScreen.storyboard */; };
 		6BBC049E1FB18C380002D18F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BBC049D1FB18C380002D18F /* GoogleService-Info.plist */; };
 		6BBC04A41FB198070002D18F /* Rentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC04A31FB198070002D18F /* Rentals.swift */; };
-		6BBC04A61FB19C7E0002D18F /* AdvertisingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC04A51FB19C7E0002D18F /* AdvertisingVC.swift */; };
 		6BBC04AA1FB1B55C0002D18F /* MyAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC04A91FB1B55C0002D18F /* MyAccountVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +70,6 @@
 		6BBC04971FB1446E0002D18F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BBC049D1FB18C380002D18F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BBC04A31FB198070002D18F /* Rentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rentals.swift; sourceTree = "<group>"; };
-		6BBC04A51FB19C7E0002D18F /* AdvertisingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisingVC.swift; sourceTree = "<group>"; };
 		6BBC04A91FB1B55C0002D18F /* MyAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountVC.swift; sourceTree = "<group>"; };
 		B89561585C3C00D2A034CFAC /* Pods-Login.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Login.release.xcconfig"; path = "Pods/Target Support Files/Pods-Login/Pods-Login.release.xcconfig"; sourceTree = "<group>"; };
 		EF0D3961AA18827596881A05 /* Pods-Login.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Login.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Login/Pods-Login.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,11 +147,10 @@
 			children = (
 				6BBC048D1FB1446D0002D18F /* LoginPageVC.swift */,
 				6BBC04A91FB1B55C0002D18F /* MyAccountVC.swift */,
-				6BBC04A51FB19C7E0002D18F /* AdvertisingVC.swift */,
 				6B3417AA1FB2881500C05AC2 /* RentalTableViewVC.swift */,
 				5EAB65541FE31E97009975C2 /* DetailVC.swift */,
-				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
 				5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */,
+				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
 				5E352F4C200D96BC00A2306B /* FilterVC.swift */,
 			);
 			path = Controller;
@@ -374,7 +371,6 @@
 				6BBC04AA1FB1B55C0002D18F /* MyAccountVC.swift in Sources */,
 				6B3417AB1FB2881500C05AC2 /* RentalTableViewVC.swift in Sources */,
 				5EAB65551FE31E97009975C2 /* DetailVC.swift in Sources */,
-				6BBC04A61FB19C7E0002D18F /* AdvertisingVC.swift in Sources */,
 				5E51D0CA1FFC583900E0C211 /* MyRentalCell.swift in Sources */,
 				6BBC04A41FB198070002D18F /* Rentals.swift in Sources */,
 				5E29B8321FF9699E008245AE /* CurvedTextView.swift in Sources */,

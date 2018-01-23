@@ -29,6 +29,7 @@ class Rental {
     private var _streetName: String!
     private var _city: String!
     private var _postcode:String!
+    private var _region: String!
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -95,7 +96,11 @@ class Rental {
         return _postcode
     }
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, streetName: String, city: String, postcode: String) {
+    var region: String? {
+        return _region
+    }
+    
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, streetName: String, city: String, postcode: String, region: String) {
         
         self._title = title
         self._imgURL = imageURL
@@ -111,6 +116,7 @@ class Rental {
         self._streetName = streetName
         self._city = city
         self._postcode = postcode
+        self._region = region
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -175,6 +181,10 @@ class Rental {
         
         if let postcode = userData["postcode"] as? String {
             self._postcode = postcode
+        }
+        
+        if let region = userData["region"] as? String {
+            self._region = region
         }
     }
     
