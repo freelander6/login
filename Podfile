@@ -19,4 +19,5 @@ pod 'SimpleImageViewer'
 pod 'Eureka'
 pod 'ImageRow'
 pod 'HidingNavigationBar'
+pod 'SideMenu'
 end

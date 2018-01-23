@@ -154,6 +154,58 @@
             </objects>
             <point key="canvasLocation" x="-914.39999999999998" y="162.3688155922039"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="mq8-06-ThO">
+            <objects>
+                <viewController id="DtQ-5V-2cE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mt6-2G-1Ca">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzw-bx-e32">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock WannaRental Pro " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5H-qC-knP">
+                                        <rect key="frame" x="8" y="22" width="359" height="56"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="22"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.64700567720000002" blue="0.71510726209999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="6El-jU-gLS"/>
+                                    <constraint firstAttribute="trailing" secondItem="S5H-qC-knP" secondAttribute="trailing" constant="8" id="S6I-hE-HqA"/>
+                                    <constraint firstAttribute="bottom" secondItem="S5H-qC-knP" secondAttribute="bottom" constant="22" id="bNx-PQ-hSf"/>
+                                    <constraint firstItem="S5H-qC-knP" firstAttribute="leading" secondItem="vzw-bx-e32" secondAttribute="leading" constant="8" id="lqQ-rr-kI2"/>
+                                    <constraint firstItem="S5H-qC-knP" firstAttribute="top" secondItem="vzw-bx-e32" secondAttribute="top" constant="22" id="xL7-B8-ifO"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWq-dD-taL">
+                                <rect key="frame" x="65" y="158" width="244" height="313"/>
+                                <string key="text">As a seller: **Upload up to 5 rental images to attract more interest. *** See the amout of views your adverts are getting ***Have one active featured add that will be at the top of the search results. *** Access the messging system to recieve instant messages from buyers. As a buyer: *** Access to favourate list to mangage intereting adverts. ***Access to messgaing system to communitcate instantaously with sellers. </string>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aQJ-li-yBZ" firstAttribute="bottom" secondItem="VWq-dD-taL" secondAttribute="bottom" constant="196" id="7eb-Ka-iPA"/>
+                            <constraint firstItem="aQJ-li-yBZ" firstAttribute="trailing" secondItem="VWq-dD-taL" secondAttribute="trailing" constant="66" id="8By-J5-s5L"/>
+                            <constraint firstItem="vzw-bx-e32" firstAttribute="top" secondItem="Mt6-2G-1Ca" secondAttribute="top" id="FuY-Ib-jZ8"/>
+                            <constraint firstItem="VWq-dD-taL" firstAttribute="leading" secondItem="aQJ-li-yBZ" secondAttribute="leading" constant="65" id="PBS-4w-vqq"/>
+                            <constraint firstItem="VWq-dD-taL" firstAttribute="top" secondItem="vzw-bx-e32" secondAttribute="bottom" constant="58" id="bkh-da-ex2"/>
+                            <constraint firstItem="vzw-bx-e32" firstAttribute="trailing" secondItem="aQJ-li-yBZ" secondAttribute="trailing" id="qe2-NJ-C9Y"/>
+                            <constraint firstItem="vzw-bx-e32" firstAttribute="leading" secondItem="aQJ-li-yBZ" secondAttribute="leading" id="tGW-gf-4Me"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aQJ-li-yBZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GgP-ah-cUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1378.4000000000001" y="-1261.6191904047978"/>
+        </scene>
         <!--My AccountVC-->
         <scene sceneID="oxd-n3-IgD">
             <objects>
@@ -215,7 +267,7 @@
                     <navigationItem key="navigationItem" id="Vvg-Ea-oIc">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="MCA-u2-WPB">
                             <connections>
-                                <segue destination="yHp-bv-bRw" kind="show" id="fg4-64-GZv"/>
+                                <segue destination="yHp-bv-bRw" kind="show" id="rHn-Be-eRb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -293,10 +345,10 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UND-Eh-hgO">
-                                                                    <rect key="frame" x="0.0" y="21" width="127" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="21" width="89" height="21"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  🛋 Furshished: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWc-1H-Y8t">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="75" id="FcD-BF-49N"/>
                                                                             </constraints>
@@ -305,7 +357,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uz3-ay-sQ7">
-                                                                            <rect key="frame" x="52" y="0.0" width="75" height="21"/>
+                                                                            <rect key="frame" x="75" y="0.0" width="14" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="75" id="5P0-BR-Nj5"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="g7o-8a-3xc"/>
@@ -448,7 +500,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JCq-nH-en5"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Rental Listings" id="0Oh-xu-arP"/>
+                    <navigationItem key="navigationItem" title="Rental Listings" id="0Oh-xu-arP">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="g8f-ek-56k">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SjC-To-XMe">
+                                <rect key="frame" x="16" y="7" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Menu"/>
+                                <connections>
+                                    <segue destination="1nH-NN-tUW" kind="presentation" id="C5B-WT-W1T"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="iEd-hi-vef" id="Zdx-5U-Wa7"/>
                         <segue destination="7HW-B6-amA" kind="show" identifier="toDetailVC" id="bab-rm-yx9"/>
@@ -729,7 +792,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="aMn-sI-sLu" kind="relationship" relationship="viewControllers" id="Awh-ap-wz5"/>
-                        <segue destination="8r6-Ng-c6K" kind="relationship" relationship="viewControllers" id="IxI-0C-n0d"/>
                         <segue destination="Cib-RW-70F" kind="relationship" relationship="viewControllers" id="yzw-0q-gBY"/>
                         <segue destination="yHp-bv-bRw" kind="relationship" relationship="viewControllers" id="SJ5-WR-Ses"/>
                     </connections>
@@ -770,9 +832,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNb-O3-Ie2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1460" y="988"/>
+            <point key="canvasLocation" x="1489" y="1159"/>
         </scene>
-        <!--Item-->
+        <!--My RentalsVC-->
         <scene sceneID="3Mw-e1-A8h">
             <objects>
                 <viewController id="8r6-Ng-c6K" customClass="MyRentalsVC" customModule="Login" customModuleProvider="target" sceneMemberID="viewController">
@@ -789,7 +851,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zbb-po-0sj">
-                                <rect key="frame" x="0.0" y="105" width="375" height="513"/>
+                                <rect key="frame" x="0.0" y="105" width="375" height="562"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="180" id="el3-s8-DH4" customClass="MyRentalCell" customModule="Login" customModuleProvider="target">
@@ -877,14 +939,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8D5-o2-ZK8"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Thb-ow-jcZ"/>
+                    <navigationItem key="navigationItem" id="b8L-26-o5Z"/>
                     <connections>
                         <outlet property="myRentalsTableView" destination="zbb-po-0sj" id="Iuu-y2-aBv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q9O-Yu-8Pf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2784.8000000000002" y="576.1619190404798"/>
+            <point key="canvasLocation" x="3124" y="576.1619190404798"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="djC-nK-dWL">
@@ -898,6 +960,12 @@
                         <color key="backgroundColor" red="0.0" green="0.64705882349999999" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="menuWidth">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="gVu-cB-u0k" kind="relationship" relationship="rootViewController" id="KWe-Zg-vwp"/>
                     </connections>
@@ -905,6 +973,104 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MD-C6-zcM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1460" y="-143"/>
+        </scene>
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="Lh7-Fu-5vF">
+            <objects>
+                <navigationController storyboardIdentifier="LeftMenuNavigationController" id="1nH-NN-tUW" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="umY-vO-CYD">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.64700567720000002" blue="0.71510726209999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="jeL-u5-qAc" kind="relationship" relationship="rootViewController" id="FXv-MU-bOq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ohw-cL-2wt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-212" y="-1636"/>
+        </scene>
+        <!--Menu-->
+        <scene sceneID="14p-Bh-kLB">
+            <objects>
+                <viewController id="jeL-u5-qAc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9fp-QH-2LL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="rU1-T8-8vh">
+                                <rect key="frame" x="16" y="112" width="207" height="235"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wt5-3J-p2J">
+                                        <rect key="frame" x="0.0" y="0.0" width="155" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5uV-uh-5xB"/>
+                                            <constraint firstAttribute="width" constant="155" id="78w-1A-4i2"/>
+                                        </constraints>
+                                        <state key="normal" title="View my adverts listed"/>
+                                        <connections>
+                                            <segue destination="98y-UK-Qx4" kind="show" id="Cei-86-F7I"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z99-zC-2FJ">
+                                        <rect key="frame" x="0.0" y="41" width="177" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="FcC-8v-igK"/>
+                                            <constraint firstAttribute="width" constant="177" id="kIu-YD-fBF"/>
+                                        </constraints>
+                                        <state key="normal" title="View my favourate rentals"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waX-J2-Fk6">
+                                        <rect key="frame" x="0.0" y="82" width="82" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="KXG-Vu-4kO"/>
+                                            <constraint firstAttribute="width" constant="82" id="tIA-td-S9N"/>
+                                        </constraints>
+                                        <state key="normal" title="My Account"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UE8-mc-HGR">
+                                        <rect key="frame" x="0.0" y="123" width="207" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="I6h-Q0-0yj"/>
+                                            <constraint firstAttribute="width" constant="207" id="Jno-Nq-SW8"/>
+                                        </constraints>
+                                        <state key="normal" title="Upgrade to WannaRental Pro! "/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDr-e6-gzj">
+                                        <rect key="frame" x="0.0" y="164" width="114" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="114" id="Ijr-so-93x"/>
+                                            <constraint firstAttribute="height" constant="30" id="kri-Mj-8yx"/>
+                                        </constraints>
+                                        <state key="normal" title="Contact Support"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sbu-oi-oX8">
+                                        <rect key="frame" x="0.0" y="205" width="56" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="atb-ER-cN3"/>
+                                            <constraint firstAttribute="width" constant="56" id="ewk-Gs-Fd1"/>
+                                        </constraints>
+                                        <state key="normal" title="Log Off "/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rU1-T8-8vh" firstAttribute="leading" secondItem="9fp-QH-2LL" secondAttribute="leadingMargin" id="CrF-tf-9FQ"/>
+                            <constraint firstItem="rU1-T8-8vh" firstAttribute="top" secondItem="PWH-44-qZd" secondAttribute="top" constant="48" id="jED-bx-bOb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PWH-44-qZd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Menu" id="0BN-rS-Tqr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jyz-gS-uLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759.20000000000005" y="-1648.4257871064469"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GEe-5n-gf6">
@@ -925,6 +1091,25 @@
             </objects>
             <point key="canvasLocation" x="1489" y="-1049"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="TdP-SZ-qoW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="98y-UK-Qx4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Thb-ow-jcZ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vSN-Mg-lUg">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8r6-Ng-c6K" kind="relationship" relationship="rootViewController" id="9a7-sl-NdO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wUR-lj-nHM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2246" y="597"/>
+        </scene>
     </scenes>
     <resources>
         <image name="WanaRental_1_1" width="2700" height="1500"/>
@@ -932,7 +1117,7 @@
         <image name="house" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fg4-64-GZv"/>
+        <segue reference="rHn-Be-eRb"/>
         <segue reference="6Bx-ee-A2T"/>
         <segue reference="RoY-hp-cyA"/>
     </inferredMetricsTieBreakers>
