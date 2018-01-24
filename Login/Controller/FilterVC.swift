@@ -17,6 +17,7 @@ class FilterVC: FormViewController {
     var furnishedTypes = Set<String>()
     var billType =  Set<String>()
     var petPolicy =  Set<String>()
+    var region = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,11 @@ class FilterVC: FormViewController {
                 destination.filteredPetPolicy = ["Pets allowed", "No pets allowed"]
             }
             
+            if region != "" {
+                destination.filteredRegion = region
+            } else {
+                destination.filteredRegion = "All"
+            }
             
             let formValues = self.form.values()
             
@@ -77,7 +83,30 @@ class FilterVC: FormViewController {
             
             Section()
             
-        
+            <<< PushRow<String>("region") {
+                $0.title = "Filter by region"
+                $0.options = ["All","Northland","Auckland","Waikato","Bay of Plenty","Gisborne","Hawke's Bay","Taranaki","Manawatu-Wanganui","Wellington","Tasman","Nelson","Marlborough","West Coast","Canterbury","Otago","Southland"]
+                $0.value = ""
+                $0.selectorTitle = "Filter by region"
+                $0.add(rule: RuleRequired())
+                
+                }.onPresent { from, to in
+                    
+                    to.selectableRowCellUpdate = { cell, row in
+                        cell.textLabel!.font = myFont
+                        //cell.textLabel!.textColor = ...
+                    }
+                    to.dismissOnSelection = false
+                    to.dismissOnChange = false
+                }   .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
+                } .onChange({ (row) in
+                    if let val = row.value {
+                        self.region = val
+                    }
+                })
             
             <<< SliderRow("price") {
                 $0.title = "Maximum Rent Per Week ($)"

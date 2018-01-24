@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 import HidingNavigationBar
 
 
-class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  { 
     
     var rentalsArray = [Rental]()
     var filteredArrary = [Rental]()
@@ -24,6 +24,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     var filteredFurnishedType: Set<String>?
     var filteredBillType: Set<String>?
     var filteredPetPolicy: Set<String>?
+    var filteredRegion: String?
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -35,39 +36,91 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailVC" {
-            let destination = segue.destination as? DetailVC
-            let value = tableView.indexPathForSelectedRow?.row
+            if let destination = segue.destination as? DetailVC, let value = tableView.indexPathForSelectedRow?.row{
             
-            if filteredArrary.count != 0 {
-                
-                destination?.emailAdress = filteredArrary[value!].email!
-                destination?.bond = filteredArrary[value!].bond!
-                destination?.dateAval = filteredArrary[value!].dateAval!
-                destination?.pets = filteredArrary[value!].pets!
-                destination?.rent = filteredArrary[value!].price!
-                destination?.rentalTitle = filteredArrary[value!].title!
-                destination?.imageURL = filteredArrary[value!].imageURL!
-                destination?.des = filteredArrary[value!].description!
-                destination?.rentalType = filteredArrary[value!].rentalType!
-                destination?.streetName = filteredArrary[value!].streetName!
-                destination?.city = filteredArrary[value!].city!
-                destination?.postcode = filteredArrary[value!].postcode!
-            } else {
-                destination?.emailAdress = rentalsArray[value!].email!
-                destination?.bond = rentalsArray[value!].bond!
-                destination?.dateAval = rentalsArray[value!].dateAval!
-                destination?.pets = rentalsArray[value!].pets!
-                destination?.rent = rentalsArray[value!].price!
-                destination?.rentalTitle = rentalsArray[value!].title!
-                destination?.imageURL = rentalsArray[value!].imageURL!
-                destination?.des = rentalsArray[value!].description!
-                destination?.rentalType = rentalsArray[value!].rentalType!
-                destination?.streetName = rentalsArray[value!].streetName!
-                destination?.city = rentalsArray[value!].city!
-                destination?.postcode = rentalsArray[value!].postcode!
+           if filteredArrary.isEmpty == false {                                      // If filters are applied
+            
+            if let filteredEmail = filteredArrary[value].email {
+                destination.emailAdress = filteredEmail
             }
+            if let filteredBond = filteredArrary[value].bond {
+                destination.bond = filteredBond
+            }
+            if let filteredDateAval = filteredArrary[value].dateAval {
+                destination.dateAval = filteredDateAval
+            }
+            if let filteredPetPolicy = filteredArrary[value].pets {
+                destination.pets = filteredPetPolicy
+            }
+            if let filteredPricePolicy = filteredArrary[value].price {
+                destination.rent = filteredPricePolicy
+            }
+            if let filteredRentitle = filteredArrary[value].title {
+                destination.rentalTitle = filteredRentitle
+            }
+            if let filteredImageURL = filteredArrary[value].imageURL {
+                destination.imageURL = filteredImageURL
+            }
+            if let filteredRentDescription = filteredArrary[value].description {
+                destination.des = filteredRentDescription
+            }
+            if let filteredRentalType = filteredArrary[value].rentalType {
+                destination.rentalType = filteredRentalType
+            }
+            if let filteredStreetName = filteredArrary[value].streetName {
+                destination.streetName = filteredStreetName
+            }
+            if let filteredCityName = filteredArrary[value].city {
+                destination.city = filteredCityName
+            }
+            if let filteredPostcode = filteredArrary[value].postcode {
+                destination.postcode = filteredPostcode
+            }
+            
+           
+            } else {                         // No filtering if filtered array is empty
+            
+            if let emailValue = rentalsArray[value].email {
+                destination.emailAdress = emailValue
+            }
+            if let bondValue = rentalsArray[value].bond{
+                destination.bond = bondValue
+            }
+            if let dateAvalValue = rentalsArray[value].dateAval {
+                destination.dateAval = dateAvalValue
+            }
+            if let petPolicyValue = rentalsArray[value].pets {
+                destination.pets = petPolicyValue
+            }
+            if let priceValue = rentalsArray[value].price {
+                destination.rent = priceValue
+            }
+            if let rentalTitleValue = rentalsArray[value].title {
+                destination.rentalTitle = rentalTitleValue
+            }
+            if let imageURLValue = rentalsArray[value].imageURL {
+                destination.imageURL = imageURLValue
+            }
+            if let rentalDescriptionValue = rentalsArray[value].description {
+                destination.des = rentalDescriptionValue
+            }
+            if let rentalTypeValue = rentalsArray[value].rentalType{
+                destination.rentalType = rentalTypeValue
+            }
+            if let streetNameValue = rentalsArray[value].streetName {
+                destination.streetName = streetNameValue
+            }
+            if let cityNameValue = rentalsArray[value].city {
+                destination.city = cityNameValue
+            }
+            if let postcodeValue = rentalsArray[value].postcode {
+                destination.postcode = postcodeValue
+            }
+
+          }
         }
     }
+}
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -195,16 +248,19 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func applyFilters(rental: Rental) {
+        if let priceFilter = self.filterByPrice, let regionFilter = filteredRegion {
+        
         let priceAsFloat = (rental.price! as NSString).floatValue
         for rentals in self.filteredRentalTypes! {
             for furn in self.filteredFurnishedType! {
                 for pet in self.filteredPetPolicy! {
-            if rental.rentalType == rentals, self.filterByPrice! >= priceAsFloat, rental.furnished == furn, rental.pets == pet {
+            if rental.rentalType == rentals, priceFilter >= priceAsFloat, rental.furnished == furn, rental.pets == pet, rental.region == regionFilter || regionFilter == "All" {
                 print("******hh\(String(describing: self.filteredRentalTypes))")
                 self.filteredArrary.append(rental)
                     }
                 }
             }
+          }
         }
     }
     
