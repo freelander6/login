@@ -25,6 +25,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     var filteredBillType: Set<String>?
     var filteredPetPolicy: Set<String>?
     var filteredRegion: String?
+    var filteredCity: String?
+    var filteredPostCode: String? 
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -240,22 +242,16 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
-    func filterByPrice(rental: Rental) {
-        let priceAsFloat = (rental.price! as NSString).floatValue
-        if self.filterByPrice! >= priceAsFloat {
-            self.filteredArrary.append(rental)
-        }
-    }
     
     func applyFilters(rental: Rental) {
-        if let priceFilter = self.filterByPrice, let regionFilter = filteredRegion {
+        if let priceFilter = self.filterByPrice, let regionFilter = filteredRegion, let rentalTypefilter = filteredRentalTypes, let filteredFurnishedType = filteredFurnishedType, let filteredPetPolicy = filteredPetPolicy, let filteredCity = filteredCity, let filteredPostcode = filteredPostCode {
         
         let priceAsFloat = (rental.price! as NSString).floatValue
-        for rentals in self.filteredRentalTypes! {
-            for furn in self.filteredFurnishedType! {
-                for pet in self.filteredPetPolicy! {
-            if rental.rentalType == rentals, priceFilter >= priceAsFloat, rental.furnished == furn, rental.pets == pet, rental.region == regionFilter || regionFilter == "All" {
-                print("******hh\(String(describing: self.filteredRentalTypes))")
+        for rentals in rentalTypefilter {
+            for furn in filteredFurnishedType {
+                for pet in filteredPetPolicy {
+            if rental.rentalType == rentals, priceFilter >= priceAsFloat, rental.furnished == furn, rental.pets == pet, rental.region == regionFilter || regionFilter == "All" , rental.city == filteredCity || filteredCity == "All", rental.postcode == filteredPostcode || filteredPostcode == "All"{
+               // print("******hh\(String(describing: self.filteredRentalTypes))")
                 self.filteredArrary.append(rental)
                     }
                 }

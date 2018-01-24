@@ -13,11 +13,14 @@ import Eureka
 class FilterVC: FormViewController {
     
     
+    
     var rentalTypes = Set<String>()
     var furnishedTypes = Set<String>()
     var billType =  Set<String>()
     var petPolicy =  Set<String>()
     var region = ""
+    var city = ""
+    var postcode = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +33,10 @@ class FilterVC: FormViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filterResults"  {
           let destination = segue.destination as! RentalTableViewVC
+            
             destination.isFilterEnabled = true
+            
+            let formValues = self.form.values()
             
             if rentalTypes.isEmpty == false {
                  destination.filteredRentalTypes = rentalTypes
@@ -62,8 +68,17 @@ class FilterVC: FormViewController {
             } else {
                 destination.filteredRegion = "All"
             }
-            
-            let formValues = self.form.values()
+          
+            if let city = formValues["city"] as? String {
+                destination.filteredCity = city
+            } else {
+                destination.filteredCity = "All"
+            }
+            if let postcode = formValues["postcode"] as? String {
+               destination.filteredPostCode = postcode
+            } else {
+                destination.filteredPostCode = "All"
+            }
             
             if let price = formValues["price"] as? Float {
                 destination.filterByPrice = price
@@ -84,7 +99,7 @@ class FilterVC: FormViewController {
             Section()
             
             <<< PushRow<String>("region") {
-                $0.title = "Filter by region"
+                $0.title = "Filter By Region"
                 $0.options = ["All","Northland","Auckland","Waikato","Bay of Plenty","Gisborne","Hawke's Bay","Taranaki","Manawatu-Wanganui","Wellington","Tasman","Nelson","Marlborough","West Coast","Canterbury","Otago","Southland"]
                 $0.value = ""
                 $0.selectorTitle = "Filter by region"
@@ -107,6 +122,18 @@ class FilterVC: FormViewController {
                         self.region = val
                     }
                 })
+            
+            
+            <<< NameRow("city") {
+                $0.title = "Search by town/city"
+                $0.placeholder = "Enter in a city/town to search results"
+                }
+            
+            <<< NameRow("postcode") {
+                $0.title = "Search by postcode"
+                $0.placeholder = "Search results by postcode"
+            }
+            
             
             <<< SliderRow("price") {
                 $0.title = "Maximum Rent Per Week ($)"
