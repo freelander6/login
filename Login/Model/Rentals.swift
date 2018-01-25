@@ -30,6 +30,7 @@ class Rental {
     private var _city: String!
     private var _postcode:String!
     private var _region: String!
+ 
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -100,6 +101,8 @@ class Rental {
         return _region
     }
     
+ 
+    
     init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, streetName: String, city: String, postcode: String, region: String) {
         
         self._title = title
@@ -117,6 +120,7 @@ class Rental {
         self._city = city
         self._postcode = postcode
         self._region = region
+      
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -186,6 +190,8 @@ class Rental {
         if let region = userData["region"] as? String {
             self._region = region
         }
+        
+      
     }
     
     func incrimentViews() {

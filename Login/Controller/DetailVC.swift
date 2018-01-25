@@ -28,6 +28,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     var streetName = ""
     var city = ""
     var postcode = ""
+    var postID = ""
     
     var address: String {
         return "\(streetName), \(city), \(postcode)"
@@ -45,23 +46,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var petsField: UILabel!
     @IBOutlet weak var descriptionField: UILabel!
     
-    
-    
-    
-//    final class rentalAnnotation: NSObject, MKAnnotation {
-//        var coordinate: CLLocationCoordinate2D
-//        var title: String?
-//        var subtitle: String?
-//
-//        init(coord: CLLocationCoordinate2D, title: String, subtitle: String) {
-//            self.coordinate = coord
-//            self.title = title
-//            self.subtitle = subtitle
-//
-//            super.init()
-//        }
-//
-//    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,5 +154,9 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
 
-
+    @IBAction func addToFavouratesBtnPressed(_ sender: Any) {
+        let postDataToUsers = DataService.ds.DBCurrentUser.child("MyFavourates").child(postID)
+        postDataToUsers.setValue(true)
+    }
+    
 }

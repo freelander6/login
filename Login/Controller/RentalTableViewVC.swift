@@ -78,6 +78,9 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let filteredPostcode = filteredArrary[value].postcode {
                 destination.postcode = filteredPostcode
             }
+            if let filteredPostID = filteredArrary[value].postID {
+                destination.postID = filteredPostID
+            }
             
            
             } else {                         // No filtering if filtered array is empty
@@ -118,7 +121,10 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let postcodeValue = rentalsArray[value].postcode {
                 destination.postcode = postcodeValue
             }
-
+            if let postID = rentalsArray[value].postID {
+                destination.postID = postID
+            }
+            
           }
         }
     }

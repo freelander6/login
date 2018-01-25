@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5E29B8321FF9699E008245AE /* CurvedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E29B8311FF9699E008245AE /* CurvedTextView.swift */; };
 		5E2CFA3F1FF602A800A0BE83 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */; };
+		5E32EFB42018293200AB0122 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32EFB32018293200AB0122 /* SideMenuVC.swift */; };
+		5E32EFB620192B1E00AB0122 /* MyFavouratesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32EFB520192B1E00AB0122 /* MyFavouratesVC.swift */; };
+		5E32EFB820192C6700AB0122 /* MyFavouratesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32EFB720192C6700AB0122 /* MyFavouratesCell.swift */; };
 		5E352F4D200D96BC00A2306B /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E352F4C200D96BC00A2306B /* FilterVC.swift */; };
 		5E3D116B200EB909001BF74A /* FilteredArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D116A200EB909001BF74A /* FilteredArray.swift */; };
 		5E51D0C81FFC43FD00E0C211 /* MyRentalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */; };
@@ -42,6 +45,9 @@
 		3D3A1E2CF3A2B343D76D1F37 /* Pods_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E29B8311FF9699E008245AE /* CurvedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTextView.swift; sourceTree = "<group>"; };
 		5E2CFA3E1FF602A800A0BE83 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
+		5E32EFB32018293200AB0122 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
+		5E32EFB520192B1E00AB0122 /* MyFavouratesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouratesVC.swift; sourceTree = "<group>"; };
+		5E32EFB720192C6700AB0122 /* MyFavouratesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouratesCell.swift; sourceTree = "<group>"; };
 		5E352F4C200D96BC00A2306B /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 		5E3D116A200EB909001BF74A /* FilteredArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredArray.swift; sourceTree = "<group>"; };
 		5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalsVC.swift; sourceTree = "<group>"; };
@@ -146,12 +152,14 @@
 			isa = PBXGroup;
 			children = (
 				6BBC048D1FB1446D0002D18F /* LoginPageVC.swift */,
+				5E32EFB520192B1E00AB0122 /* MyFavouratesVC.swift */,
 				6BBC04A91FB1B55C0002D18F /* MyAccountVC.swift */,
 				6B3417AA1FB2881500C05AC2 /* RentalTableViewVC.swift */,
 				5EAB65541FE31E97009975C2 /* DetailVC.swift */,
 				5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */,
 				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
 				5E352F4C200D96BC00A2306B /* FilterVC.swift */,
+				5E32EFB32018293200AB0122 /* SideMenuVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 				5E29B8311FF9699E008245AE /* CurvedTextView.swift */,
 				5E51D0C91FFC583900E0C211 /* MyRentalCell.swift */,
 				5E7134FA200229E200C59EF0 /* CustomTextField.swift */,
+				5E32EFB720192C6700AB0122 /* MyFavouratesCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -367,6 +376,7 @@
 				5E65E9141FF7497A00ADDFDF /* CurvedImage.swift in Sources */,
 				6BBC048E1FB1446D0002D18F /* LoginPageVC.swift in Sources */,
 				5E352F4D200D96BC00A2306B /* FilterVC.swift in Sources */,
+				5E32EFB820192C6700AB0122 /* MyFavouratesCell.swift in Sources */,
 				5E8CF3FE1FF501610097B97F /* RoundedButton.swift in Sources */,
 				6BBC04AA1FB1B55C0002D18F /* MyAccountVC.swift in Sources */,
 				6B3417AB1FB2881500C05AC2 /* RentalTableViewVC.swift in Sources */,
@@ -378,7 +388,9 @@
 				6BBC048C1FB1446D0002D18F /* AppDelegate.swift in Sources */,
 				5E6EC54020056E5700AD7979 /* AdvertFormVC.swift in Sources */,
 				5EE0B2E42000AC8200ED2003 /* PinAnnotation.swift in Sources */,
+				5E32EFB42018293200AB0122 /* SideMenuVC.swift in Sources */,
 				6B4FC2BE1FD2114400EF2092 /* RentalCell.swift in Sources */,
+				5E32EFB620192B1E00AB0122 /* MyFavouratesVC.swift in Sources */,
 				5E7134FB200229E200C59EF0 /* CustomTextField.swift in Sources */,
 				5E65E9161FF81B0400ADDFDF /* CurvedView.swift in Sources */,
 				5EE0B2E01FFE115300ED2003 /* dismissKeyboard.swift in Sources */,
