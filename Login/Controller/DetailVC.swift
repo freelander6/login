@@ -11,6 +11,7 @@ import MessageUI
 import Firebase
 import SimpleImageViewer
 import MapKit
+import Whisper
 
 
 
@@ -157,6 +158,15 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBAction func addToFavouratesBtnPressed(_ sender: Any) {
         let postDataToUsers = DataService.ds.DBCurrentUser.child("MyFavourates").child(postID)
         postDataToUsers.setValue(true)
+        
+
+        
+        var announcement = Announcement(title: "", subtitle: "This property has been added to your favourate page", image: UIImage(named: "if_tick_blue_619551"))
+        announcement.duration = 2
+        
+        Whisper.show(shout: announcement, to: navigationController!, completion: {
+           
+        })
     }
     
 }

@@ -28,7 +28,6 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let myFavourateRental = myFavouates[indexPath.row]
         if let cell = myFavouratesTableView.dequeueReusableCell(withIdentifier: "favCell") as? MyFavouratesCell {
-            print("*****sucess")
             cell.configureCell(rental: myFavourateRental)
             return cell
         } else {
@@ -40,7 +39,7 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 1
     }
     
-    
+    // Allow deletion of favourate from Firebase and view
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
         if editingStyle == .delete {
@@ -50,14 +49,8 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             refFavourate.child(postID).removeValue()
 
             }
-
-
             // remove the item from the data model
             myFavouates.remove(at: indexPath.row)
-
-
-
-
             // delete the table view row
             tableView.deleteRows(at: [indexPath], with: .fade)
 

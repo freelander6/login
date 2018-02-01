@@ -220,6 +220,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             self.rentalsArray = []
             self.filteredArrary = []
             
+            
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
@@ -229,7 +230,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         let rental = Rental(postID: key, userData: dicOfRentals)
                         self.rentalsArray.append(rental)
                         
-                        if self.filterByPrice != nil && self.filteredRentalTypes != nil {
+                       // if self.filterByPrice != nil && self.filteredRentalTypes != nil  {
+                        if self.isFilterEnabled == true {
                             self.applyFilters(rental: rental)
                         }
 
@@ -250,6 +252,30 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     func applyFilters(rental: Rental) {
+        
+        if filterByPrice == nil {
+            filterByPrice = 20000
+        }
+        if filteredPostCode == nil {
+            filteredPostCode = "All"
+        }
+        if filteredRegion == nil {
+            filteredRegion = "All"
+        }
+        if filteredCity == nil {
+            filteredCity = "All"
+        }
+        if filteredRentalTypes == nil {
+            filteredRentalTypes = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
+        }
+        if filteredFurnishedType == nil {
+            filteredFurnishedType = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
+        }
+        if filteredPetPolicy == nil {
+            filteredPetPolicy = ["Pets allowed", "No pets allowed"]
+        }
+        
+        
         if let priceFilter = self.filterByPrice, let regionFilter = filteredRegion, let rentalTypefilter = filteredRentalTypes, let filteredFurnishedType = filteredFurnishedType, let filteredPetPolicy = filteredPetPolicy, let filteredCity = filteredCity, let filteredPostcode = filteredPostCode {
         
         let priceAsFloat = (rental.price! as NSString).floatValue

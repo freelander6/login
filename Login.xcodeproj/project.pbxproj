@@ -24,6 +24,7 @@
 		5E7134FB200229E200C59EF0 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7134FA200229E200C59EF0 /* CustomTextField.swift */; };
 		5E8CF3FE1FF501610097B97F /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8CF3FD1FF501610097B97F /* RoundedButton.swift */; };
 		5EAB65551FE31E97009975C2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB65541FE31E97009975C2 /* DetailVC.swift */; };
+		5EC0C7AB20214CA000A62748 /* InitialLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0C7AA20214CA000A62748 /* InitialLocationVC.swift */; };
 		5EE0B2E01FFE115300ED2003 /* dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0B2DF1FFE115300ED2003 /* dismissKeyboard.swift */; };
 		5EE0B2E22000A97000ED2003 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE0B2E12000A97000ED2003 /* MapKit.framework */; };
 		5EE0B2E42000AC8200ED2003 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0B2E32000AC8200ED2003 /* PinAnnotation.swift */; };
@@ -61,6 +62,7 @@
 		5E8CF3FD1FF501610097B97F /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5EAB65541FE31E97009975C2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5EBC38E51FE13B3500EF3EAD /* Login.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Login.entitlements; sourceTree = "<group>"; };
+		5EC0C7AA20214CA000A62748 /* InitialLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLocationVC.swift; sourceTree = "<group>"; };
 		5EE0B2DF1FFE115300ED2003 /* dismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dismissKeyboard.swift; sourceTree = "<group>"; };
 		5EE0B2E12000A97000ED2003 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5EE0B2E32000AC8200ED2003 /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
 				5E352F4C200D96BC00A2306B /* FilterVC.swift */,
 				5E32EFB32018293200AB0122 /* SideMenuVC.swift */,
+				5EC0C7AA20214CA000A62748 /* InitialLocationVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -305,9 +308,11 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HidingNavigationBar/HidingNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageRow/ImageRow.framework",
+				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Whisper/Whisper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -322,9 +327,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HidingNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageRow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Whisper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -392,6 +399,7 @@
 				6B4FC2BE1FD2114400EF2092 /* RentalCell.swift in Sources */,
 				5E32EFB620192B1E00AB0122 /* MyFavouratesVC.swift in Sources */,
 				5E7134FB200229E200C59EF0 /* CustomTextField.swift in Sources */,
+				5EC0C7AB20214CA000A62748 /* InitialLocationVC.swift in Sources */,
 				5E65E9161FF81B0400ADDFDF /* CurvedView.swift in Sources */,
 				5EE0B2E01FFE115300ED2003 /* dismissKeyboard.swift in Sources */,
 				5E2CFA3F1FF602A800A0BE83 /* RoundedImage.swift in Sources */,

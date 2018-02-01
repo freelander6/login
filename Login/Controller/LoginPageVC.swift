@@ -26,7 +26,7 @@ class LoginPageVC: UIViewController {
    override func viewDidAppear(_ animated: Bool) {
         
     if let _  = KeychainWrapper.standard.string(forKey: "uid") {
-        performSegue(withIdentifier: "optionsVC", sender: nil)
+        performSegue(withIdentifier: "toInitialLocationVC", sender: nil)
     }
     
 }
@@ -37,7 +37,7 @@ class LoginPageVC: UIViewController {
         
         let val = KeychainWrapper.standard.set(id, forKey: "uid")
         print("Saved to keychain: \(val)")
-        performSegue(withIdentifier: "optionsVC", sender: nil)
+        performSegue(withIdentifier: "toInitialLocationVC", sender: nil)
     }
     
     

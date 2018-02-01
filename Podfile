@@ -20,4 +20,6 @@ pod 'Eureka'
 pod 'ImageRow'
 pod 'HidingNavigationBar'
 pod 'SideMenu'
+pod 'Whisper'
+pod 'SearchTextField'
 end

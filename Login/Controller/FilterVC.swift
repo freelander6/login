@@ -41,59 +41,67 @@ class FilterVC: FormViewController {
             if rentalTypes.isEmpty == false {
                  destination.filteredRentalTypes = rentalTypes
                 filterCount += 1
-            } else {
-                destination.filteredRentalTypes = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
-                
             }
+//            else {
+//                destination.filteredRentalTypes = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
+            
+            //}
            
             if billType.isEmpty == false {
                 destination.filteredBillType = billType
                 filterCount += 1
-            } else {
-                destination.filteredBillType = ["All bills inluded", "No bills included"]
             }
-            
+//            else {
+//                destination.filteredBillType = ["All bills inluded", "No bills included"]
+//            }
+        
             if furnishedTypes.isEmpty == false {
                 destination.filteredFurnishedType = furnishedTypes
                 filterCount += 1
-            } else {
-                destination.filteredFurnishedType = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
             }
-            
+//            else {
+//                destination.filteredFurnishedType = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
+//            }
+        
             if petPolicy.isEmpty == false {
                 destination.filteredPetPolicy = petPolicy
                 filterCount += 1
-            } else {
-                destination.filteredPetPolicy = ["Pets allowed", "No pets allowed"]
             }
-            
+//            else {
+//                destination.filteredPetPolicy = ["Pets allowed", "No pets allowed"]
+//            }
+        
             if region != "" {
                 destination.filteredRegion = region
                 filterCount += 1
-            } else {
-                destination.filteredRegion = "All"
             }
-          
+//            else {
+//                destination.filteredRegion = "All"
+//            }
+        
             if let city = formValues["city"] as? String {
                 destination.filteredCity = city
                 filterCount += 1
-            } else {
-                destination.filteredCity = "All"
             }
+//            else {
+//                destination.filteredCity = "All"
+//            }
             if let postcode = formValues["postcode"] as? String {
                destination.filteredPostCode = postcode
                 filterCount += 1
-            } else {
-                destination.filteredPostCode = "All"
             }
-            
+//            else {
+//                destination.filteredPostCode = "All"
+//            }
+        
             if let price = formValues["price"] as? Float {
                 destination.filterByPrice = price
                 filterCount += 1
-            } else {
-                destination.filterByPrice = 2000
             }
-            
+//            else {
+//                destination.filterByPrice = 2000
+//            }
+        
           
         
             
