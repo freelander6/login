@@ -31,7 +31,7 @@ class InitialLocationVC: UIViewController {
     @IBAction func useCurrentLocationBtnPressed(_ sender: Any) {
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   /* override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRentalVC" {
             if let destination = segue.destination as? RentalTableViewVC {
                 if let field = searchField.text {
@@ -42,6 +42,21 @@ class InitialLocationVC: UIViewController {
                 }
                
             }
+        }
+    } */
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRentalVC" {
+            let barViewController = segue.destination as! UITabBarController
+            let destination = barViewController.viewControllers![0] as! RentalTableViewVC
+            if let field = searchField.text {
+                destination.filteredCity = field
+                destination.isFilterEnabled = true
+                
+                
+            }
+            
         }
     }
     
