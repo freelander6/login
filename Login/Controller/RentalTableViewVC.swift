@@ -83,7 +83,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             }
             
            
-            } else {                         // No filtering if filtered array is empty
+            } else {     // No filtering if filtered array is empty
             
             if let emailValue = rentalsArray[value].email {
                 destination.emailAdress = emailValue
@@ -239,7 +239,10 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         
                     }
                 }
-                self.tableView.reloadData()
+                
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
             }
         
         

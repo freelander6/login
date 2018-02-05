@@ -197,10 +197,10 @@
                                     <action selector="useCurrentLocationBtnPressed:" destination="9t5-r4-HmI" eventType="touchUpInside" id="f4N-Dt-3CO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View or list rentals in your area" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-9x-5dt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter the location you are interested in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-9x-5dt">
                                 <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="27"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -412,10 +412,10 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UND-Eh-hgO">
-                                                                    <rect key="frame" x="0.0" y="21" width="89" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="21" width="127" height="21"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  🛋 Furshished: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWc-1H-Y8t">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="75" id="FcD-BF-49N"/>
                                                                             </constraints>
@@ -424,7 +424,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uz3-ay-sQ7">
-                                                                            <rect key="frame" x="75" y="0.0" width="14" height="21"/>
+                                                                            <rect key="frame" x="52" y="0.0" width="75" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="75" id="5P0-BR-Nj5"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="g7o-8a-3xc"/>
