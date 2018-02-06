@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -57,7 +58,56 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailVC" {
+            if let destination = segue.destination as? DetailVC, let value = myFavouratesTableView.indexPathForSelectedRow?.row {
+               
+                if let email = myFavouates[value].email {
+                    destination.emailAdress = email
+                }
+                if let bond = myFavouates[value].bond {
+                    destination.bond = bond
+                }
+                if let dateAval = myFavouates[value].dateAval {
+                    destination.dateAval = dateAval
+                }
+                if let petPolicy = myFavouates[value].pets {
+                    destination.pets = petPolicy
+                }
+                if let pricePolicy = myFavouates[value].price {
+                    destination.rent = pricePolicy
+                }
+                if let rentitle = myFavouates[value].title {
+                    destination.rentalTitle = rentitle
+                }
+                if let imageURL = myFavouates[value].imageURL {
+                    destination.imageURL = imageURL
+                }
+                if let rentalDescription = myFavouates[value].description {
+                    destination.des = rentalDescription
+                }
+                if let rentalType = myFavouates[value].rentalType {
+                    destination.rentalType = rentalType
+                }
+                if let streetName = myFavouates[value].streetName {
+                    destination.streetName = streetName
+                }
+                if let cityName = myFavouates[value].city {
+                    destination.city = cityName
+                }
+                if let postcode = myFavouates[value].postcode {
+                    destination.postcode = postcode
+                }
+                if let postID = myFavouates[value].postID {
+                    destination.postID = postID
+                }
+            }
+        }
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toDetailVC", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

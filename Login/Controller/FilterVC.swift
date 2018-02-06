@@ -32,7 +32,10 @@ class FilterVC: FormViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filterResults"  {
-          let destination = segue.destination as! RentalTableViewVC
+            let barViewController = segue.destination as! UITabBarController
+            let destination = barViewController.viewControllers![0] as! RentalTableViewVC
+            
+         // let destination = segue.destination as! RentalTableViewVC
             
             destination.isFilterEnabled = true
             
