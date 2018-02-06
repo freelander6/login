@@ -22,4 +22,5 @@ pod 'HidingNavigationBar'
 pod 'SideMenu'
 pod 'Whisper'
 pod 'SearchTextField'
+pod 'ImageSlideshow', '~> 1.5'
 end

@@ -12,6 +12,7 @@ import Firebase
 import SimpleImageViewer
 import MapKit
 import Whisper
+import ImageSlideshow
 
 
 
@@ -38,6 +39,8 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var map: MKMapView!
     
 
+    @IBOutlet weak var imageSlider: ImageSlideshow!
+    
     @IBOutlet weak var titleField: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var houseTypeField: UILabel!
@@ -49,10 +52,14 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     
 
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        setUpSlider()
+        
+   
+        
         titleField.text = rentalTitle
         houseTypeField.text = rentalType
         bondField.text = bond
@@ -64,7 +71,9 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
         addMapAnnotation()
      
         if let img = RentalTableViewVC.imageCache.object(forKey: imageURL as NSString) {
-            image.image = img
+            let localSource = [ImageSource(imageString: "house")!,ImageSource(image: img)]
+             imageSlider.setImageInputs(localSource)
+            
         } else {
             // download image from Firebase
             let ref = Storage.storage().reference(forURL: imageURL)
@@ -75,7 +84,8 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
                     print("Image downloaded")
                     if let imageData = data {
                         if let img = UIImage(data: imageData) {
-                            self.image.image = img
+                            let localSource = [ImageSource(imageString: "house")!,ImageSource(image: img)]
+                            self.imageSlider.setImageInputs(localSource)
                             RentalTableViewVC.imageCache.setObject(img, forKey: self.imageURL as NSString)
                         }
                     }
@@ -87,8 +97,28 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
 
     
    
+    func setUpSlider() {
+        imageSlider.backgroundColor = UIColor.white
+        imageSlider.slideshowInterval = 5.0
+        imageSlider.pageControlPosition = PageControlPosition.underScrollView
+        imageSlider.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
+        imageSlider.pageControl.pageIndicatorTintColor = UIColor.black
+        imageSlider.contentScaleMode = UIViewContentMode.scaleAspectFill
+        
+        // optional way to show activity indicator during image load (skipping the line will show no activity indicator)
+        imageSlider.activityIndicator = DefaultActivityIndicator()
+       
+        //Setup tap gesture on image to go full screen
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(DetailVC.didTap))
+        imageSlider.addGestureRecognizer(recognizer)
+        
+    }
     
-    
+    @objc func didTap() {
+        let fullScreenController = imageSlider.presentFullScreenController(from: self)
+        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+    }
     
     @IBAction func contactBtnPressed(_ sender: Any) {
         
