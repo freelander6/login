@@ -16,6 +16,7 @@
 		5E3D116B200EB909001BF74A /* FilteredArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D116A200EB909001BF74A /* FilteredArray.swift */; };
 		5E51D0C81FFC43FD00E0C211 /* MyRentalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */; };
 		5E51D0CA1FFC583900E0C211 /* MyRentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D0C91FFC583900E0C211 /* MyRentalCell.swift */; };
+		5E58CD22202A49B500E09EE5 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58CD21202A49B500E09EE5 /* ChatVC.swift */; };
 		5E65E9141FF7497A00ADDFDF /* CurvedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */; };
 		5E65E9161FF81B0400ADDFDF /* CurvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9151FF81B0400ADDFDF /* CurvedView.swift */; };
 		5E65E9181FF8303000ADDFDF /* CurvedBorderForLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65E9171FF8303000ADDFDF /* CurvedBorderForLabel.swift */; };
@@ -53,6 +54,8 @@
 		5E3D116A200EB909001BF74A /* FilteredArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredArray.swift; sourceTree = "<group>"; };
 		5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalsVC.swift; sourceTree = "<group>"; };
 		5E51D0C91FFC583900E0C211 /* MyRentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalCell.swift; sourceTree = "<group>"; };
+		5E58CD21202A49B500E09EE5 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		5E58CD23202A4E4B00E09EE5 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		5E65E9131FF7497A00ADDFDF /* CurvedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedImage.swift; sourceTree = "<group>"; };
 		5E65E9151FF81B0400ADDFDF /* CurvedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedView.swift; sourceTree = "<group>"; };
 		5E65E9171FF8303000ADDFDF /* CurvedBorderForLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedBorderForLabel.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		6BBC047F1FB1446D0002D18F = {
 			isa = PBXGroup;
 			children = (
+				5E58CD23202A4E4B00E09EE5 /* Bridging-Header.h */,
 				6BBC048A1FB1446D0002D18F /* Login */,
 				6BBC04891FB1446D0002D18F /* Products */,
 				D2E7081C7B190DFB4B2F1FB1 /* Pods */,
@@ -163,6 +167,7 @@
 				5E352F4C200D96BC00A2306B /* FilterVC.swift */,
 				5E32EFB32018293200AB0122 /* SideMenuVC.swift */,
 				5EC0C7AA20214CA000A62748 /* InitialLocationVC.swift */,
+				5E58CD21202A49B500E09EE5 /* ChatVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -309,6 +314,8 @@
 				"${BUILT_PRODUCTS_DIR}/HidingNavigationBar/HidingNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageRow/ImageRow.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
@@ -329,6 +336,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HidingNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageRow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
@@ -390,6 +399,7 @@
 				6BBC04AA1FB1B55C0002D18F /* MyAccountVC.swift in Sources */,
 				6B3417AB1FB2881500C05AC2 /* RentalTableViewVC.swift in Sources */,
 				5EAB65551FE31E97009975C2 /* DetailVC.swift in Sources */,
+				5E58CD22202A49B500E09EE5 /* ChatVC.swift in Sources */,
 				5E51D0CA1FFC583900E0C211 /* MyRentalCell.swift in Sources */,
 				6BBC04A41FB198070002D18F /* Rentals.swift in Sources */,
 				5E29B8321FF9699E008245AE /* CurvedTextView.swift in Sources */,
@@ -553,6 +563,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ss.Login;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -570,6 +581,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ss.Login;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

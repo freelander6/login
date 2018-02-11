@@ -23,6 +23,7 @@ class DataService {
     private var _DBRrefRentals = DB.child("Rentals")
     private var _DBRrefUsers = DB.child("Users")
     private var _DBRefMyRentals = DB.child("Users").child("MyRentals")
+    private var _DBRefThreads = DB.child("Threads")
     
     //firebase storage ref
     private var _StorageREF = STORAGE.child("rental_images")
@@ -41,6 +42,10 @@ class DataService {
     
     var DBrefUsers: DatabaseReference {
         return _DBRrefUsers
+    }
+    
+    var DBrefThreads : DatabaseReference {
+        return _DBRefThreads
     }
     
     

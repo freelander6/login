@@ -650,7 +650,11 @@ class AdvertFormVC: FormViewController {
         if let description = formValues["rentalDescription"] {self._rentalDescription = description as! String }
         
         if let image = formValues["image1"] {self.rentalImage = image as? UIImage}
-        if let email = formValues["email"] {self._email = email as! String}
+     //   if let imageTwo = formValues["image2"] {self.rentalImage = image as? UIImage}
+      //  if let imageThree = formValues["image3"] {self.rentalImage = image as? UIImage}
+     //   if let imageFour = formValues["image4"] {self.rentalImage = image as? UIImage}
+      //  if let imageFive = formValues["image5"] {self.rentalImage = image as? UIImage}
+      //  if let email = formValues["email"] {self._email = email as! String}
         
     }
     

@@ -13,6 +13,7 @@ import SimpleImageViewer
 import MapKit
 import Whisper
 import ImageSlideshow
+import SwiftKeychainWrapper
 
 
 
@@ -42,7 +43,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var imageSlider: ImageSlideshow!
     
     @IBOutlet weak var titleField: UILabel!
-    @IBOutlet weak var image: UIImageView!
+
     @IBOutlet weak var houseTypeField: UILabel!
     @IBOutlet weak var bondField: UILabel!
     @IBOutlet weak var rentField: UILabel!
@@ -95,7 +96,13 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
         
     }
 
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toChatVC" {
+            if let destination = segue.destination as? ChatVC {
+                destination.senderUserID = ""
+            }
+        }
+    }
    
     func setUpSlider() {
         imageSlider.backgroundColor = UIColor.white
@@ -122,12 +129,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBAction func contactBtnPressed(_ sender: Any) {
         
-        let mailComposeViewController = configuredMailComposeViewController()
-        if MFMailComposeViewController.canSendMail() {
-            self.present(mailComposeViewController, animated: true, completion: nil)
-        } else {
-            self.showSendMailErrorAlert()
-        }
+    performSegue(withIdentifier: "toChatVC", sender: nil)
         
     }
     
@@ -153,18 +155,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     
-    
-    @IBAction func imageGestureTapped(_ sender: Any) {
-        print("pressed")
-        let configuration = ImageViewerConfiguration { config in
-            config.imageView = image
-        }
-        
-        let imageViewerController = ImageViewerController(configuration: configuration)
-        
-        present(imageViewerController, animated: true)
-    }
-    
+
 
     func addMapAnnotation() {
         let geocoder = CLGeocoder()
