@@ -17,9 +17,9 @@ import SwiftKeychainWrapper
 
 
 
-class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
+class DetailVC: UIViewController {
   
-    var emailAdress = ""
+    var userID = ""
     var rentalTitle = ""
     var rentalType = ""
     var bond = ""
@@ -99,7 +99,7 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toChatVC" {
             if let destination = segue.destination as? ChatVC {
-                destination.senderUserID = ""
+                destination.senderUserID = userID
             }
         }
     }
@@ -133,21 +133,9 @@ class DetailVC: UIViewController, MFMailComposeViewControllerDelegate {
         
     }
     
-    func configuredMailComposeViewController() -> MFMailComposeViewController {
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
-        
-        mailComposerVC.setToRecipients([emailAdress])
-        mailComposerVC.setSubject("RE WannaRental enquiry ")
-       // mailComposerVC.setMessageBody("Set message body here", isHTML: false)
-        
-        return mailComposerVC
-    }
+
     
-    func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
-        sendMailErrorAlert.show()
-    }
+
     
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

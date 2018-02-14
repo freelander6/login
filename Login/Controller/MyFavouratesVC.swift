@@ -62,8 +62,8 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "toDetailVC" {
             if let destination = segue.destination as? DetailVC, let value = myFavouratesTableView.indexPathForSelectedRow?.row {
                
-                if let email = myFavouates[value].email {
-                    destination.emailAdress = email
+                if let userID = myFavouates[value].userID {
+                    destination.userID = userID
                 }
                 if let bond = myFavouates[value].bond {
                     destination.bond = bond

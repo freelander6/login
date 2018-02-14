@@ -23,7 +23,7 @@ class AdvertFormVC: FormViewController {
     private var _bond: String!
     private var _furnished: String!
     private var _pets: String!
-    private var _email: String!
+    private var _userID: String!
     private var _street: String!
     private var _city: String!
     private var _postcode: String!
@@ -53,8 +53,9 @@ class AdvertFormVC: FormViewController {
     var pets: String? {
         return _pets
     }
-    var email: String? {
-        return _email
+    var userID: String? {
+        let uid = KeychainWrapper.standard.string(forKey: "uid")
+        return uid
     }
     var street: String?{
         return _street
@@ -134,7 +135,7 @@ class AdvertFormVC: FormViewController {
             "type": type as AnyObject,
             "pets": pets as AnyObject,
             "imageURL": imgURL as AnyObject,
-            "email": email as AnyObject,
+            "userID": userID as AnyObject,
             "furnished": furnished as AnyObject,
             "ImageID": imageID as AnyObject,
             "street": street as AnyObject,

@@ -22,7 +22,7 @@ class Rental {
     private var _pets: String!
     private var _description: String!
     private var _postID: String!
-    private var _email: String!
+    private var _userID: String!
     private var _furnished: String!
     private var _views = 0
     private var _ImageID: String!
@@ -69,8 +69,8 @@ class Rental {
         return _postID
     }
     
-    var email: String? {
-        return _email
+    var userID: String? {
+        return _userID
     }
     
     var furnished: String? {
@@ -159,8 +159,8 @@ class Rental {
             self._description = description
         }
         
-        if let email = userData["email"] as? String {
-            self._email = email
+        if let userID = userData["userID"] as? String {
+            self._userID = userID
         }
         
         if let furnished = userData["furnished"] as? String {

@@ -42,8 +42,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             
            if filteredArrary.isEmpty == false {                                      // If filters are applied
             
-            if let filteredEmail = filteredArrary[value].email {
-                destination.emailAdress = filteredEmail
+            if let filteredUserID = filteredArrary[value].userID {
+                destination.userID = filteredUserID
             }
             if let filteredBond = filteredArrary[value].bond {
                 destination.bond = filteredBond
@@ -85,8 +85,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
            
             } else {     // No filtering if filtered array is empty
             
-            if let emailValue = rentalsArray[value].email {
-                destination.emailAdress = emailValue
+            if let userIDValue = rentalsArray[value].userID {
+                destination.userID = userIDValue
             }
             if let bondValue = rentalsArray[value].bond{
                 destination.bond = bondValue

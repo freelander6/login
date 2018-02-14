@@ -11,10 +11,11 @@ import JSQMessagesViewController
 import SwiftKeychainWrapper
 
 
-class ChatVC: JSQMessagesViewController {
-
+class MyThreadsVC: JSQMessagesViewController {
+    
     var senderUserID = ""
-    let threadID = UUID().uuidString
+    var threadID = ""
+    var myThreadID: String?
     
     //Local messgae array
     var messages = [JSQMessage]()
@@ -31,76 +32,108 @@ class ChatVC: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-            let senderUID = KeychainWrapper.standard.string(forKey: "uid")
-      
-            senderId = senderUID
-            senderDisplayName = ""
+        
+        let senderUID = KeychainWrapper.standard.string(forKey: "uid")
+        
+        senderId = senderUID
+        senderDisplayName = ""
+        
+        let threadQuery = DataService.ds.DBCurrentUser.child("MyThreads")
+        _ = threadQuery.observe(.childAdded, with: { snapshot in
+            
+            print(snapshot.key)
+            self.threadID = snapshot.key
+            
+            
+            if self.threadID != "" {
+                
+                let query = DataService.ds.DBrefThreads.child(self.threadID).child("Messages").queryLimited(toLast: 10)     // Gets the last 10 messages
+                
+                _ = query.observe(.childAdded, with: { [weak self] snapshot in
+                    
+                    if  let data        = snapshot.value as? [String: String],
+                        let id          = data["senderID"],
+                        let name        = data["name"],
+                        let text        = data["text"],
+                        !text.isEmpty
+                    {
+                        if let message = JSQMessage(senderId: id, displayName: name, text: text)
+                        {
+                            self?.messages.append(message)
+                            
+                            self?.finishReceivingMessage()   // Refresh UI
+                        }
+                    }
+                })
+                
+                
+            }
+            
+            
+        })
         
         
-        
+//        let myThreads = DataService.ds.DBCurrentUser.child("MyThreads")
+//
+//        _ = myThreads.observe(.childAdded, with: { (snapshot) in
+//
+//                self.myThreadID = snapshot.key
+//           // print("My thread ID is : \(String(describing: self.myThreadID))")
+//
+//        })
         
         inputToolbar.contentView.leftBarButtonItem = nil    // Hides attactment button
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero  // avatar size zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero  // avatar size zero
         
         //Obseriving firbase
-        let query = DataService.ds.DBrefThreads.child(threadID).child("Messages").queryLimited(toLast: 10)     // Gets the last 10 messages
-        
-        _ = query.observe(.childAdded, with: { [weak self] snapshot in
+      //  if let myThreadID = myThreadID 
             
-            if  let data        = snapshot.value as? [String: String],
-                let id          = data["senderID"],
-                let name        = data["name"],
-                let text        = data["text"],
-                !text.isEmpty
-            {
-                if let message = JSQMessage(senderId: id, displayName: name, text: text)
-                {
-                    self?.messages.append(message)
-                    
-                    self?.finishReceivingMessage()   // Refresh UI
-                }
-            }
-        })
+        if threadID != "" {
         
+    
+            
     }
+        
+ 
+        
+}
     
     //Displaying a users name
-    @objc func showDisplayNameDialog()
-    {
-        let defaults = UserDefaults.standard
-        
-        let alert = UIAlertController(title: "Your Display Name", message: "Before you can chat, please choose a display name. Others will see this name when you send chat messages. You can change your display name again by tapping the navigation bar.", preferredStyle: .alert)
-        
-        alert.addTextField { textField in
-            
-            if let name = defaults.string(forKey: "jsq_name")
-            {
-                textField.text = name
-            }
-            else
-            {
-                let names = ["Ford", "Arthur", "Zaphod", "Trillian", "Slartibartfast", "Humma Kavula", "Deep Thought"]
-                textField.text = names[Int(arc4random_uniform(UInt32(names.count)))]
-            }
-        }
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self, weak alert] _ in
-            
-            if let textField = alert?.textFields?[0], !textField.text!.isEmpty {
-                
-                self?.senderDisplayName = textField.text
-                
-                self?.title = "Chat: \(self!.senderDisplayName!)"
-                
-                defaults.set(textField.text, forKey: "jsq_name")
-                defaults.synchronize()
-            }
-        }))
-        
-        present(alert, animated: true, completion: nil)
-    }
+//    @objc func showDisplayNameDialog()
+//    {
+//        let defaults = UserDefaults.standard
+//
+//        let alert = UIAlertController(title: "Your Display Name", message: "Before you can chat, please choose a display name. Others will see this name when you send chat messages. You can change your display name again by tapping the navigation bar.", preferredStyle: .alert)
+//
+//        alert.addTextField { textField in
+//
+//            if let name = defaults.string(forKey: "jsq_name")
+//            {
+//                textField.text = name
+//            }
+//            else
+//            {
+//                let names = ["Ford", "Arthur", "Zaphod", "Trillian", "Slartibartfast", "Humma Kavula", "Deep Thought"]
+//                textField.text = names[Int(arc4random_uniform(UInt32(names.count)))]
+//            }
+//        }
+//
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self, weak alert] _ in
+//
+//            if let textField = alert?.textFields?[0], !textField.text!.isEmpty {
+//
+//                self?.senderDisplayName = textField.text
+//
+//                self?.title = "Chat: \(self!.senderDisplayName!)"
+//
+//                defaults.set(textField.text, forKey: "jsq_name")
+//                defaults.synchronize()
+//            }
+//        }))
+//
+//        present(alert, animated: true, completion: nil)
+//    }
     
     
     
@@ -132,7 +165,7 @@ class ChatVC: JSQMessagesViewController {
     }
     // When set is pressed
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-       
+        
         let threadFireRef = DataService.ds.DBrefThreads.child(threadID).child("Messages").childByAutoId()
         let currentUserThreadRef = DataService.ds.DBCurrentUser
         let recieveUserRef = DataService.ds.DBrefUsers
@@ -143,3 +176,4 @@ class ChatVC: JSQMessagesViewController {
         finishSendingMessage()
     }
 }
+
