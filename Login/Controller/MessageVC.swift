@@ -11,7 +11,7 @@ import JSQMessagesViewController
 import SwiftKeychainWrapper
 
 
-class MyThreadsVC: JSQMessagesViewController {
+class MessageVC: JSQMessagesViewController {
     
     var senderUserID = ""
     var threadID = ""
