@@ -13,7 +13,24 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var chatListTableView: UITableView!
     
-    var myThreads: [String] = []
+    class Thread {
+        
+        var threadID : String
+        var username: String
+        
+        init(thread: String, user: String) {
+            self.threadID = thread
+            self.username = user
+        }
+        
+    }
+    
+    
+   
+    
+    
+    var myThreads = [Thread]()
+
     
     
     override func viewDidLoad() {
@@ -29,12 +46,30 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         threads.observe(.childAdded) { (snapshot) in
             
                 print(snapshot.key)
-                self.myThreads.append(snapshot.key)
-                print(self.myThreads)
             
-                self.chatListTableView.reloadData()
+                let threadKey = snapshot.key
+                let senderID = snapshot.value as? String
+            
+            
+         
+                let users = DataService.ds.DBrefUsers.child(senderID!).child("MyDetails").child("Username")
+                users.observe(.childAdded, with: { (snapshot) in
+                    let username = snapshot.key
+                    let thread = Thread(thread: threadKey, user: username)
+                    self.myThreads.append(thread)
+                    
+                    self.chatListTableView.reloadData()
+                    
+                })
+              
+            
+            
+            self.chatListTableView.reloadData()
+            
             
             }
+        
+        
         
             
             
@@ -48,7 +83,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = chatListTableView.dequeueReusableCell(withIdentifier: "cell") as? ChatListCell {
             
-           let thread = myThreads[indexPath.row]
+           let thread = myThreads[indexPath.row].username
             
            cell.configureCell(houseTitle: thread)
             
@@ -75,7 +110,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if segue.identifier == "toMessageVC" {
             if let destination = segue.destination as? MessageVC {
                 if let value = chatListTableView.indexPathForSelectedRow?.row {
-                    destination.threadID = myThreads[value]
+                    destination.threadID = myThreads[value].threadID
                 }
                 
             }

@@ -172,7 +172,7 @@ class MessageVC: JSQMessagesViewController {
         let message = ["senderID": senderId, "name": senderDisplayName, "text": text]
         threadFireRef.setValue(message)
         currentUserThreadRef.child("MyThreads").child(threadID).setValue(true)
-        recieveUserRef.child(senderId).child("MyThreads").child(threadID).setValue(true)
+        recieveUserRef.child(senderId).child("MyThreads").child(threadID).setValue(senderId)
         finishSendingMessage()
     }
 }
