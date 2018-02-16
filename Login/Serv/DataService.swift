@@ -24,6 +24,7 @@ class DataService {
     private var _DBRrefUsers = DB.child("Users")
     private var _DBRefMyRentals = DB.child("Users").child("MyRentals")
     private var _DBRefThreads = DB.child("Threads")
+
     
     //firebase storage ref
     private var _StorageREF = STORAGE.child("rental_images")
@@ -61,7 +62,7 @@ class DataService {
     }
     
     func createFirebaseDBUser(uid: String, users: Dictionary<String, String>) {
-        DBrefUsers.child(uid).updateChildValues(users)
+        DBrefUsers.child(uid).child("MyDetails").updateChildValues(users)
     }
     
     

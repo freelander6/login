@@ -52,16 +52,27 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             
          
-                let users = DataService.ds.DBrefUsers.child(senderID!).child("MyDetails").child("Username")
-                users.observe(.childAdded, with: { (snapshot) in
-                    let username = snapshot.key
-                    let thread = Thread(thread: threadKey, user: username)
-                    self.myThreads.append(thread)
+                let users = DataService.ds.DBrefUsers.child(senderID!).child("MyDetails")
+            
+                users.observe(.value, with: { (snapshot) in
+                    if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                        for snap in snapshots {
+                            print(snap)
+                            if let dicOfMyDetails = snap.value as? Dictionary<String,AnyObject> {
+                                print(dicOfMyDetails)
+                                if  let username = dicOfMyDetails["username"] as? String {
+                                    let thread = Thread(thread: threadKey, user: username)
+                                    self.myThreads.append(thread)
+                                    self.chatListTableView.reloadData()
+                                    
+                                }
+                               
+                            }
+                        }
                     
-                    self.chatListTableView.reloadData()
+                }
                     
                 })
-              
             
             
             self.chatListTableView.reloadData()
@@ -76,7 +87,11 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
           self.chatListTableView.reloadData()
             
         }
-        
+    
+    
+
+    
+    
      
         
     

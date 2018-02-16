@@ -70,6 +70,21 @@ class LoginPageVC: UIViewController {
     }
     
     
+    @IBAction func RegisterAccountBtnPressed(_ sender: Any) {
+        
+        
+        if KeychainWrapper.standard.string(forKey: "uid") == nil {
+            performSegue(withIdentifier: "toRegisterAccountVC", sender: nil)
+        } else {
+            print("Account already exists")
+        }
+        
+       
+        
+    }
+    
+    
+    
     @IBAction func emailLoginBtnPressed(_ sender: Any) {
         if let email = emailField.text, let pwd = passwordField.text {
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
@@ -81,19 +96,7 @@ class LoginPageVC: UIViewController {
                     }
                     
                 } else {
-                    // Authorise with firebase
-                    Auth.auth().createUser(withEmail: email, password: pwd, completion: { (user, error) in
-                        if error != nil {
-                            print("Unable to authenticate with email/password \(error ?? "" as! Error)")
-                        } else {
-                            print("New user account created and signed in ")
-                            // Store login in keychain so that it can be retrieved later
-                            if let user = user {
-                                let userData = ["provider": user.providerID]
-                                self.storeKeychainAndCreateDBUser(id: user.uid, users: userData )
-                            }
-                        }
-                    })
+                    print("No user account found, please register a new account")
                 }
             })
             
