@@ -174,10 +174,10 @@
 				5E6EC53F20056E5700AD7979 /* AdvertFormVC.swift */,
 				5E51D0C71FFC43FD00E0C211 /* MyRentalsVC.swift */,
 				5E352F4C200D96BC00A2306B /* FilterVC.swift */,
+				5E58CD242032F58400E09EE5 /* MessageVC.swift */,
 				5E32EFB32018293200AB0122 /* SideMenuVC.swift */,
 				5EC0C7AA20214CA000A62748 /* InitialLocationVC.swift */,
 				5E58CD21202A49B500E09EE5 /* ChatVC.swift */,
-				5E58CD242032F58400E09EE5 /* MessageVC.swift */,
 				5E06FBAC20342F2C00FBE7B7 /* ChatListVC.swift */,
 			);
 			path = Controller;

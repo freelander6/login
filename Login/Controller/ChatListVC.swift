@@ -57,17 +57,17 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 users.observe(.value, with: { (snapshot) in
                     if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                         for snap in snapshots {
-                            print(snap)
-                            if let dicOfMyDetails = snap.value as? Dictionary<String,AnyObject> {
-                                print(dicOfMyDetails)
-                                if  let username = dicOfMyDetails["username"] as? String {
+                         //  print(snap)
+                            if snap.key == "username" {
+                                if let username = snap.value as? String {
                                     let thread = Thread(thread: threadKey, user: username)
                                     self.myThreads.append(thread)
                                     self.chatListTableView.reloadData()
-                                    
                                 }
                                
+                                
                             }
+                            
                         }
                     
                 }

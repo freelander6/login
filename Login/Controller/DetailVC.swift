@@ -99,7 +99,7 @@ class DetailVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toChatVC" {
             if let destination = segue.destination as? ChatVC {
-                destination.senderUserID = userID
+                destination.recieveMessageUserID = userID 
             }
         }
     }

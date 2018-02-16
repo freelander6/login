@@ -13,7 +13,7 @@ import SwiftKeychainWrapper
 
 class MessageVC: JSQMessagesViewController {
     
-    var senderUserID = ""
+    var recieveUserID = ""
     var threadID = ""
     var myThreadID: String?
     
@@ -171,8 +171,8 @@ class MessageVC: JSQMessagesViewController {
         let recieveUserRef = DataService.ds.DBrefUsers
         let message = ["senderID": senderId, "name": senderDisplayName, "text": text]
         threadFireRef.setValue(message)
-        currentUserThreadRef.child("MyThreads").child(threadID).setValue(true)
-        recieveUserRef.child(senderId).child("MyThreads").child(threadID).setValue(senderId)
+        currentUserThreadRef.child("MyThreads").child(threadID).setValue(senderId)
+      //  recieveUserRef.child(senderUserID).child("MyThreads").child(threadID).setValue(senderId)
         finishSendingMessage()
     }
 }
