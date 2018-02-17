@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatListCell: UITableViewCell {
 
     @IBOutlet weak var cellLabel: UILabel!
+
+    @IBOutlet weak var userProfileImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,8 +26,26 @@ class ChatListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(houseTitle: String) {
+    func configureCell(houseTitle: String, imgUrl: String?) {
         cellLabel.text = houseTitle
+        if let imgUrl = imgUrl {
+            let ref = Storage.storage().reference(forURL: imgUrl)
+            ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                if error != nil {
+                    print("An error has occured downloading image")
+                } else {
+                    print("Image downloaded")
+                    if let imageData = data {
+                        if let img = UIImage(data: imageData) {
+                            self.userProfileImage.image = img
+                            
+                        }
+                    }
+                }
+            })
+        }
+        
     }
+      
 
 }

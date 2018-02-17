@@ -17,17 +17,15 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         var threadID : String
         var username: String
+        var imageURL: String?
         
-        init(thread: String, user: String) {
+        init(thread: String, user: String, img: String?) {
             self.threadID = thread
             self.username = user
+            self.imageURL = img
         }
         
     }
-    
-    
-   
-    
     
     var myThreads = [Thread]()
 
@@ -49,7 +47,8 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
                 let threadKey = snapshot.key
                 let senderID = snapshot.value as? String
-            
+                var username = ""
+                var imageurl = ""
             
          
                 let users = DataService.ds.DBrefUsers.child(senderID!).child("MyDetails")
@@ -59,33 +58,19 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         for snap in snapshots {
                          //  print(snap)
                             if snap.key == "username" {
-                                if let username = snap.value as? String {
-                                    let thread = Thread(thread: threadKey, user: username)
-                                    self.myThreads.append(thread)
-                                    self.chatListTableView.reloadData()
-                                }
-                               
-                                
+                                username = snap.value as! String
                             }
-                            
+                            if snap.key == "profileImageURL" {
+                                imageurl = snap.value as! String
+                            }
                         }
-                    
-                }
+                        let thread = Thread(thread: threadKey, user: username, img: imageurl)
+                        self.myThreads.append(thread)
+                        self.chatListTableView.reloadData()
+                    }
                     
                 })
-            
-            
-            self.chatListTableView.reloadData()
-            
-            
-            }
-        
-        
-        
-            
-            
-          self.chatListTableView.reloadData()
-            
+             }
         }
     
     
@@ -99,8 +84,9 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if let cell = chatListTableView.dequeueReusableCell(withIdentifier: "cell") as? ChatListCell {
             
            let thread = myThreads[indexPath.row].username
+            let img = myThreads[indexPath.row].imageURL
             
-           cell.configureCell(houseTitle: thread)
+           cell.configureCell(houseTitle: thread, imgUrl: img)
             
             
             return cell
