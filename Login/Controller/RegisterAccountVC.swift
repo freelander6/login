@@ -8,9 +8,11 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 import SwiftKeychainWrapper
 
-class RegisterAccountVC: UIViewController {
+class RegisterAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
     @IBOutlet weak var profieImage: UIImageView!
@@ -18,10 +20,15 @@ class RegisterAccountVC: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    let picker = UIImagePickerController()
+    
+   // private var userID = ""
+    private var imageURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        picker.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -37,16 +44,25 @@ class RegisterAccountVC: UIViewController {
             } else {
                 print("New account registered and signed in")
                 if let user = user {
+                  
                     let userData = ["provider": user.providerID, "username": username]
                     self.storeKeychainAndCreateDBUser(id: user.uid, users: userData)
-                    self.performSegue(withIdentifier: "toInitialLocationVC", sender: nil)
+                    
                 }
             }
+            if Auth.auth().currentUser != nil {
+                if let user = user?.uid {
+                    self.uploadProfileImage(userID: user)
+                  //  DataService.ds.DBrefUsers.child(user).child("MyDetails").child("profileImageURL").setValue(imgURL)
+                    self.performSegue(withIdentifier: "toInitialLocationVC", sender: nil)                }
+             
+                }
+            
         }
-        
         
     }
     
+
     func storeKeychainAndCreateDBUser(id: String, users: Dictionary<String, String>) {
         
         DataService.ds.createFirebaseDBUser(uid: id, users: users)
@@ -55,7 +71,57 @@ class RegisterAccountVC: UIViewController {
         print("Saved to keychain: \(val)")
     }
     
+    func uploadProfileImage(userID: String){
+        if let imageToUpload = profieImage.image {
+            if let imageData = UIImageJPEGRepresentation(imageToUpload, 0.2) {
+                
+                let metaData = StorageMetadata()
+                metaData.contentType = "image/jpeg"
+                let imageUID = UUID().uuidString
+                DataService.ds.StorageProfile.child(imageUID).putData(imageData, metadata: metaData, completion: { (metadata, error) in
+                    if error != nil {
+                        print("Error occured uploading profile image")
+                    } else {
+                        print("Sucess")
+                        if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                            DataService.ds.DBrefUsers.child(userID).child("MyDetails").child("profileImageURL").setValue(downloadURL)
+                            
+                        }
+                    }
+                    
+                   
+                })
+                
+            }
+        }
+        
+     
+    }
     
+    
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        profieImage.contentMode = .scaleAspectFill
+        profieImage.image = chosenImage
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func profileImageGesturePressed(_ sender: Any) {
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        present(picker, animated: true, completion: nil)
+    }
     
 
 

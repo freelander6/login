@@ -28,10 +28,15 @@ class DataService {
     
     //firebase storage ref
     private var _StorageREF = STORAGE.child("rental_images")
+    private var _StorageProfile = STORAGE.child("ProfileImages")
     
     var StorageREF : StorageReference {
         return _StorageREF
     }
+    var StorageProfile: StorageReference {
+        return _StorageProfile
+    }
+    
     
     var DBAref: DatabaseReference {
         return _DBAref

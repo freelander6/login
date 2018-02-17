@@ -1223,8 +1223,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-cP-aru">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_profile" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-cP-aru">
                                 <rect key="frame" x="125" y="169" width="125" height="125"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="vCe-AK-Jca"/>
                                 </constraints>
@@ -1263,6 +1264,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="J5j-cP-aru" firstAttribute="leading" secondItem="ajH-B4-00c" secondAttribute="leading" constant="125" id="75F-lz-Ovr"/>
                             <constraint firstItem="J5j-cP-aru" firstAttribute="top" secondItem="9Pw-2g-M9G" secondAttribute="bottom" constant="63" id="Dg2-Ag-fyZ"/>
@@ -1275,6 +1277,9 @@
                             <constraint firstItem="HD0-aU-bG2" firstAttribute="leading" secondItem="ajH-B4-00c" secondAttribute="leading" constant="20" id="bOJ-jL-d3o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ajH-B4-00c"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ybd-dd-5yY" appends="YES" id="pZu-3I-ZtF"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="l3c-ME-yOu" id="NaF-6a-JKt"/>
@@ -1285,6 +1290,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jif-ME-4kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ybd-dd-5yY">
+                    <connections>
+                        <action selector="profileImageGesturePressed:" destination="QC0-bg-ASC" id="3jJ-z0-YAh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1911.2" y="51.724137931034484"/>
         </scene>
@@ -1454,6 +1464,7 @@
         <image name="f" width="352" height="328"/>
         <image name="house_image" width="3352" height="2286"/>
         <image name="image_loading" width="259" height="194"/>
+        <image name="user_profile" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0Mz-jp-IZ4"/>
