@@ -104,14 +104,14 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toMessageVC", sender: nil)
+        performSegue(withIdentifier: "toChatVC", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toMessageVC" {
-            if let destination = segue.destination as? MessageVC {
+        if segue.identifier == "toChatVC" {
+            if let destination = segue.destination as? ChatVC {
                 if let value = chatListTableView.indexPathForSelectedRow?.row {
-                    destination.threadID = myThreads[value].threadID
+                    destination.thread = myThreads[value].threadID
                 }
                 
             }

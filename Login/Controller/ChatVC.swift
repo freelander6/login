@@ -15,6 +15,8 @@ class ChatVC: JSQMessagesViewController {
 
     var recieveMessageUserID = ""
     let threadID = UUID().uuidString
+    var thread = ""
+    var threadRef = ""
     
     //Local messgae array
     var messages = [JSQMessage]()
@@ -44,8 +46,17 @@ class ChatVC: JSQMessagesViewController {
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero  // avatar size zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero  // avatar size zero
         
+        
+        
         //Obseriving firbase
-        let query = DataService.ds.DBrefThreads.child(threadID).child("Messages").queryLimited(toLast: 10)     // Gets the last 10 messages
+        
+        if thread != "" {
+            threadRef = thread
+        } else {
+            threadRef = threadID
+        }
+        
+        let query = DataService.ds.DBrefThreads.child(threadRef).child("Messages").queryLimited(toLast: 10)     // Gets the last 10 messages
         
         _ = query.observe(.childAdded, with: { [weak self] snapshot in
             
@@ -133,13 +144,13 @@ class ChatVC: JSQMessagesViewController {
     // When set is pressed
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
        
-        let threadFireRef = DataService.ds.DBrefThreads.child(threadID).child("Messages").childByAutoId()
+        let threadFireRef = DataService.ds.DBrefThreads.child(threadRef).child("Messages").childByAutoId()
         let currentUserThreadRef = DataService.ds.DBCurrentUser
         let recieveUserRef = DataService.ds.DBrefUsers
         let message = ["senderID": senderId, "name": senderDisplayName, "text": text]
         threadFireRef.setValue(message)
-        currentUserThreadRef.child("MyThreads").child(threadID).setValue(recieveMessageUserID)
-        recieveUserRef.child(recieveMessageUserID).child("MyThreads").child(threadID).setValue(senderId)
+        currentUserThreadRef.child("MyThreads").child(threadRef).setValue(recieveMessageUserID)
+        recieveUserRef.child(recieveMessageUserID).child("MyThreads").child(threadRef).setValue(senderId)
         finishSendingMessage()
     }
 }

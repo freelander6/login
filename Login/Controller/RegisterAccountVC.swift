@@ -109,7 +109,9 @@ class RegisterAccountVC: UIViewController, UIImagePickerControllerDelegate, UINa
         
     }
     
-    
+    func uploadImageToFirbase() {
+        
+    }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
