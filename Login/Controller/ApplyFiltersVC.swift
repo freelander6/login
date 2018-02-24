@@ -9,18 +9,30 @@
 import UIKit
 import SideMenu
 import RangeSeekSlider
+import DropDown
 
 class ApplyFiltersVC: UIViewController {
 
 
+    @IBOutlet weak var typeDropDown: UIView!
+    
     @IBOutlet weak var priceSlider: RangeSeekSlider!
+    
+    @IBOutlet weak var filterByTypeBtn: UIButton!
+    
+    @IBOutlet weak var rentalPeriodBtn: UIButton!
+    @IBOutlet weak var filterByFurnishedBtn: UIButton!
+    let typeDropdown = DropDown()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-    
+    typeDropdown.anchorView = typeDropDown
+    typeDropdown.dataSource = ["Entire house", "Room in a shared house", "Room share", "Flat/Apartment/Self Contained", "Other"]
         
+     
+        
+      
     // Setup custom side bar
     SideMenuManager.default.menuEnableSwipeGestures = false
     SideMenuManager.default.menuWidth = 300
@@ -28,20 +40,44 @@ class ApplyFiltersVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRentalTableView" {
+            if let destination = segue.destination as? RentalTableViewVC {
+                destination.filterByPrice = Float(priceSlider.maxValue)
+                
+                if typeDropdown.selectedItem != nil {
+           //         destination.filteredRentalTypes = typeDropdown.selectedItem
+                }
+            }
+        }
+    }
+
+    @IBAction func applyFilterButtonPressed(_ sender: Any) {
+        
+        
+    }
+    @IBAction func filterByTypePressed(_ sender: Any) {
+        typeDropdown.show()
+      
+        filterByTypeBtn.setTitle(typeDropdown.selectedItem, for: .normal)
+        typeDropdown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.filterByTypeBtn.setTitle(item, for: .normal)
+        }
+        
+        typeDropdown.cancelAction = { [unowned self] in
+            self.filterByTypeBtn.setTitle("Filter by Type", for: .normal)
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+ 
+    @IBAction func filterByFurnishedBtnPressed(_ sender: Any) {
+        
     }
-    */
-
+    
+    
+    @IBAction func rentalPeriodBtnPressed(_ sender: Any) {
+    }
+    
+    
 }

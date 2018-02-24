@@ -5,6 +5,8 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DLRadioButton (1.4.11)
+  - DropDown (2.3.1)
   - Eureka (4.0.1)
   - FBSDKCoreKit (4.27.1):
     - Bolts (~> 1.7)
@@ -79,6 +81,8 @@ PODS:
   - Whisper (6.0.2)
 
 DEPENDENCIES:
+  - DLRadioButton (~> 1.4)
+  - DropDown
   - Eureka
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -100,6 +104,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DLRadioButton: 0d04b8259e7bfd886571a1e9173c73fee7118f50
+  DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
   FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
   FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
@@ -127,6 +133,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 4a308d025412493ad73a30192195420544568ce2
+PODFILE CHECKSUM: 5fda0329f916a9395596bba582f2efa2ffda8852
 
 COCOAPODS: 1.3.1
