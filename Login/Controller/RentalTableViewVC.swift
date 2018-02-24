@@ -346,18 +346,32 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         menuBtn.titleLabel?.font = headerFont
         menuBtn.addTarget(self, action: #selector(menuBtnPressed), for: .touchUpInside)
         
+        let locationBtn = UIButton(frame: CGRect(x: 150, y: 15, width: 75, height: 10))
+        locationBtn.setTitle("Location", for: .normal)
+        
+        locationBtn.setTitleColor(btnColour, for: .normal)
+        locationBtn.titleLabel?.font = headerFont
+        locationBtn.addTarget(self, action: #selector(locationBtnPressed), for: .touchUpInside)
+        
+        
+        
         extensionView.addSubview(btn)
         extensionView.addSubview(menuBtn)
+        extensionView.addSubview(locationBtn)
         hidingBarMangar = HidingNavigationBarManager(viewController: self, scrollView: tableView)
         hidingBarMangar?.addExtensionView(extensionView)
         
     }
     
     @objc func filterBtnPressed() {
-        performSegue(withIdentifier: "toFilterVC", sender: nil)
+        performSegue(withIdentifier: "toApplyFiltersVC", sender: nil)
     }
     @objc func menuBtnPressed() {
         performSegue(withIdentifier: "toSideMenu", sender: nil)
+    }
+    
+    @objc func locationBtnPressed() {
+        
     }
     
 }

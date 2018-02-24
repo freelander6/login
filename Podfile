@@ -24,5 +24,6 @@ pod 'Whisper'
 pod 'SearchTextField'
 pod 'ImageSlideshow', '~> 1.5'
 pod 'JSQMessagesViewController'
+pod 'RangeSeekSlider'
 
 end
