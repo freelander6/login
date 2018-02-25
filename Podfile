@@ -25,6 +25,6 @@ pod 'SearchTextField'
 pod 'ImageSlideshow', '~> 1.5'
 pod 'JSQMessagesViewController'
 pod 'RangeSeekSlider'
-pod 'DLRadioButton', '~> 1.4'
 pod 'DropDown'
+pod 'M13Checkbox'
 end

@@ -393,21 +393,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="VAW-DI-1EL">
-                                <rect key="frame" x="15" y="79" width="270" height="583"/>
+                                <rect key="frame" x="15" y="79" width="280" height="497"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pg-M3-LHN">
-                                        <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by Price ($)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pg-M3-LHN">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="S6T-2h-jMB"/>
-                                            <constraint firstAttribute="width" constant="106" id="aoW-h9-HP0"/>
+                                            <constraint firstAttribute="width" constant="140" id="aoW-h9-HP0"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wql-Vf-7Ie" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
-                                        <rect key="frame" x="0.0" y="43" width="270" height="24"/>
+                                        <rect key="frame" x="0.0" y="43" width="280" height="24"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="dVe-0u-EPx"/>
+                                            <constraint firstAttribute="height" constant="24" id="xMD-9x-euJ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxDistance">
+                                                <real key="value" value="4000"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="2000"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedMinValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedMaxValue">
+                                                <real key="value" value="2000"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qG2-zI-82g">
                                         <rect key="frame" x="0.0" y="86" width="105" height="24"/>
@@ -422,7 +443,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="-90" translatesAutoresizingMaskIntoConstraints="NO" id="7bx-Iz-PDF">
                                         <rect key="frame" x="0.0" y="129" width="93" height="24"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-c8-TXJ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-c8-TXJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="93" height="24"/>
                                                 <state key="normal" title="Filter by Type"/>
                                                 <connections>
@@ -445,17 +466,26 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vI-CS-DWM">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="-150" translatesAutoresizingMaskIntoConstraints="NO" id="ofn-1C-cto">
                                         <rect key="frame" x="0.0" y="215" width="170" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="170" id="T9S-RI-Cyl"/>
-                                            <constraint firstAttribute="height" constant="30" id="p3H-9F-Qea"/>
-                                        </constraints>
-                                        <state key="normal" title="Filter by furnished status"/>
-                                        <connections>
-                                            <action selector="filterByFurnishedBtnPressed:" destination="04B-fj-Wlc" eventType="touchUpInside" id="pmK-tu-O34"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vI-CS-DWM">
+                                                <rect key="frame" x="0.0" y="0.0" width="170" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="170" id="T9S-RI-Cyl"/>
+                                                    <constraint firstAttribute="height" constant="30" id="p3H-9F-Qea"/>
+                                                </constraints>
+                                                <state key="normal" title="Filter by furnished status"/>
+                                                <connections>
+                                                    <action selector="filterByFurnishedBtnPressed:" destination="04B-fj-Wlc" eventType="touchUpInside" id="pmK-tu-O34"/>
+                                                </connections>
+                                            </button>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNI-sT-gFT">
+                                                <rect key="frame" x="-15" y="0.0" width="0.0" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Length rental is available for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft2-Ki-Q5H">
                                         <rect key="frame" x="0.0" y="258" width="220" height="24"/>
                                         <constraints>
@@ -466,17 +496,26 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-Gl-F6V">
-                                        <rect key="frame" x="0.0" y="301" width="150" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="HqN-5d-YUq"/>
-                                            <constraint firstAttribute="width" constant="150" id="qEm-G2-31K"/>
-                                        </constraints>
-                                        <state key="normal" title="Filter by rental period"/>
-                                        <connections>
-                                            <action selector="rentalPeriodBtnPressed:" destination="04B-fj-Wlc" eventType="touchUpInside" id="L4z-vn-n17"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="qrn-b3-tXf">
+                                        <rect key="frame" x="0.0" y="301" width="270" height="24"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-Gl-F6V">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="HqN-5d-YUq"/>
+                                                    <constraint firstAttribute="width" constant="150" id="qEm-G2-31K"/>
+                                                </constraints>
+                                                <state key="normal" title="Filter by rental period"/>
+                                                <connections>
+                                                    <action selector="rentalPeriodBtnPressed:" destination="04B-fj-Wlc" eventType="touchUpInside" id="L4z-vn-n17"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FK-i8-raw">
+                                                <rect key="frame" x="150" y="0.0" width="120" height="24"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bond Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GN-56-EEt">
                                         <rect key="frame" x="0.0" y="344" width="118" height="24"/>
                                         <constraints>
@@ -487,50 +526,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6EH-jG-Zbb">
-                                        <rect key="frame" x="0.0" y="387" width="110" height="24"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8c-8k-0N4" customClass="DLRadioButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="33" id="Bqm-17-QhR"/>
-                                                    <constraint firstAttribute="width" constant="55" id="cUz-7Q-AAB"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                                <state key="normal" title="Yes">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outletCollection property="otherButtons" destination="EJH-iw-PYQ" id="9lS-uP-dgX"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJH-iw-PYQ" customClass="DLRadioButton">
-                                                <rect key="frame" x="55" y="0.0" width="55" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="55" id="phP-8J-frA"/>
-                                                    <constraint firstAttribute="height" constant="33" id="shG-Es-SRz"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                                <state key="normal" title="No ">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                        <viewLayoutGuide key="safeArea" id="l5H-by-oQP"/>
-                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTo-5l-oZp">
+                                        <rect key="frame" x="0.0" y="387" width="240" height="24"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bills Included" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJM-NR-xlQ">
                                         <rect key="frame" x="0.0" y="430" width="118" height="24"/>
                                         <constraints>
@@ -541,51 +540,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uoa-Kv-Flv">
-                                        <rect key="frame" x="0.0" y="473" width="110" height="24"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqK-m5-bcg" customClass="DLRadioButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="33" id="IhJ-cq-vuT"/>
-                                                    <constraint firstAttribute="width" constant="55" id="SMg-jS-K6q"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                                <state key="normal" title="Yes">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outletCollection property="otherButtons" destination="rFk-8n-tGw" id="RKR-PD-KDB"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-8n-tGw" customClass="DLRadioButton">
-                                                <rect key="frame" x="55" y="0.0" width="55" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="33" id="fpo-IK-eRB"/>
-                                                    <constraint firstAttribute="width" constant="55" id="sMh-uN-hna"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                                <state key="normal" title="No ">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pets allowed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyx-Sy-T48">
-                                        <rect key="frame" x="0.0" y="516" width="99" height="24"/>
+                                        <rect key="frame" x="0.0" y="473" width="99" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="99" id="iUI-jf-42E"/>
                                             <constraint firstAttribute="height" constant="24" id="rEu-ca-dKF"/>
@@ -594,56 +550,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6n-18-S6b">
-                                        <rect key="frame" x="0.0" y="559" width="110" height="24"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVB-VD-DMG" customClass="DLRadioButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="33" id="4dc-BD-u3V"/>
-                                                    <constraint firstAttribute="width" constant="55" id="Ld9-qh-A6q"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                                <state key="normal" title="Yes">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outletCollection property="otherButtons" destination="EH1-YQ-ddd" id="qQF-kI-8zd"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-YQ-ddd" customClass="DLRadioButton">
-                                                <rect key="frame" x="55" y="0.0" width="55" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="55" id="G4T-kE-oAt"/>
-                                                    <constraint firstAttribute="height" constant="33" id="bpb-Mm-AHi"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                                <state key="normal" title="No ">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Wql-Vf-7Ie" secondAttribute="trailing" id="M0o-iK-QXp"/>
+                                    <constraint firstAttribute="trailing" secondItem="sTo-5l-oZp" secondAttribute="trailing" constant="40" id="R9c-gr-vIb"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2C2-RY-74Z" customClass="RoundedButton" customModule="Login" customModuleProvider="target">
-                                <rect key="frame" x="15" y="677" width="250" height="45"/>
+                                <rect key="frame" x="15" y="591" width="250" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.54117647059999996" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="4FO-DC-5Ho"/>
@@ -656,12 +570,25 @@
                                     <action selector="applyFilterButtonPressed:" destination="04B-fj-Wlc" eventType="touchUpInside" id="4qy-d0-Ds5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwv-3d-8qb">
+                                <rect key="frame" x="22" y="601" width="25" height="25"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="l2g-IV-CCy"/>
+                                    <constraint firstAttribute="height" constant="25" id="thc-uQ-zpT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" white="1" alpha="0.87" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="VAW-DI-1EL" firstAttribute="top" secondItem="6hT-HX-Okp" secondAttribute="top" constant="15" id="5bH-Xe-uVj"/>
+                            <constraint firstItem="cwv-3d-8qb" firstAttribute="centerY" secondItem="2C2-RY-74Z" secondAttribute="centerY" id="904-L9-xzR"/>
                             <constraint firstItem="2C2-RY-74Z" firstAttribute="top" secondItem="VAW-DI-1EL" secondAttribute="bottom" constant="15" id="Kez-zA-gdJ"/>
                             <constraint firstItem="6hT-HX-Okp" firstAttribute="bottom" secondItem="2C2-RY-74Z" secondAttribute="bottom" constant="20" id="Wyv-CL-Trp"/>
+                            <constraint firstItem="cwv-3d-8qb" firstAttribute="leading" secondItem="6hT-HX-Okp" secondAttribute="leading" constant="22" id="eMp-cx-viD"/>
                             <constraint firstItem="VAW-DI-1EL" firstAttribute="leading" secondItem="6hT-HX-Okp" secondAttribute="leading" constant="15" id="p7V-qB-oRN"/>
                             <constraint firstItem="2C2-RY-74Z" firstAttribute="leading" secondItem="6hT-HX-Okp" secondAttribute="leading" constant="15" id="vbk-JA-rPG"/>
                         </constraints>
@@ -672,16 +599,25 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="check" destination="sTo-5l-oZp" id="qcQ-Kb-T2w"/>
+                        <outlet property="counterLbl" destination="cwv-3d-8qb" id="AZ1-1s-p8j"/>
                         <outlet property="filterByFurnishedBtn" destination="3vI-CS-DWM" id="XTq-wu-hmR"/>
+                        <outlet property="filterByPriceLbl" destination="6Pg-M3-LHN" id="k2P-xB-9iR"/>
+                        <outlet property="filterByRentalPeriodBtn" destination="QcS-Gl-F6V" id="mFi-41-XMn"/>
+                        <outlet property="filterByRentalPeriodLbl" destination="ft2-Ki-Q5H" id="eWo-hZ-IwZ"/>
                         <outlet property="filterByTypeBtn" destination="VFl-c8-TXJ" id="Lnx-NO-qMG"/>
+                        <outlet property="filterbyTypeLbl" destination="qG2-zI-82g" id="tFm-hd-j2F"/>
+                        <outlet property="furnishedDropDown" destination="oNI-sT-gFT" id="rep-Ll-eAH"/>
+                        <outlet property="furnishedStatusLbl" destination="c8r-79-7O2" id="nKg-Mu-SOH"/>
                         <outlet property="priceSlider" destination="Wql-Vf-7Ie" id="jkg-nz-Rm1"/>
                         <outlet property="rentalPeriodBtn" destination="QcS-Gl-F6V" id="RKu-AQ-Ghe"/>
+                        <outlet property="rentalPeriodDropDown" destination="1FK-i8-raw" id="x62-zV-YNA"/>
                         <outlet property="typeDropDown" destination="3O6-Af-Ubm" id="fj0-ZI-LFL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RfB-St-Usn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4551.1999999999998" y="-620.68965517241384"/>
+            <point key="canvasLocation" x="4318" y="-640"/>
         </scene>
         <!--Rental Listings-->
         <scene sceneID="2Vv-aO-PEX">

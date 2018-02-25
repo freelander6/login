@@ -13,7 +13,7 @@ class CurvedBorderForLabel: UILabel {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.cornerRadius = 10
+        layer.cornerRadius = layer.frame.size.width/2
         layer.borderWidth = 0.5
         layer.masksToBounds = false
         layer.borderColor = UIColor(displayP3Red: SHADOW_GREY, green: SHADOW_GREY, blue: SHADOW_GREY, alpha: 0.4).cgColor
