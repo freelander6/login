@@ -24,7 +24,7 @@ class DetailVC: UIViewController {
     var rentalType = ""
     var bond = ""
     var rent = ""
-    var dateAval = ""
+    var rentalPeriod = ""
     var pets = ""
     var des = ""
     var imageURL = ""
@@ -65,7 +65,7 @@ class DetailVC: UIViewController {
         houseTypeField.text = rentalType
         bondField.text = bond
         rentField.text = rent
-        dateAvalField.text = dateAval
+        dateAvalField.text = rentalPeriod
         petsField.text = pets
         descriptionField.text = des
         

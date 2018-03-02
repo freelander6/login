@@ -53,7 +53,7 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
         self.rentalPriceLbl.text = "$\(rental.price!) p/w"
         self.rentalTypeLbl.text = rental.rentalType
         self.bondLbl.text = rental.bond
-        self.dateAvalLbl.text = rental.dateAval
+        self.dateAvalLbl.text = rental.rentalPeriod
         self.furnished.text = rental.furnished
       //  self.petsLbl.text = rental.pets
 

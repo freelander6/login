@@ -17,11 +17,12 @@ import ImageRow
 class AdvertFormVC: FormViewController {
     
     private var _rentalTitle :String!
-    private var _dateAval : String!
+    private var _rentalPeriod : String!
     private var _type: String!
     private var _price: String!
     private var _bond: String!
     private var _furnished: String!
+    private var _bills: String!
     private var _pets: String!
     private var _userID: String!
     private var _street: String!
@@ -34,8 +35,8 @@ class AdvertFormVC: FormViewController {
         return _rentalTitle
     }
     
-    var dateAval: String? {
-        return _dateAval
+    var rentalPeriod: String? {
+        return _rentalPeriod
     }
     
     var type: String? {
@@ -49,6 +50,9 @@ class AdvertFormVC: FormViewController {
     }
     var furnished: String? {
         return _furnished
+    }
+    var bills: String? {
+        return _bills
     }
     var pets: String? {
         return _pets
@@ -131,12 +135,13 @@ class AdvertFormVC: FormViewController {
             "price": price as AnyObject,
             "description": rentalDescription as AnyObject,
             "bond": bond as AnyObject,
-            "date": dateAval as AnyObject,
+            "rentalPeriod": rentalPeriod as AnyObject,
             "type": type as AnyObject,
             "pets": pets as AnyObject,
             "imageURL": imgURL as AnyObject,
             "userID": userID as AnyObject,
             "furnished": furnished as AnyObject,
+             "bills": bills as AnyObject,
             "ImageID": imageID as AnyObject,
             "street": street as AnyObject,
             "postcode": postcode as AnyObject,
@@ -169,17 +174,8 @@ class AdvertFormVC: FormViewController {
             cell.detailTextLabel?.font = myFont
         }
         
-        DateRow.defaultCellSetup = { cell, row in
-            cell.textLabel?.font = myFont
-            cell.detailTextLabel?.font = myFont
-            
-        }
-        
-        EmailRow.defaultCellSetup = { cell, row in
-            cell.textLabel?.font = myFont
-            cell.detailTextLabel?.font = myFont
-            
-        }
+     
+   
         
         PushRow<String>.defaultCellSetup = { cell, row in
             cell.textLabel?.font = myFont
@@ -247,39 +243,12 @@ class AdvertFormVC: FormViewController {
                     }
             }
             
+
             
-            <<< IntRow("bond"){
-                $0.title = "Bond"
-                $0.placeholder = "Inital bond amount required"
-                $0.add(rule: RuleGreaterThan(min: 2))
-                $0.add(rule: RuleSmallerThan(max: 9999))
-                $0.add(rule: RuleRequired())
-                let formatter = NumberFormatter()
-                formatter.locale = .current
-                formatter.numberStyle = .currency
-                $0.formatter = formatter
-                }
-                .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.titleLabel?.textColor = .red
-                    }
-            }
-            
-            
-            <<< DateRow("date"){
-                $0.title = "Date Available"
-                
-                $0.value = Date()
-                let formatter = DateFormatter()
-                formatter.locale = .current
-                formatter.dateStyle = .medium
-                formatter.timeStyle = .none
-                $0.dateFormatter = formatter
-            }
-            
+                        
             <<< PushRow<String>("rentalType") {
                 $0.title = "Rental Type"
-                $0.options = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
+                $0.options = ["Entire house", "Room in a shared house", "Room share", "Flat/Apartment/Self Contained", "Other"]
                 $0.value = ""
                 $0.selectorTitle = "Select the rental type"
                 $0.add(rule: RuleRequired())
@@ -298,11 +267,32 @@ class AdvertFormVC: FormViewController {
                     }
             }
             
+            <<< PushRow<String>("rentalPeriod") {
+                $0.title = "Rental Period"
+                $0.options = ["Under 1 Month", "1-3 Months", "3-6 Months", "6-12 Months", "12 Months +"]
+                $0.value = ""
+                $0.selectorTitle = "Period the rental is available for"
+                $0.add(rule: RuleRequired())
+                
+                }.onPresent { from, to in
+                    
+                    to.selectableRowCellUpdate = { cell, row in
+                        cell.textLabel!.font = myFont
+                        //cell.textLabel!.textColor = ...
+                    }
+                    to.dismissOnSelection = false
+                    to.dismissOnChange = false
+                } .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
+            }
+            
             <<< PushRow<String>("pet") {
                 $0.title = "Pet Policy"
-                $0.options = ["Pets allowed", "No pets allowed"]
+                $0.options = ["Yes", "No"]
                 $0.value = ""
-                $0.selectorTitle = "Pet policy"
+                $0.selectorTitle = "Are pets allowed?"
                 $0.add(rule: RuleRequired())
                 
                 }.onPresent { from, to in
@@ -321,7 +311,7 @@ class AdvertFormVC: FormViewController {
             
             <<< PushRow<String>("furnished") {
                 $0.title = "Furnished"
-                $0.options = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
+                $0.options = ["Yes", "No"]
                 $0.value = ""
                 $0.selectorTitle = "Furnished status"
                 $0.add(rule: RuleRequired())
@@ -339,6 +329,55 @@ class AdvertFormVC: FormViewController {
                         cell.textLabel?.textColor = .red
                     }
         }
+            
+            <<< PushRow<String>("bills") {
+                $0.title = "Bills included in rental price?"
+                $0.options = ["Yes", "No"]
+                $0.value = ""
+                $0.selectorTitle = "Bills included"
+                $0.add(rule: RuleRequired())
+                
+                }.onPresent { from, to in
+                    
+                    to.selectableRowCellUpdate = { cell, row in
+                        cell.textLabel!.font = myFont
+                        //cell.textLabel!.textColor = ...
+                    }
+                    to.dismissOnSelection = false
+                    to.dismissOnChange = false
+                }       .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.textLabel?.textColor = .red
+                    }
+            }
+            
+        
+            <<< SwitchRow("bond"){
+                $0.title = "Bond Required?"
+            }
+            <<< IntRow("bondValue"){
+                
+                $0.hidden = Condition.function(["bond"], { form in
+                    return !((form.rowBy(tag: "bond") as? SwitchRow)?.value ?? false)
+                })
+                $0.title = "Bond Amount "
+                $0.placeholder = "Inital bond amount required"
+                $0.add(rule: RuleGreaterThan(min: 2))
+                $0.add(rule: RuleSmallerThan(max: 9999))
+                let formatter = NumberFormatter()
+                formatter.locale = .current
+                formatter.numberStyle = .currency
+                $0.formatter = formatter
+
+                }
+                .cellUpdate { cell, row in
+                    if !row.isValid {
+                    cell.titleLabel?.textColor = .red
+                                        }
+                            }
+
+        
+        
         form +++
             
             Section(footer: "Include any addtional information viewers may be interested in.")
@@ -572,34 +611,8 @@ class AdvertFormVC: FormViewController {
                     cell.imageView?.image = UIImage(named: "plus_image")
         }
         
-        form +++
+     
             
-            Section(footer: "Provide a contact email address for viewer enquires.")
-            { section in
-                var header = HeaderFooterView<UILabel>(.class)
-                header.height = { sectionSpacing }
-                header.onSetupView = {view, _ in
-                    view.textColor = headerColour
-                    view.text = "   Contact"
-                    view.font = headerFont
-                    
-                }
-                section.header = header
-            }
-            
-            <<< EmailRow("email") {
-                $0.title = "Email address"
-                $0.placeholder = "Current email address"
-                $0.add(rule: RuleRequired())
-                $0.add(rule: RuleEmail())
-                $0.validationOptions = .validatesOnChangeAfterBlurred
-                }
-                .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.titleLabel?.textColor = .red
-                    }        }
-        
-        
         form +++
             
             Section()
@@ -634,16 +647,17 @@ class AdvertFormVC: FormViewController {
         let formValues = self.form.values()
         if let title = formValues["title"] { self._rentalTitle = title as! String }
         if let rent = formValues["rent"] { self._price = String(describing: rent!) }
-        if let bond = formValues["bond"] { self._bond = String(describing: bond!) }
+        if let bond = formValues["bondValue"] { self._bond = String(describing: bond!) }
         
-        if let date = formValues["date"] {
-            self._dateAval = String(describing: date!)
+        if let period = formValues["rentalPeriod"] {
+            self._rentalPeriod = String(describing: period!)
         }
         
         
         if let rental = formValues["rentalType"] { self._type = rental as! String }
         if let pet = formValues["pet"] { self._pets = pet as! String }
         if let furnished = formValues["furnished"] { self._furnished = furnished as! String }
+        if let bills = formValues["bills"] { self._bills = bills as! String }
         if let street = formValues["street"] { self._street = street as! String }
         if let city = formValues["city"] { self._city = city as! String }
         if let region = formValues["region"] { self._region = region as! String}
@@ -655,12 +669,12 @@ class AdvertFormVC: FormViewController {
       //  if let imageThree = formValues["image3"] {self.rentalImage = image as? UIImage}
      //   if let imageFour = formValues["image4"] {self.rentalImage = image as? UIImage}
       //  if let imageFive = formValues["image5"] {self.rentalImage = image as? UIImage}
-      //  if let email = formValues["email"] {self._email = email as! String}
+
         
     }
     
     func clearScreen() {
-        form.setValues(["title" : "", "rent" : nil, "bond" : nil, "date" : Date(), "rentalType" : "", "pet" : "", "furnished": "", "street" : "", "city" : "", "postcode" : "", "rentalDescription" : "", "image1" : nil, "email" : ""])
+        form.setValues(["title" : "", "rent" : nil, "bondValue" : nil, "rentalPeriod" : "", "rentalType" : "", "pet" : "", "furnished": "", "bills": "", "street" : "", "city" : "", "postcode" : "", "houseNumber": "", "rentalDescription" : "", "image1" : nil, "region" : nil])
         tableView.reloadData()
     }
     

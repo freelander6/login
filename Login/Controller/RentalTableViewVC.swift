@@ -19,14 +19,17 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     var myRentals = [String]()
 
     var isFilterEnabled: Bool? 
-    var filterByPrice: Float?
-    var filteredRentalTypes: Set<String>?
-    var filteredFurnishedType: Set<String>?
-    var filteredBillType: Set<String>?
-    var filteredPetPolicy: Set<String>?
+    var filterByMinPrice: Float?
+    var filterByMaxPrice: Float?
+    var filteredRentalTypes: String?
+    var filteredFurnishedType: String?
+    var filteredBillType: String?
+    var filteredPetPolicy: String?
+    var filteredRentalPeriod: String?
     var filteredRegion: String?
     var filteredCity: String?
-    var filteredPostCode: String? 
+    var filteredPostCode: String?
+    var filteredBond: String?
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -48,8 +51,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let filteredBond = filteredArrary[value].bond {
                 destination.bond = filteredBond
             }
-            if let filteredDateAval = filteredArrary[value].dateAval {
-                destination.dateAval = filteredDateAval
+            if let filteredRentalPeriod = filteredArrary[value].rentalPeriod {
+                destination.rentalPeriod = filteredRentalPeriod
             }
             if let filteredPetPolicy = filteredArrary[value].pets {
                 destination.pets = filteredPetPolicy
@@ -91,8 +94,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let bondValue = rentalsArray[value].bond{
                 destination.bond = bondValue
             }
-            if let dateAvalValue = rentalsArray[value].dateAval {
-                destination.dateAval = dateAvalValue
+            if let rentalPeriodValue = rentalsArray[value].rentalPeriod {
+                destination.rentalPeriod = rentalPeriodValue
             }
             if let petPolicyValue = rentalsArray[value].pets {
                 destination.pets = petPolicyValue
@@ -147,10 +150,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
       var rental = rentalsArray[indexPath.row]
-        
-//        if  indexPath.row < self.filteredArrary.count  {
-//            rental = filteredArrary[indexPath.row]
-//        }
+
        
         if isFilterEnabled == true {
             rental = filteredArrary[indexPath.row]
@@ -158,9 +158,6 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? RentalCell {
-
-
-
 
             var rentalImage = ""
 
@@ -206,6 +203,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewWillDisappear(animated)
         hidingBarMangar?.viewWillDisappear(animated)
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -255,53 +254,43 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     func applyFilters(rental: Rental) {
-        
-        if filterByPrice == nil {
-            filterByPrice = 20000
-        }
-        if filteredPostCode == nil {
-            filteredPostCode = "All"
-        }
-        if filteredRegion == nil {
-            filteredRegion = "All"
-        }
-        if filteredCity == nil {
-            filteredCity = "All"
-        }
-        if filteredRentalTypes == nil {
-            filteredRentalTypes = ["Entire house", "Room in a shared house", "Room share", "Flat", "Apartment", "Other"]
-        }
-        if filteredFurnishedType == nil {
-            filteredFurnishedType = ["Fully furnished", "Partly furnished", "Appliances only", "Not furnished"]
-        }
-        if filteredPetPolicy == nil {
-            filteredPetPolicy = ["Pets allowed", "No pets allowed"]
-        }
-        
-        
-        if let priceFilter = self.filterByPrice, let regionFilter = filteredRegion, let rentalTypefilter = filteredRentalTypes, let filteredFurnishedType = filteredFurnishedType, let filteredPetPolicy = filteredPetPolicy, let filteredCity = filteredCity, let filteredPostcode = filteredPostCode {
-        
         let priceAsFloat = (rental.price! as NSString).floatValue
-        for rentals in rentalTypefilter {
-            for furn in filteredFurnishedType {
-                for pet in filteredPetPolicy {
-            if rental.rentalType == rentals, priceFilter >= priceAsFloat, rental.furnished == furn, rental.pets == pet, rental.region == regionFilter || regionFilter == "All" , rental.city == filteredCity || filteredCity == "All", rental.postcode == filteredPostcode || filteredPostcode == "All"{
-               // print("******hh\(String(describing: self.filteredRentalTypes))")
-                self.filteredArrary.append(rental)
+        if let maxPrice = filterByMaxPrice, let minPrice = filterByMinPrice {
+            if priceAsFloat <= maxPrice && priceAsFloat >= minPrice {
+                if let type = rental.rentalType {
+                    if filteredRentalTypes == type || filteredRentalTypes == nil {
+                        if let period = rental.rentalPeriod {
+                            if filteredRentalPeriod == period || filteredRentalPeriod == nil {
+                                if let furnished = rental.furnished {
+                                    if filteredFurnishedType == furnished || filteredFurnishedType == nil {
+                                        if rental.bond == nil && filteredBond == "No" || rental.bond != nil && filteredBond == "Yes" || filteredBond == nil {
+                                            if let bills = rental.bills {
+                                                if filteredBillType == bills || filteredBillType == nil {
+                                                    if let pets = rental.pets {
+                                                        if filteredPetPolicy == pets || filteredPetPolicy == nil {
+                                                            self.filteredArrary.append(rental)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                 }
             }
-          }
+            
         }
+        
     }
-    
-    
-   
 
-    
-    
+   
     override func viewDidAppear(_ animated: Bool) {
-        print("**********\(String(describing: filterByPrice)))")
+        
     }
     
  

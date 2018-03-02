@@ -68,8 +68,8 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let bond = myFavouates[value].bond {
                     destination.bond = bond
                 }
-                if let dateAval = myFavouates[value].dateAval {
-                    destination.dateAval = dateAval
+                if let rentalPeriod = myFavouates[value].rentalPeriod {
+                    destination.rentalPeriod = rentalPeriod
                 }
                 if let petPolicy = myFavouates[value].pets {
                     destination.pets = petPolicy
