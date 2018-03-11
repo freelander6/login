@@ -28,14 +28,13 @@ class DetailVC: UIViewController {
     var pets = ""
     var des = ""
     var imageURL = ""
-    var streetName = ""
-    var city = ""
-    var postcode = ""
+    var lat: Double?
+    var long: Double? 
     var postID = ""
     
-    var address: String {
-        return "\(streetName), \(city), \(postcode)"
-    }
+//    var address: String {
+//        return "\(streetName), \(city), \(postcode)"
+//    }
     
     @IBOutlet weak var map: MKMapView!
     
@@ -146,21 +145,21 @@ class DetailVC: UIViewController {
 
 
     func addMapAnnotation() {
-        let geocoder = CLGeocoder()
-        
-        geocoder.geocodeAddressString(address) { (placemarks, error) in
-            
-            if error != nil {
-                //Deal with error here
-            } else if let placemarks = placemarks {
-                
-                if let coordinate = placemarks.first?.location?.coordinate {
-                    let pin = PinAnnotation(title: "WannaRental Property", subtitle: "wanaka", coordinate: coordinate)
-                    self.map.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500), animated: true)
-                    self.map.addAnnotation(pin)
-                }
-            }
-        }
+//        let geocoder = CLGeocoder()
+//
+//        geocoder.geocodeAddressString(address) { (placemarks, error) in
+//
+//            if error != nil {
+//                //Deal with error here
+//            } else if let placemarks = placemarks {
+//
+//                if let coordinate = placemarks.first?.location?.coordinate {
+//                    let pin = PinAnnotation(title: "WannaRental Property", subtitle: "wanaka", coordinate: coordinate)
+//                    self.map.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500), animated: true)
+//                    self.map.addAnnotation(pin)
+//                }
+//            }
+//        }
     }
     
 

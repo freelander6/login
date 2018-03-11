@@ -10,15 +10,30 @@ import FirebaseDatabase
 import MessageUI
 import SwiftKeychainWrapper
 import HidingNavigationBar
+import LocationPickerViewController
 
 
-class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  { 
+class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+    
+    let defaultLocation = UserDefaults.standard
+    
+    var selectedLocation: CLLocation {
+        let lat = defaultLocation.double(forKey: "lat")
+        let long = defaultLocation.double(forKey: "long")
+        let loc = CLLocation(latitude: lat, longitude: long)
+        return loc
+    }
+    
+    
     
     var rentalsArray = [Rental]()
     var filteredArrary = [Rental]()
+    var filteredLocationArrary = [Rental]()
+    
     var myRentals = [String]()
+    
 
-    var isFilterEnabled: Bool? 
+    var isFilterEnabled: Bool?
     var filterByMinPrice: Float?
     var filterByMaxPrice: Float?
     var filteredRentalTypes: String?
@@ -30,6 +45,10 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     var filteredCity: String?
     var filteredPostCode: String?
     var filteredBond: String?
+    
+//    var location: CLLocation?
+    
+    var allowedDistance = 100.0
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -40,6 +59,19 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+        if segue.identifier == "toLocationSelectVC" {
+            let locationPicker = segue.destination as! LocationPicker
+            locationPicker.pickCompletion = { (pickedLocationItem) in
+                
+                if let lat = pickedLocationItem.coordinate?.latitude, let long = pickedLocationItem.coordinate?.longitude {
+                   self.defaultLocation.set(lat, forKey: "lat")
+                    self.defaultLocation.set(long, forKey: "long")
+                }
+            }
+        }
+        
+        
         if segue.identifier == "toDetailVC" {
             if let destination = segue.destination as? DetailVC, let value = tableView.indexPathForSelectedRow?.row{
             
@@ -72,17 +104,15 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let filteredRentalType = filteredArrary[value].rentalType {
                 destination.rentalType = filteredRentalType
             }
-            if let filteredStreetName = filteredArrary[value].streetName {
-                destination.streetName = filteredStreetName
+            if let filteredLat = filteredArrary[value].lat {
+                destination.lat = filteredLat
             }
-            if let filteredCityName = filteredArrary[value].city {
-                destination.city = filteredCityName
+            if let filteredLong = filteredArrary[value].long {
+                destination.long  = filteredLong
             }
-            if let filteredPostcode = filteredArrary[value].postcode {
-                destination.postcode = filteredPostcode
-            }
+       
             if let filteredPostID = filteredArrary[value].postID {
-                destination.postID = filteredPostID
+                destination.postID = filteredPostID 
             }
             
            
@@ -115,14 +145,12 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let rentalTypeValue = rentalsArray[value].rentalType{
                 destination.rentalType = rentalTypeValue
             }
-            if let streetNameValue = rentalsArray[value].streetName {
-                destination.streetName = streetNameValue
+       
+            if let latValue = rentalsArray[value].lat {
+                destination.lat = latValue
             }
-            if let cityNameValue = rentalsArray[value].city {
-                destination.city = cityNameValue
-            }
-            if let postcodeValue = rentalsArray[value].postcode {
-                destination.postcode = postcodeValue
+            if let longValue = rentalsArray[value].long {
+                destination.long = longValue
             }
             if let postID = rentalsArray[value].postID {
                 destination.postID = postID
@@ -151,8 +179,9 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
       var rental = rentalsArray[indexPath.row]
 
-       
+        
         if isFilterEnabled == true {
+            
             rental = filteredArrary[indexPath.row]
         }
         
@@ -209,46 +238,64 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         
         
+        
+        self.rentalsArray = []
+        self.filteredArrary = []
        
         tableView.dataSource = self
         tableView.dataSource = self
         
         //Firebase observer
-        DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
-            
-            self.rentalsArray = []
-            self.filteredArrary = []
-            
-            
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshots {
-                    if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
-                        
-                        let key = snap.key
-                        
-                        let rental = Rental(postID: key, userData: dicOfRentals)
-                        self.rentalsArray.append(rental)
-                        
-                       // if self.filterByPrice != nil && self.filteredRentalTypes != nil  {
-                        if self.isFilterEnabled == true {
-                            self.applyFilters(rental: rental)
-                        }
-
-                     
-                        
-                    }
-                }
-                
-                DispatchQueue.main.async{
-                    self.tableView.reloadData()
-                }
-            }
-        
-        
-        
-        }
-        addHidingBar()
-        
+//        DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
+//
+//            self.rentalsArray = []
+//            self.filteredArrary = []
+//
+//
+//            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+//                for snap in snapshots {
+//                    if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
+//
+//                        let key = snap.key
+//
+//                        let rental = Rental(postID: key, userData: dicOfRentals)
+//
+//                        if let selectedLong = self.selectedLocationLong, let selectedLat = self.selectedLocationLat, let rentalLong = rental.long, let rentalLat = rental.lat  {
+//
+//                            let rentalLocation = CLLocation(latitude: rentalLat, longitude: rentalLong)
+//                            let selectedLocation = CLLocation(latitude: selectedLat, longitude: selectedLong)
+//                            let distance = selectedLocation.distance(from: rentalLocation)
+//
+//                            if distance < 1000 {
+//                                self.rentalsArray.append(rental)
+//                            } else {
+//                                print("no rentals match")
+//                            }
+//
+//                        }
+//
+//                      //  self.rentalsArray.append(rental)
+//
+//
+//                        if self.isFilterEnabled == true {
+//                            self.applyFilters(rental: rental)
+//                        }
+//
+//
+//
+//                    }
+//                }
+//
+//                DispatchQueue.main.async{
+//                    self.tableView.reloadData()
+//                }
+//            }
+//
+//
+//
+//        }
+//        addHidingBar()
+//
         
     }
     
@@ -268,7 +315,15 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                                                 if filteredBillType == bills || filteredBillType == nil {
                                                     if let pets = rental.pets {
                                                         if filteredPetPolicy == pets || filteredPetPolicy == nil {
-                                                            self.filteredArrary.append(rental)
+                                                            if let lat = rental.lat, let long = rental.long {
+                                                                let rentalLocation = CLLocation(latitude: lat, longitude: long)
+                                                                if rentalLocation.distance(from: selectedLocation) <= allowedDistance {
+                                                                     self.filteredArrary.append(rental)
+                                                                }
+                                                               
+                                                            }
+                                                            
+                                                            
                                                         }
                                                     }
                                                 }
@@ -290,7 +345,63 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
 
    
     override func viewDidAppear(_ animated: Bool) {
+        DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
+            
+            self.rentalsArray = []
+            self.filteredArrary = []
+            
+            
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
+                        
+                        let key = snap.key
+                        
+                        let rental = Rental(postID: key, userData: dicOfRentals)
+                        
+                       
+                     
+                        
+                        if let rentalLong = rental.long, let rentalLat = rental.lat  {
+                            let rentalLocation = CLLocation(latitude: rentalLat, longitude: rentalLong)
+                            let distance = rentalLocation.distance(from: self.selectedLocation)
+                            print("distance: \(distance)")
+    
+                            if distance <= self.allowedDistance {
+                                self.rentalsArray.append(rental)
+                            } else {
+                                print("no rentals match")
+                            }
+                            
+                        }
+                        
+                         
+                        
+                        if self.isFilterEnabled == true  {
+                            self.applyFilters(rental: rental)
+                        }
+                        
+                        
+
+                        
+                        
+                        
+                        
+                        
+                    }
+                }
+                
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
+            }
+            
+            
+            
+        }
+        addHidingBar()
         
+
     }
     
  
@@ -360,7 +471,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @objc func locationBtnPressed() {
-        
+         performSegue(withIdentifier: "toLocationSelectVC", sender: nil)
     }
     
 }

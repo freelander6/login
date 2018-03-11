@@ -67,6 +67,7 @@ PODS:
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - leveldb-library (1.20)
+  - LocationPickerViewController (3.2)
   - M13Checkbox (3.2.2)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - ImageRow
   - ImageSlideshow (~> 1.5)
   - JSQMessagesViewController
+  - LocationPickerViewController
   - M13Checkbox
   - RangeSeekSlider
   - SearchTextField
@@ -124,6 +126,7 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  LocationPickerViewController: 0e0b8308cbda8fa98abf03c84f2c048c68f87b60
   M13Checkbox: a8c2491cfbbca10797925fd0b9154a782bf40d89
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RangeSeekSlider: 0386c5a9aa5ebcb2fa5238e8a627280cf46c7c0a
@@ -133,6 +136,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 181285c100b641579a6e4c59fe7888d6c52fadf3
+PODFILE CHECKSUM: df58679d5f3b6cdf1dcabb9a8de0d75dcb81661f
 
 COCOAPODS: 1.3.1

@@ -89,14 +89,12 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let rentalType = myFavouates[value].rentalType {
                     destination.rentalType = rentalType
                 }
-                if let streetName = myFavouates[value].streetName {
-                    destination.streetName = streetName
+             
+                if let lat = myFavouates[value].lat {
+                    destination.lat = lat
                 }
-                if let cityName = myFavouates[value].city {
-                    destination.city = cityName
-                }
-                if let postcode = myFavouates[value].postcode {
-                    destination.postcode = postcode
+                if let long = myFavouates[value].long {
+                    destination.long = long
                 }
                 if let postID = myFavouates[value].postID {
                     destination.postID = postID

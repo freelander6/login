@@ -27,10 +27,9 @@ class Rental {
     private var _bills: String!
     private var _views = 0
     private var _ImageID: String!
-    private var _streetName: String!
-    private var _city: String!
-    private var _postcode:String!
-    private var _region: String!
+    private var _long : Double!
+    private var _lat: Double!
+
  
     private var _postRef: DatabaseReference!
     
@@ -89,25 +88,19 @@ class Rental {
         return _ImageID
     }
     
-    var streetName: String? {
-        return _streetName
+    var long: Double? {
+        return _long
     }
     
-    var city: String? {
-        return _city
+    var lat: Double? {
+        return _lat
     }
     
-    var postcode: String? {
-        return _postcode
-    }
-    
-    var region: String? {
-        return _region
-    }
+
     
  
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, rentalPeriod: String, pets: String, description: String, furnished: String, bills: String, views: Int, ImageID: String, streetName: String, city: String, postcode: String, region: String) {
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, rentalPeriod: String, pets: String, description: String, furnished: String, bills: String, views: Int, ImageID: String, long: Double, lat: Double) {
         
         self._title = title
         self._imgURL = imageURL
@@ -121,10 +114,8 @@ class Rental {
         self._bills = bills
         self._views = views
         self._ImageID = ImageID
-        self._streetName = streetName
-        self._city = city
-        self._postcode = postcode
-        self._region = region
+        self._long = long
+        self._lat = lat
       
     }
     
@@ -183,21 +174,13 @@ class Rental {
             self._ImageID = imageID
         }
         
-        if let streetName = userData["street"] as? String {
-            self._streetName = streetName
+        if let long = userData["long"] as? Double {
+            self._long = long
         }
-        
-        if let city = userData["city"] as? String {
-            self._city = city
+        if let lat = userData["lat"] as? Double {
+            self._lat = lat
         }
-        
-        if let postcode = userData["postcode"] as? String {
-            self._postcode = postcode
-        }
-        
-        if let region = userData["region"] as? String {
-            self._region = region
-        }
+  
         
       
     }

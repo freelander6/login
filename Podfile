@@ -27,4 +27,5 @@ pod 'JSQMessagesViewController'
 pod 'RangeSeekSlider'
 pod 'DropDown'
 pod 'M13Checkbox'
+pod 'LocationPickerViewController'
 end

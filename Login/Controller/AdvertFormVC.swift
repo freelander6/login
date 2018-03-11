@@ -12,6 +12,7 @@ import FirebaseDatabase
 import SwiftKeychainWrapper
 import Eureka
 import ImageRow
+import LocationPickerViewController
 
 
 class AdvertFormVC: FormViewController {
@@ -25,11 +26,9 @@ class AdvertFormVC: FormViewController {
     private var _bills: String!
     private var _pets: String!
     private var _userID: String!
-    private var _street: String!
-    private var _city: String!
-    private var _postcode: String!
+    private var _lat : Double!
+    private var _long: Double!
     private var _rentalDescription: String!
-    private var _region: String!
     
     var rentalTitle: String? {
         return _rentalTitle
@@ -61,19 +60,13 @@ class AdvertFormVC: FormViewController {
         let uid = KeychainWrapper.standard.string(forKey: "uid")
         return uid
     }
-    var street: String?{
-        return _street
+    var lat: Double? {
+        return _lat
     }
-    var city: String? {
-        return _city
+    var long: Double? {
+        return _long
     }
-    var postcode: String? {
-        return _postcode
-    }
-    
-    var region: String? {
-        return _region
-    }
+
     
     var rentalDescription: String? {
         return _rentalDescription
@@ -93,6 +86,31 @@ class AdvertFormVC: FormViewController {
         loadEurekaForm()
     }
 
+    
+////     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+////        if segue.identifier == "toLocationInputVC" {
+////            let locationPicker = segue.destination as! LocationPicker
+//            locationPicker.pickCompletion = { (pickedLocationItem) in
+//
+//                self._lat = pickedLocationItem.coordinate?.latitude
+//                self._long = pickedLocationItem.coordinate?.longitude
+//            }
+////        }
+////    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toLocationInputVC" {
+            let locationPicker = segue.destination as! LocationPicker
+            locationPicker.pickCompletion = { (pickedLocationItem) in
+                
+                self._lat = pickedLocationItem.coordinate?.latitude
+                self._long = pickedLocationItem.coordinate?.longitude
+            }
+
+        }
+    }
+    
     
     func upLoadImageAndDataToFirebase() {
         
@@ -143,10 +161,8 @@ class AdvertFormVC: FormViewController {
             "furnished": furnished as AnyObject,
              "bills": bills as AnyObject,
             "ImageID": imageID as AnyObject,
-            "street": street as AnyObject,
-            "postcode": postcode as AnyObject,
-            "city": city as AnyObject,
-            "region": region as AnyObject
+            "lat": lat as AnyObject,
+            "long": long as AnyObject
         ]
         
         //Post data
@@ -175,8 +191,6 @@ class AdvertFormVC: FormViewController {
         }
         
      
-   
-        
         PushRow<String>.defaultCellSetup = { cell, row in
             cell.textLabel?.font = myFont
             cell.detailTextLabel?.font = myFont
@@ -425,79 +439,14 @@ class AdvertFormVC: FormViewController {
                 section.header = header
             }
             
-            <<< NameRow("street") {
-                $0.title = "Street Name:"
-                $0.placeholder = "Street name for the property"
-                 $0.add(rule: RuleRequired())
-                
-                }
-                .cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "plus_image")
-                }     .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.textLabel?.textColor = .red
-                    }
-            }
-            
-            <<< NameRow("city") {
-                $0.title = "City"
-                $0.placeholder = "City"
-                $0.add(rule: RuleRequired())
-                
-                }
-                .cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "plus_image")
-                }.cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.textLabel?.textColor = .red
-                    }
-            }
-            
-            
-            <<< PushRow<String>("region") {
-                $0.title = "Region"
-                $0.options = ["Northland","Auckland","Waikato","Bay of Plenty","Gisborne","Hawke's Bay","Taranaki","Manawatu-Wanganui","Wellington","Tasman","Nelson","Marlborough","West Coast","Canterbury","Otago","Southland"]
-                $0.value = ""
-                $0.selectorTitle = "Select Region"
-              
-                }.onPresent { from, to in
-                    
-                    to.selectableRowCellUpdate = { cell, row in
-                        cell.textLabel!.font = myFont
-                        //cell.textLabel!.textColor = ...
-                    }
-                    to.dismissOnSelection = false
-                    to.dismissOnChange = false
-                } .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.textLabel?.textColor = .red
-                    }
-            }
-
-            
-            <<< NameRow("postcode") {
-                $0.title = "Post Code "
-                $0.placeholder = "Post Code"
-                $0.add(rule: RuleRequired())
-                }
-                .cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "plus_image")
-                }    .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.textLabel?.textColor = .red
-                    }
-            }
-            
-            <<< SwitchRow("switchRowTag"){
-                $0.title = "Share the house number?"
-            }
-            <<< NameRow("houseNumber"){
-                
-                $0.hidden = Condition.function(["switchRowTag"], { form in
-                    return !((form.rowBy(tag: "switchRowTag") as? SwitchRow)?.value ?? false)
-                })
-                $0.title = "House number"
+           
+            <<< ButtonRow("location") {
+                $0.title = "Location"
+                $0.presentationMode = .segueName(segueName: "toLocationInputVC" , onDismiss: nil)
         }
+                .cellSetup { cell, row in
+                    cell.textLabel?.font = myFont
+                }
         
         
         form +++
@@ -658,10 +607,8 @@ class AdvertFormVC: FormViewController {
         if let pet = formValues["pet"] { self._pets = pet as! String }
         if let furnished = formValues["furnished"] { self._furnished = furnished as! String }
         if let bills = formValues["bills"] { self._bills = bills as! String }
-        if let street = formValues["street"] { self._street = street as! String }
-        if let city = formValues["city"] { self._city = city as! String }
-        if let region = formValues["region"] { self._region = region as! String}
-        if let postcode = formValues["postcode"] { self._postcode = postcode as! String }
+
+
         if let description = formValues["rentalDescription"] {self._rentalDescription = description as! String }
         
         if let image = formValues["image1"] {self.rentalImage = image as? UIImage}
