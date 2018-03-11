@@ -317,7 +317,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                                                         if filteredPetPolicy == pets || filteredPetPolicy == nil {
                                                             if let lat = rental.lat, let long = rental.long {
                                                                 let rentalLocation = CLLocation(latitude: lat, longitude: long)
-                                                                if rentalLocation.distance(from: selectedLocation) <= allowedDistance {
+                                                                if rentalLocation.distance(from: selectedLocation)/1000 <= allowedDistance {
                                                                      self.filteredArrary.append(rental)
                                                                 }
                                                                
@@ -364,7 +364,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                         
                         if let rentalLong = rental.long, let rentalLat = rental.lat  {
                             let rentalLocation = CLLocation(latitude: rentalLat, longitude: rentalLong)
-                            let distance = rentalLocation.distance(from: self.selectedLocation)
+                            let distance = rentalLocation.distance(from: self.selectedLocation)/1000
                             print("distance: \(distance)")
     
                             if distance <= self.allowedDistance {
