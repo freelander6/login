@@ -11,10 +11,12 @@ import MessageUI
 import SwiftKeychainWrapper
 import HidingNavigationBar
 import LocationPickerViewController
+import DropDown 
 
 
 class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
-    
+   
+    //User defaults to save location
     let defaultLocation = UserDefaults.standard
     
     var selectedLocation: CLLocation {
@@ -24,7 +26,11 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         return loc
     }
     
+    var allowedDistance: Double {
+        return defaultLocation.double(forKey: "distance")
+    }
     
+    let typeDro = DropDown()
     
     var rentalsArray = [Rental]()
     var filteredArrary = [Rental]()
@@ -48,7 +54,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
 //    var location: CLLocation?
     
-    var allowedDistance = 100.0
+  
   
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
@@ -60,16 +66,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
-        if segue.identifier == "toLocationSelectVC" {
-            let locationPicker = segue.destination as! LocationPicker
-            locationPicker.pickCompletion = { (pickedLocationItem) in
-                
-                if let lat = pickedLocationItem.coordinate?.latitude, let long = pickedLocationItem.coordinate?.longitude {
-                   self.defaultLocation.set(lat, forKey: "lat")
-                    self.defaultLocation.set(long, forKey: "long")
-                }
-            }
-        }
+      
         
         
         if segue.identifier == "toDetailVC" {
@@ -237,7 +234,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        addHidingBar()
         
         self.rentalsArray = []
         self.filteredArrary = []
@@ -399,7 +396,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             
             
         }
-        addHidingBar()
+        
         
 
     }
