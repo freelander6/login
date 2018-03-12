@@ -13,7 +13,9 @@ import LocationPickerViewController
 class LocationSelectionVC: UIViewController {
     
     let defaultLocation = UserDefaults.standard
+    
 
+    
     
     @IBOutlet weak var selectLocationBtn: RoundedButton!
    
@@ -21,15 +23,26 @@ class LocationSelectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        distanceSlider.selectedMaxValue = CGFloat(defaultLocation.double(forKey: "distance"))
         
+        if userDefaultExist(key: "distance") == true {
+            distanceSlider.selectedMaxValue = CGFloat(defaultLocation.double(forKey: "distance"))
+        }
         
-        // Do any additional setup after loading the view.
-    
-
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if userDefaultExist(key: "name") == true {
+            self.selectLocationBtn.titleLabel?.text = self.defaultLocation.string(forKey: "name")
+        }
+        
+        
+            
+        
+        
+      
+        
+    }
     
     
     @IBAction func selectLocationBtnPressed(_ sender: Any) {
@@ -45,7 +58,8 @@ class LocationSelectionVC: UIViewController {
                 if let lat = pickedLocationItem.coordinate?.latitude, let long = pickedLocationItem.coordinate?.longitude {
                     self.defaultLocation.set(lat, forKey: "lat")
                     self.defaultLocation.set(long, forKey: "long")
-                    self.selectLocationBtn.titleLabel?.text = pickedLocationItem.name
+                    self.defaultLocation.set(pickedLocationItem.name, forKey: "name")
+                    
                 }
             }
         }
@@ -56,5 +70,8 @@ class LocationSelectionVC: UIViewController {
 
     }
     
+    func userDefaultExist(key: String) -> Bool {
+        return defaultLocation.object(forKey: key) != nil
+    }
     
 }
