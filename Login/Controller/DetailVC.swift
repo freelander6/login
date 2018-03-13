@@ -11,9 +11,9 @@ import MessageUI
 import Firebase
 import SimpleImageViewer
 import MapKit
-import Whisper
 import ImageSlideshow
 import SwiftKeychainWrapper
+import CFAlertViewController
 
 
 
@@ -167,14 +167,44 @@ class DetailVC: UIViewController {
         let postDataToUsers = DataService.ds.DBCurrentUser.child("MyFavourates").child(postID)
         postDataToUsers.setValue(true)
         
-
         
-        var announcement = Announcement(title: "", subtitle: "This property has been added to your favourate page", image: UIImage(named: "if_tick_blue_619551"))
-        announcement.duration = 2
-        
-        Whisper.show(shout: announcement, to: navigationController!, completion: {
-           
+        // Create Alet View Controller
+        let alertController = CFAlertViewController(title: "Favourate added! ",
+                                                    message: "This property has been added to your favourate list",
+                                                    textAlignment: .left,
+                                                    preferredStyle: .alert,
+                                                    didDismissAlertHandler: nil)
+        // Create Upgrade Action
+        let defaultAction = CFAlertAction(title: "Ok",
+                                          style: .Default,
+                                          alignment: .center,
+                                          backgroundColor: UIColor(red: CGFloat(46.0 / 255.0), green: CGFloat(204.0 / 255.0), blue: CGFloat(113.0 / 255.0), alpha: CGFloat(1)),
+                                          textColor: nil,
+                                          handler: { (action) in
+                                            // Handle btn press
         })
+        
+        
+        let goToFavourates = CFAlertAction(title: "View My Favourates",
+                                          style: .Default,
+                                          alignment: .center,
+                                          backgroundColor: UIColor(red: CGFloat(46.0 / 255.0), green: CGFloat(204.0 / 255.0), blue: CGFloat(113.0 / 255.0), alpha: CGFloat(1)),
+                                          textColor: nil,
+                                          handler: { (action) in
+                                            
+                                            print("Button with title '" + action.title! + "' tapped")
+                                            self.performSegue(withIdentifier: "toMyFavouratesVC", sender: nil)
+        })
+        
+        
+        // Add Action Button Into Alert
+        alertController.addAction(defaultAction)
+         alertController.addAction(goToFavourates)
+        // Present Alert View Controller
+        present(alertController, animated: true, completion: nil)
+        
+        
+       
     }
     
 }

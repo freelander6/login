@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - CFAlertViewController (3.0)
   - DropDown (2.3.1)
   - Eureka (4.0.1)
   - FBSDKCoreKit (4.30.0):
@@ -82,6 +83,7 @@ PODS:
   - Whisper (6.0.2)
 
 DEPENDENCIES:
+  - CFAlertViewController
   - DropDown
   - Eureka
   - FBSDKCoreKit
@@ -106,6 +108,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  CFAlertViewController: 460bb12b42b500bb0838e5595ca144a18344765f
   DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
   FBSDKCoreKit: 7c4bba2877781a131ab5d54c0a78c405d4307b62
@@ -136,6 +139,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: df58679d5f3b6cdf1dcabb9a8de0d75dcb81661f
+PODFILE CHECKSUM: 165d0147bfc245f98bfe3164ad8af07923af505c
 
 COCOAPODS: 1.3.1

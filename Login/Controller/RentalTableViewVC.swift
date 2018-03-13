@@ -11,7 +11,8 @@ import MessageUI
 import SwiftKeychainWrapper
 import HidingNavigationBar
 import LocationPickerViewController
-import DropDown 
+import DropDown
+import CFAlertViewController
 
 
 class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDelegate  {
@@ -236,63 +237,19 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         
         addHidingBar()
         
+        
+        
         self.rentalsArray = []
         self.filteredArrary = []
        
         tableView.dataSource = self
         tableView.dataSource = self
         
-        //Firebase observer
-//        DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
-//
-//            self.rentalsArray = []
-//            self.filteredArrary = []
-//
-//
-//            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-//                for snap in snapshots {
-//                    if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
-//
-//                        let key = snap.key
-//
-//                        let rental = Rental(postID: key, userData: dicOfRentals)
-//
-//                        if let selectedLong = self.selectedLocationLong, let selectedLat = self.selectedLocationLat, let rentalLong = rental.long, let rentalLat = rental.lat  {
-//
-//                            let rentalLocation = CLLocation(latitude: rentalLat, longitude: rentalLong)
-//                            let selectedLocation = CLLocation(latitude: selectedLat, longitude: selectedLong)
-//                            let distance = selectedLocation.distance(from: rentalLocation)
-//
-//                            if distance < 1000 {
-//                                self.rentalsArray.append(rental)
-//                            } else {
-//                                print("no rentals match")
-//                            }
-//
-//                        }
-//
-//                      //  self.rentalsArray.append(rental)
-//
-//
-//                        if self.isFilterEnabled == true {
-//                            self.applyFilters(rental: rental)
-//                        }
-//
-//
-//
-//                    }
-//                }
-//
-//                DispatchQueue.main.async{
-//                    self.tableView.reloadData()
-//                }
-//            }
-//
-//
-//
-//        }
-//        addHidingBar()
-//
+        if userDefaultExist(key: "name") == false {
+            addAlertViewIfLocationNotSet()
+        }
+      
+     
         
     }
     
@@ -415,7 +372,33 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
 
 
-    
+    func addAlertViewIfLocationNotSet() {
+        
+        // Create Alet View Controller
+        let alertController = CFAlertViewController(title: "You've not yet set a location",
+                                                    message: "Set a location to view the best results in your area      ",
+                                                    textAlignment: .left,
+                                                    preferredStyle: .alert,
+                                                    didDismissAlertHandler: nil)
+        // Create Upgrade Action
+        let defaultAction = CFAlertAction(title: "Set location",
+                                          style: .Default,
+                                          alignment: .center,
+                                          backgroundColor: UIColor(red: CGFloat(46.0 / 255.0), green: CGFloat(204.0 / 255.0), blue: CGFloat(113.0 / 255.0), alpha: CGFloat(1)),
+                                          textColor: nil,
+                                          handler: { (action) in
+                                            
+                                            print("Button with title '" + action.title! + "' tapped")
+                                            self.performSegue(withIdentifier: "toLocationSelectVC", sender: nil)
+        })
+        
+        // Add Action Button Into Alert
+        alertController.addAction(defaultAction)
+        
+        // Present Alert View Controller
+        present(alertController, animated: true, completion: nil)
+        
+    }
 
     func addHidingBar() {
       
@@ -458,6 +441,11 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         hidingBarMangar = HidingNavigationBarManager(viewController: self, scrollView: tableView)
         hidingBarMangar?.addExtensionView(extensionView)
         
+    }
+    
+    // Used to determine if NSDUserDefaults is empty
+    func userDefaultExist(key: String) -> Bool {
+        return defaultLocation.object(forKey: key) != nil
     }
     
     @objc func filterBtnPressed() {
