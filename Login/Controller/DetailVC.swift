@@ -14,6 +14,7 @@ import MapKit
 import ImageSlideshow
 import SwiftKeychainWrapper
 import CFAlertViewController
+import Contacts
 
 
 
@@ -39,6 +40,8 @@ class DetailVC: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
 
+    
+
     @IBOutlet weak var imageSlider: ImageSlideshow!
     
     @IBOutlet weak var titleField: UILabel!
@@ -62,8 +65,14 @@ class DetailVC: UIViewController {
         
         titleField.text = rentalTitle
         houseTypeField.text = rentalType
-        bondField.text = bond
-        rentField.text = rent
+        if bond == "" {
+            bondField.text = "No Bond"
+        } else {
+            bondField.text = bond
+            
+        }
+        
+        rentField.text = "$\(rent)"
         dateAvalField.text = rentalPeriod
         petsField.text = pets
         descriptionField.text = des
@@ -145,24 +154,30 @@ class DetailVC: UIViewController {
 
 
     func addMapAnnotation() {
-//        let geocoder = CLGeocoder()
-//
-//        geocoder.geocodeAddressString(address) { (placemarks, error) in
-//
-//            if error != nil {
-//                //Deal with error here
-//            } else if let placemarks = placemarks {
-//
-//                if let coordinate = placemarks.first?.location?.coordinate {
-//                    let pin = PinAnnotation(title: "WannaRental Property", subtitle: "wanaka", coordinate: coordinate)
-//                    self.map.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500), animated: true)
-//                    self.map.addAnnotation(pin)
-//                }
-//            }
-//        }
+        let annotation = MKPointAnnotation()
+        
+        if let lat = self.lat, let long = self.long {
+            let location = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            let viewRegion = MKCoordinateRegionMakeWithDistance(location, 1500, 1500)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            map.setRegion(viewRegion, animated: false)
+            map.addAnnotation(annotation)
+            
+        }
+       
     }
     
-
+    func mapView(_ mapView: MKMapView, annotationView view:MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
+        self.title = title
+        mapItem.name = title
+        mapItem.openInMaps(launchOptions: launchOptions)
+    }
+    
+    
     @IBAction func addToFavouratesBtnPressed(_ sender: Any) {
         let postDataToUsers = DataService.ds.DBCurrentUser.child("MyFavourates").child(postID)
         postDataToUsers.setValue(true)
