@@ -57,7 +57,7 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
     
     @IBOutlet weak var rentalPeriodBtn: UIButton!
 
-    @IBOutlet weak var counterLbl: UILabel!
+
     
     let typeDropdown = DropDown()
 
@@ -76,18 +76,12 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
         priceSlider.delegate = self
     
         
-        if filterCounter == 0 {
-            counterLbl.isHidden = true
-        }
+
     
-      updateCheckBoxUI()
+      updateUI()
         
     
-        
-    // UI Change on label
-    counterLbl.layer.cornerRadius = counterLbl.frame.width/2
-    counterLbl.layer.masksToBounds = true
-        
+
         
     // Setup drop down lists
     typeDropdown.anchorView = typeDropDown
@@ -105,7 +99,7 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
     }
 
     
-    func updateCheckBoxUI() {
+    func updateUI() {
         
         bondNoCheck.addSubview(bondNoCheckbox)
         bondYesCheck.addSubview(bondYesCheckbox)
@@ -115,6 +109,9 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
         petsYesCheck.addSubview(petsYesCheckbox)
         furnishedNoCheck.addSubview(furnishedNoCheckbox)
         furnishedYesCheck.addSubview(furnishedYesCheckbox)
+        
+        rentalPeriodBtn.titleLabel?.textAlignment = .left
+        filterByTypeBtn.titleLabel?.textAlignment = .left
         
     }
     
@@ -174,21 +171,21 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
         
         
         
-        typeDropdown.bottomOffset = CGPoint(x: -95, y:(typeDropdown.anchorView?.plainView.bounds.height)!)
+        typeDropdown.bottomOffset = CGPoint(x: -70, y:(typeDropdown.anchorView?.plainView.bounds.height)!)
         
         
         filterByTypeBtn.setTitle(typeDropdown.selectedItem, for: .normal)
         typeDropdown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.filterByTypeBtn.setTitle(item, for: .normal)
             self.isRentalTypeFilterOn = true
-            self.refreshFilterLabel()
+
            
         }
         
         typeDropdown.cancelAction = { [unowned self] in
-            self.filterByTypeBtn.setTitle("Filter by Type", for: .normal)
+            self.filterByTypeBtn.setTitle("Select", for: .normal)
             self.isRentalTypeFilterOn = false
-            self.refreshFilterLabel()
+
         }
     }
     
@@ -203,14 +200,14 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
         rentalPeriodDropdown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.rentalPeriodBtn.setTitle(item, for: .normal)
             self.isRentalPeriodFilterOn = true
-            self.refreshFilterLabel()
+
             
         }
         
         rentalPeriodDropdown.cancelAction = { [unowned self] in
-            self.rentalPeriodBtn.setTitle("Filter by rental period", for: .normal)
+            self.rentalPeriodBtn.setTitle("Select", for: .normal)
             self.isRentalPeriodFilterOn = false
-            self.refreshFilterLabel()
+    
             
         }
     }
@@ -218,38 +215,9 @@ class ApplyFiltersVC: UIViewController, RangeSeekSliderDelegate {
  
     
 
+
     
-    func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
-        isPriceFilterOn = true
-        self.refreshFilterLabel()
-    }
-    
-    
-    func refreshFilterLabel() {
-        
-        filterCounter = 0
-        
-        if isRentalPeriodFilterOn == true {
-            filterCounter += 1
-        }
-        if isRentalTypeFilterOn == true {
-            filterCounter += 1
-        }
-        
-        if isPriceFilterOn == true {
-            filterCounter += 1
-        }
-        
-        counterLbl.text = String(filterCounter)
-        
-        if filterCounter != 0 {
-            counterLbl.isHidden = false
-        } else {
-            counterLbl.isHidden = true
-        }
-    
-        
-    }
+
     
    
     

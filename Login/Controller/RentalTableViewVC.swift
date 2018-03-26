@@ -304,51 +304,54 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             self.rentalsArray = []
             self.filteredArrary = []
             
-            
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshots {
-                    if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
-                        
-                        let key = snap.key
-                        
-                        let rental = Rental(postID: key, userData: dicOfRentals)
-                        
-                       
-                     
-                        
-                        if let rentalLong = rental.long, let rentalLat = rental.lat  {
-                            let rentalLocation = CLLocation(latitude: rentalLat, longitude: rentalLong)
-                            let distance = rentalLocation.distance(from: self.selectedLocation)/1000
-                            print("distance: \(distance)")
-    
-                            if distance <= self.allowedDistance {
-                                self.rentalsArray.append(rental)
-                            } else {
-                                print("no rentals match")
+            DispatchQueue.main.async {
+                if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                    for snap in snapshots {
+                        if let dicOfRentals = snap.value as? Dictionary<String,AnyObject> {
+                            
+                            let key = snap.key
+                            
+                            let rental = Rental(postID: key, userData: dicOfRentals)
+                            
+                            
+                            
+                            
+                            if let rentalLong = rental.long, let rentalLat = rental.lat  {
+                                let rentalLocation = CLLocation(latitude: rentalLat, longitude: rentalLong)
+                                let distance = rentalLocation.distance(from: self.selectedLocation)/1000
+                                print("distance: \(distance)")
+                                
+                                if distance <= self.allowedDistance {
+                                    self.rentalsArray.append(rental)
+                                } else {
+                                    print("no rentals match")
+                                }
+                                
                             }
                             
+                            
+                            
+                            if self.isFilterEnabled == true  {
+                                self.applyFilters(rental: rental)
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                         }
-                        
-                         
-                        
-                        if self.isFilterEnabled == true  {
-                            self.applyFilters(rental: rental)
-                        }
-                        
-                        
-
-                        
-                        
-                        
-                        
-                        
+                    }
+                    
+                    DispatchQueue.main.async{
+                        self.tableView.reloadData()
                     }
                 }
-                
-                DispatchQueue.main.async{
-                    self.tableView.reloadData()
-                }
+
             }
+            
             
             
             

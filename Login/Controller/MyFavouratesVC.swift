@@ -12,6 +12,7 @@ import FirebaseStorage
 
 class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
     var rentalsArray = [Rental]()
     var myFavouates = [Rental]()
@@ -25,15 +26,35 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
      
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let myFavourateRental = myFavouates[indexPath.row]
-        if let cell = myFavouratesTableView.dequeueReusableCell(withIdentifier: "favCell") as? MyFavouratesCell {
-            cell.configureCell(rental: myFavourateRental)
-            return cell
+        let favourates = myFavouates[indexPath.row]
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "favCell") as? MyFavouratesCell {
+            
+            var rentalImage = ""
+            
+            if favourates.imageURL != nil {
+                rentalImage = favourates.imageURL!
+            }
+            
+            
+            if let img = MyFavouratesVC.imageCache.object(forKey: rentalImage as NSString) {
+                cell.configureCell(rental: favourates, image: img)
+                
+                return cell
+            } else {
+                cell.configureCell(rental: favourates, image: nil)
+                
+                return cell
+            }
+            
         } else {
             return MyFavouratesCell()
         }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
