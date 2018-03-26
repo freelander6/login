@@ -105,9 +105,6 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     for snap in snapshots {
                         if let value = snap.value {
                             
-                            //self.myRentals.append((value as? String))
-                            // print("**************\(value)")
-                            
                             for rental in self.rentalsArray {
                                 if rental.postID == value as? String {
                                     self.myRentals.append(rental as Rental)

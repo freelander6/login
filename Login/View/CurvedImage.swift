@@ -13,7 +13,7 @@ class CurvedImage: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.cornerRadius = 10
+        layer.cornerRadius = 25
         clipsToBounds = true    
     }
 }

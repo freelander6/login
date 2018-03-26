@@ -18,17 +18,19 @@ class Rental {
     private var _price: String!
     private var _rentalType: String!
     private var _bond: String!
-    private var _dateAval: String!
+    private var _rentalPeriod: String!
     private var _pets: String!
     private var _description: String!
     private var _postID: String!
-    private var _email: String!
+    private var _userID: String!
     private var _furnished: String!
+    private var _bills: String!
     private var _views = 0
     private var _ImageID: String!
-    private var _streetName: String!
-    private var _city: String!
-    private var _postcode:String!
+    private var _long : Double!
+    private var _lat: Double!
+
+ 
     private var _postRef: DatabaseReference!
     
     var title: String? {
@@ -51,8 +53,8 @@ class Rental {
         return _bond
     }
     
-    var dateAval: String? {
-        return _dateAval
+    var rentalPeriod: String? {
+        return _rentalPeriod
     }
     
     var pets: String? {
@@ -67,12 +69,15 @@ class Rental {
         return _postID
     }
     
-    var email: String? {
-        return _email
+    var userID: String? {
+        return _userID
     }
     
     var furnished: String? {
         return _furnished
+    }
+    var bills: String? {
+        return _bills
     }
     
     var views: Int? {
@@ -83,34 +88,35 @@ class Rental {
         return _ImageID
     }
     
-    var streetName: String? {
-        return _streetName
+    var long: Double? {
+        return _long
     }
     
-    var city: String? {
-        return _city
+    var lat: Double? {
+        return _lat
     }
     
-    var postcode: String? {
-        return _postcode
-    }
+
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, dateAval: String, pets: String, description: String, furnished: String, views: Int, ImageID: String, streetName: String, city: String, postcode: String) {
+ 
+    
+    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, rentalPeriod: String, pets: String, description: String, furnished: String, bills: String, views: Int, ImageID: String, long: Double, lat: Double) {
         
         self._title = title
         self._imgURL = imageURL
         self._price = price
         self._rentalType = rentalType
         self._bond = bond
-        self._dateAval = dateAval
+        self._rentalPeriod = rentalPeriod
         self._pets = pets
         self._description = description
         self._furnished = furnished
+        self._bills = bills
         self._views = views
         self._ImageID = ImageID
-        self._streetName = streetName
-        self._city = city
-        self._postcode = postcode
+        self._long = long
+        self._lat = lat
+      
     }
     
     init(postID: String, userData: Dictionary<String, AnyObject>) {
@@ -137,8 +143,8 @@ class Rental {
             self._bond  = bond
         }
         
-        if let dateAval = userData["date"] as? String {
-            self._dateAval = dateAval
+        if let rentalPeriod = userData["rentalPeriod"] as? String {
+            self._rentalPeriod = rentalPeriod
         }
         
         if let pets = userData["pets"] as? String {
@@ -149,12 +155,15 @@ class Rental {
             self._description = description
         }
         
-        if let email = userData["email"] as? String {
-            self._email = email
+        if let userID = userData["userID"] as? String {
+            self._userID = userID
         }
         
         if let furnished = userData["furnished"] as? String {
             self._furnished = furnished
+        }
+        if let bills = userData["bills"] as? String {
+            self._bills = bills
         }
         
         if let views = userData["views"] as? Int {
@@ -165,17 +174,15 @@ class Rental {
             self._ImageID = imageID
         }
         
-        if let streetName = userData["street"] as? String {
-            self._streetName = streetName
+        if let long = userData["long"] as? Double {
+            self._long = long
         }
+        if let lat = userData["lat"] as? Double {
+            self._lat = lat
+        }
+  
         
-        if let city = userData["city"] as? String {
-            self._city = city
-        }
-        
-        if let postcode = userData["postcode"] as? String {
-            self._postcode = postcode
-        }
+      
     }
     
     func incrimentViews() {
