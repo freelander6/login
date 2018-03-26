@@ -10,6 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import Firebase
 import SwiftKeychainWrapper
+import CFAlertViewController
 
 class LoginPageVC: UIViewController {
     
@@ -97,6 +98,7 @@ class LoginPageVC: UIViewController {
                     
                 } else {
                     print("No user account found, please register a new account")
+                    self.presentLoginAlert()
                 }
             })
             
@@ -105,4 +107,48 @@ class LoginPageVC: UIViewController {
 
 
     }
+    
+    
+        func presentLoginAlert() {
+
+        
+        // Create Alet View Controller
+        let alertController = CFAlertViewController(title: "User account not recognised",
+                                                    message: "Either your username/password is incorrect or you do not yet have a user account",
+                                                    textAlignment: .left,
+                                                    preferredStyle: .alert,
+                                                    didDismissAlertHandler: nil)
+        // Create Upgrade Action
+        let defaultAction = CFAlertAction(title: "Try again",
+                                          style: .Default,
+                                          alignment: .center,
+                                          backgroundColor: UIColor(red: CGFloat(46.0 / 255.0), green: CGFloat(204.0 / 255.0), blue: CGFloat(113.0 / 255.0), alpha: CGFloat(1)),
+                                          textColor: nil,
+                                          handler: { (action) in
+                                            // Handle btn press
+        })
+        
+        
+        let goToRegister = CFAlertAction(title: "Register a new account",
+                                           style: .Default,
+                                           alignment: .center,
+                                           backgroundColor: UIColor(red: CGFloat(46.0 / 255.0), green: CGFloat(204.0 / 255.0), blue: CGFloat(113.0 / 255.0), alpha: CGFloat(1)),
+                                           textColor: nil,
+                                           handler: { (action) in
+
+                                            self.performSegue(withIdentifier: "toRegisterAccountVC", sender: nil)
+        })
+        
+        
+        // Add Action Button Into Alert
+        alertController.addAction(defaultAction)
+        alertController.addAction(goToRegister)
+        // Present Alert View Controller
+        present(alertController, animated: true, completion: nil)
+        
+    }
+
+    
+    
+    
 }
