@@ -56,7 +56,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
 //    var location: CLLocation?
     
   
-  
+   var indicator = UIActivityIndicatorView()
+    
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     
     
@@ -299,6 +300,10 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
 
    
     override func viewDidAppear(_ animated: Bool) {
+        activityIndicator()
+        indicator.startAnimating()
+        indicator.backgroundColor = UIColor.white
+        
         DataService.ds.DBrefRentals.observe(.value) { (snapshot) in
             
             self.rentalsArray = []
@@ -346,6 +351,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
                     }
                     
                     DispatchQueue.main.async{
+                        self.indicator.stopAnimating()
+                        self.indicator.hidesWhenStopped = true
                         self.tableView.reloadData()
                     }
                 }
@@ -465,6 +472,15 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func locationBtnPressed() {
          performSegue(withIdentifier: "toLocationSelectVC", sender: nil)
+    }
+    
+    //Activity display/Loading bar
+        func activityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
     }
     
 }

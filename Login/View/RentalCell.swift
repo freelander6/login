@@ -25,7 +25,8 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var dateAvalLbl: UILabel!
     @IBOutlet weak var furnished: UILabel!
     
-    
+    var indicator = UIActivityIndicatorView()
+    var hasImage: Bool?
     
     @IBOutlet weak var rentalImage: UIImageView!
     
@@ -33,7 +34,6 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
         super.awakeFromNib()
         // Initialization code
     }
-    
     
  
     
@@ -44,11 +44,19 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
         // Configure the view for the selected state
     }
     
+    
     func configureCell(rental: Rental, image: UIImage?) {
+        
+        //Add activity inditcator
+        if hasImage != true {
+            activityIndicator()
+            indicator.startAnimating()
+            indicator.backgroundColor = UIColor.clear
+        }
+       
+        
+        //Initialiase outlets 
         self.rental = rental
-        
-        
-        
         self.rentalTitleLbl.text = rental.title
         self.rentalPriceLbl.text = "$\(rental.price!) p/w"
         self.rentalTypeLbl.text = rental.rentalType
@@ -60,6 +68,9 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
     
         if image != nil {
             //Image already in cache
+            //Stop indicator
+            self.indicator.stopAnimating()
+            self.indicator.hidesWhenStopped = true
             self.rentalImage.image = image
         } else {
             // download image from Firebase
@@ -73,7 +84,12 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
                         if let img = UIImage(data: imageData) {
                             self.rentalImage.image = img
                             RentalTableViewVC.imageCache.setObject(img, forKey: rental.imageURL! as NSString)
+                            //Stop indicator
+                            self.indicator.stopAnimating()
+                            self.indicator.hidesWhenStopped = true
+                            self.hasImage = true
                         }
+                        
                     }
                 }
             })
@@ -82,6 +98,20 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
         }
         
     }
+    
+    
+    //Activity display/Loading bar
+    func activityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+      //  indicator.center = self.view.center
+        //self.view.addSubview(indicator)
+        indicator.center = CGPoint(x: 185, y: 200)
+        addSubview(indicator)
+    }
+    
+    
     
 
     
