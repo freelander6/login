@@ -80,7 +80,6 @@ PODS:
   - SideMenu (3.1.5)
   - SimpleImageViewer (1.1.1)
   - SwiftKeychainWrapper (3.0.1)
-  - Whisper (6.0.2)
 
 DEPENDENCIES:
   - CFAlertViewController
@@ -104,7 +103,6 @@ DEPENDENCIES:
   - SideMenu
   - SimpleImageViewer
   - SwiftKeychainWrapper
-  - Whisper
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -137,8 +135,7 @@ SPEC CHECKSUMS:
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
-  Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 165d0147bfc245f98bfe3164ad8af07923af505c
+PODFILE CHECKSUM: e68841625a7fdf9010f07316dc70660804eb93bf
 
 COCOAPODS: 1.3.1
