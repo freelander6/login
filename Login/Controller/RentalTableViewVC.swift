@@ -415,27 +415,32 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
         label.textAlignment = NSTextAlignment.center
         extensionView.addSubview(label) */
         
-        let btn = UIButton(frame: CGRect(x: 275, y: 15, width: 75, height: 10))
-        btn.setTitle("Filter", for: .normal)
+        let btn = UIButton(frame: CGRect(x: 275, y: -5, width: 50, height: 50))
+       // btn.setTitle("Filter", for: .normal)
         let btnColour = UIColor(displayP3Red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
         btn.setTitleColor(btnColour, for: .normal)
         btn.titleLabel?.font = headerFont
+        btn.setImage(#imageLiteral(resourceName: "search-7"), for: .normal)
         btn.addTarget(self, action: #selector(filterBtnPressed), for: .touchUpInside)
         
-        let menuBtn = UIButton(frame: CGRect(x: 20, y: 15, width: 75, height: 10))
-        menuBtn.setTitle("Menu", for: .normal)
+        let menuBtn = UIButton(frame: CGRect(x: 20, y: -5, width: 50, height: 50))
+      //  menuBtn.setTitle("Menu", for: .normal)
        
         menuBtn.setTitleColor(btnColour, for: .normal)
         menuBtn.titleLabel?.font = headerFont
         menuBtn.addTarget(self, action: #selector(menuBtnPressed), for: .touchUpInside)
+        menuBtn.setImage(#imageLiteral(resourceName: "list-fat-7"), for: .normal)
+        menuBtn.imageView?.clipsToBounds = true
         
-        let locationBtn = UIButton(frame: CGRect(x: 150, y: 15, width: 75, height: 10))
-        locationBtn.setTitle("Location", for: .normal)
+        
+        
+        let locationBtn = UIButton(frame: CGRect(x: 150, y: -5, width: 50, height: 50))
+       // locationBtn.setTitle("Location", for: .normal)
         
         locationBtn.setTitleColor(btnColour, for: .normal)
         locationBtn.titleLabel?.font = headerFont
         locationBtn.addTarget(self, action: #selector(locationBtnPressed), for: .touchUpInside)
-        
+        locationBtn.setImage(#imageLiteral(resourceName: "paper-plane-7"), for: .normal)
         
         
         extensionView.addSubview(btn)
