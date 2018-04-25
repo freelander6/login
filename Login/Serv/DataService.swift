@@ -13,6 +13,7 @@ import SwiftKeychainWrapper
 
 let DB = Database.database().reference()
 let STORAGE = Storage.storage().reference()
+let rentalID = UUID().uuidString
 
 class DataService {
     
@@ -21,10 +22,12 @@ class DataService {
     //dba references
     private var _DBAref = DB
     private var _DBRrefRentals = DB.child("Rentals")
+    private var _DBrefRentalsCurrent = DB.child("Rentals").child(rentalID)
+    private var _DBRefRentalImages = DB.child("Rentals").child(rentalID).child("Images")
     private var _DBRrefUsers = DB.child("Users")
     private var _DBRefMyRentals = DB.child("Users").child("MyRentals")
     private var _DBRefThreads = DB.child("Threads")
-
+    
     
     //firebase storage ref
     private var _StorageREF = STORAGE.child("rental_images")
@@ -44,6 +47,14 @@ class DataService {
     
     var DBrefRentals: DatabaseReference {
         return _DBRrefRentals
+    }
+    
+    var DBrefRentalCurrent: DatabaseReference {
+        return _DBrefRentalsCurrent
+    }
+    
+    var DBrefRentalCurrentImages: DatabaseReference {
+        return _DBRefRentalImages
     }
     
     var DBrefUsers: DatabaseReference {
@@ -72,3 +83,4 @@ class DataService {
     
     
 }
+
