@@ -28,14 +28,22 @@ class DetailVC: UIViewController {
     var rentalPeriod = ""
     var pets = ""
     var des = ""
-    var imageURL = ""
+    var imageOneUrl: String?
+    var imageTwoUrl: String?
+    var imageThreeUrl: String?
+    var imageFourUrl : String?
     var lat: Double?
     var long: Double? 
     var postID = ""
+    var imageArray = [UIImage]()
+    var imageSource = [ImageSource]()
     
 //    var address: String {
 //        return "\(streetName), \(city), \(postcode)"
 //    }
+    
+    
+    var localSource = [ImageSource]()
     
     @IBOutlet weak var map: MKMapView!
     
@@ -78,29 +86,135 @@ class DetailVC: UIViewController {
         descriptionField.text = des
         
         addMapAnnotation()
-     
-        if let img = RentalTableViewVC.imageCache.object(forKey: imageURL as NSString) {
-            let localSource = [ImageSource(imageString: "house")!,ImageSource(image: img)]
-             imageSlider.setImageInputs(localSource)
+//
+//        if let imgOneString = self.imageOneUrl, let imgOne = RentalTableViewVC.imageCache.object(forKey: imgOneString as NSString) {
+//            var localSource = [ImageSource(image: imgOne)]
+//            if let imageTwoString = self.imageTwoUrl, let imgTwo = RentalTableViewVC.imageCache.object(forKey: imageTwoString as NSString) {
+//                localSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo)]
+//                if let imageThreeString = self.imageThreeUrl, let imgThree =  RentalTableViewVC.imageCache.object(forKey: imageThreeString as NSString) {
+//                    localSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo), ImageSource(image: imgThree)]
+//                    if let imageFourString = self.imageFourUrl, let imgFour = RentalTableViewVC.imageCache.object(forKey: imageFourString as NSString) {
+//                       localSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo), ImageSource(image: imgThree), ImageSource(image: imgFour)]
+//                    }
+//                }
+//            }
+//             imageSlider.setImageInputs(localSource)
+//
+//        } else {
+//            // download image from Firebase
+
+
+        
             
-        } else {
-            // download image from Firebase
-            let ref = Storage.storage().reference(forURL: imageURL)
-            ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-                if error != nil {
-                    print("An error has occured downloading image")
-                } else {
-                    print("Image downloaded")
-                    if let imageData = data {
-                        if let img = UIImage(data: imageData) {
-                            let localSource = [ImageSource(imageString: "house")!,ImageSource(image: img)]
-                            self.imageSlider.setImageInputs(localSource)
-                            RentalTableViewVC.imageCache.setObject(img, forKey: self.imageURL as NSString)
+            if imageOneUrl != nil {
+                let refImageOne = Storage.storage().reference(forURL: imageOneUrl!)
+                refImageOne.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                    if error != nil {
+                        print("An error has occured downloading image")
+                    } else {
+                        print("Image downloaded")
+                        if let imageData = data {
+                            if let imgOne = UIImage(data: imageData) {
+                                //  self.imageArray.append(img)
+                                RentalTableViewVC.imageCache.setObject(imgOne, forKey: self.imageOneUrl! as NSString)
+                                self.localSource = [ImageSource(image: imgOne)]
+                                self.imageSlider.setImageInputs(self.localSource)
+                               
+                                if self.imageTwoUrl != nil {
+                                    let refImageTwo = Storage.storage().reference(forURL: self.imageTwoUrl!)
+                                    refImageTwo.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                                        if error != nil {
+                                            print("An error has occured downloading image")
+                                        } else {
+                                            print("Image downloaded")
+                                            if let imageData = data {
+                                                if let imgTwo = UIImage(data: imageData) {
+                                                    RentalTableViewVC.imageCache.setObject(imgTwo, forKey: self.imageTwoUrl! as NSString)
+                                                    self.localSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo)]
+                                                    self.imageSlider.setImageInputs(self.localSource)
+                                                    
+                                                    if self.imageThreeUrl != nil {
+                                                        let refImageThree = Storage.storage().reference(forURL: self.imageThreeUrl!)
+                                                        refImageThree.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                                                            if error != nil {
+                                                                print("An error has occured downloading image")
+                                                            } else {
+                                                                print("Image downloaded")
+                                                                if let imageData = data {
+                                                                    if let imgThree = UIImage(data: imageData) {
+                                                                        RentalTableViewVC.imageCache.setObject(imgThree, forKey: self.imageThreeUrl! as NSString)
+                                                                        self.localSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo), ImageSource(image: imgThree)]
+                                                                        self.imageSlider.setImageInputs(self.localSource)
+                                                                        
+                                                                        if self.imageFourUrl != nil {
+                                                                            let refImageFour = Storage.storage().reference(forURL: self.imageFourUrl!)
+                                                                            refImageFour.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                                                                                if error != nil {
+                                                                                    print("An error has occured downloading image")
+                                                                                } else {
+                                                                                    print("Image downloaded")
+                                                                                    if let imageData = data {
+                                                                                        if let imgFour = UIImage(data: imageData) {
+                                                                                            RentalTableViewVC.imageCache.setObject(imgFour, forKey: self.imageFourUrl! as NSString)
+                                                                                            self.localSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo), ImageSource(image: imgThree), ImageSource(image: imgFour)]
+                                                                                            self.imageSlider.setImageInputs(self.localSource)
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            })
+                                                                        }
+
+                                                                        
+                                                                    }
+                                                                }
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    })
+                                }
+                                
+                            }
                         }
                     }
-                }
-            })
-        }
+                })
+                
+              
+                
+                
+            }
+          
+            
+        
+           
+            
+        
+          
+
+        
+        
+  //  }
+        
+
+//        if let imageOneString = self.imageOneUrl, let imageOne = RentalTableViewVC.imageCache.object(forKey: imageOneString as NSString) {
+//             localSource = [ImageSource(image: imageOne)]
+//            if let imageTwoString = self.imageTwoUrl, let imageTwo = RentalTableViewVC.imageCache.object(forKey: imageTwoString as NSString) {
+//                localSource = [ImageSource(image: imageOne),ImageSource(image: imageTwo)]
+//                if let imageThreeString = self.imageThreeUrl, let imageThree = RentalTableViewVC.imageCache.object(forKey: imageThreeString as NSString) {
+//                    localSource = [ImageSource(image: imageOne),ImageSource(image: imageTwo),ImageSource(image: imageThree)]
+//                    if let imageFourString = self.imageFourUrl, let imageFour = RentalTableViewVC.imageCache.object(forKey: imageFourString as NSString) {
+//                        localSource = [ImageSource(image: imageOne),ImageSource(image: imageTwo),ImageSource(image: imageThree),ImageSource(image: imageFour)]
+//                    }
+//                }
+//            }
+//            self.imageSlider.setImageInputs(localSource)
+//
+//        }
+        
+
+       
         
     }
 

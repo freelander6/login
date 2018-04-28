@@ -43,17 +43,17 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         if editingStyle == .delete {
             let postID = myRentals[indexPath.row].postID
-            let imageID = myRentals[indexPath.row].ImageID
+           // let imageID = myRentals[indexPath.row].ImageID
             let refRental = DataService.ds.DBrefRentals
             let refUsers = DataService.ds.DBCurrentUser.child("MyRentals")
             let refFBstorage = DataService.ds.StorageREF
             refRental.child(postID!).removeValue()
             refUsers.child(postID!).removeValue()
-            refFBstorage.child(imageID!).delete(completion: { (error) in
+        /*    refFBstorage.child(imageID!).delete(completion: { (error) in
                 if error != nil {
                     print("There was an error deleting the image")
                 }
-            })
+            }) */
     
             
             // remove the item from the data model

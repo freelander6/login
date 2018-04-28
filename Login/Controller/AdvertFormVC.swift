@@ -176,7 +176,7 @@ class AdvertFormVC: FormViewController {
     }
     
     
-    func uploadImageToFirebaseStorage(img: UIImage?) {
+    func uploadImageToFirebaseStorage(img: UIImage?, imageName: String) {
         if let image = img {
             let imageData = UIImageJPEGRepresentation(image, 0.2)
             let imageID = UUID().uuidString
@@ -190,7 +190,7 @@ class AdvertFormVC: FormViewController {
                         // Uploaded Image
                         // Upload reference to Rental field in firebase\
                         let downloadUrl = meta?.downloadURL()?.absoluteString
-                        let imageRef = DataService.ds.DBrefRentalCurrentImages.child(imageID)
+                        let imageRef = DataService.ds.DBrefRentalCurrent.child(imageName)
                         imageRef.setValue(downloadUrl)
                     }
                 })
@@ -585,16 +585,16 @@ class AdvertFormVC: FormViewController {
                         self.clearScreen()
                         
                         if let img = self.rentalImage {
-                            self.uploadImageToFirebaseStorage(img: img)
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image1")
                         }
                         if let img = self.rentalImageTwo {
-                           self.uploadImageToFirebaseStorage(img: img)
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image2")
                         }
                         if let img = self.rentalImageThree {
-                            self.uploadImageToFirebaseStorage(img: img)
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image3")
                         }
                         if let img = self.rentalImageFour {
-                            self.uploadImageToFirebaseStorage(img: img)
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image4")
                         }
                         
                         self.postDataToFirbase()
