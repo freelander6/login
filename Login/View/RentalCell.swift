@@ -76,26 +76,30 @@ class RentalCell: UITableViewCell, MFMailComposeViewControllerDelegate {
             // download image from Firebase
           
             
-            let ref = Storage.storage().reference(forURL: rental.imageOneUrl!)
-        
-            ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-                if error != nil {
-                    print("An error has occured downloading image")
-                } else {
-                    print("Image downloaded")
-                    if let imageData = data {
-                        if let img = UIImage(data: imageData) {
-                            self.rentalImage.image = img
-                            RentalTableViewVC.imageCache.setObject(img, forKey: rental.imageOneUrl! as NSString)
-                            //Stop indicator
-                            self.indicator.stopAnimating()
-                            self.indicator.hidesWhenStopped = true
-                            self.hasImage = true
+            if let image = rental.imageOneUrl {
+                let ref = Storage.storage().reference(forURL: image)
+                
+                ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                    if error != nil {
+                        print("An error has occured downloading image")
+                    } else {
+                        print("Image downloaded")
+                        if let imageData = data {
+                            if let img = UIImage(data: imageData) {
+                                self.rentalImage.image = img
+                                RentalTableViewVC.imageCache.setObject(img, forKey: rental.imageOneUrl! as NSString)
+                                //Stop indicator
+                                self.indicator.stopAnimating()
+                                self.indicator.hidesWhenStopped = true
+                                self.hasImage = true
+                            }
+                            
                         }
-                        
                     }
-                }
-            })
+                })
+            }
+            
+        
             
             
         }
