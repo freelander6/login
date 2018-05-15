@@ -85,231 +85,14 @@ class DetailVC: UIViewController {
         petsField.text = pets
         descriptionField.text = des
         
+        
+        loadImagesIntoImageSlider()
         addMapAnnotation()
-
-
-//            // Download images from firebase if cache is empty
-//
-//            if imageOneUrl != nil {
-//                if RentalTableViewVC.imageCache.object(forKey: imageOneUrl! as NSString) == nil {
-//                let refImageOne = Storage.storage().reference(forURL: imageOneUrl!)
-//                refImageOne.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-//                    if error != nil {
-//                        print("An error has occured downloading image")
-//                    } else {
-//                        print("Image downloaded")
-//                        if let imageData = data {
-//                            if let imgOne = UIImage(data: imageData) {
-//                                //  self.imageArray.append(img)
-//                                RentalTableViewVC.imageCache.setObject(imgOne, forKey: self.imageOneUrl! as NSString)
-//                                self.localImageSource = [ImageSource(image: imgOne)]
-//                                self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                                if self.imageTwoUrl != nil {
-//                                    let refImageTwo = Storage.storage().reference(forURL: self.imageTwoUrl!)
-//                                    refImageTwo.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-//                                        if error != nil {
-//                                            print("An error has occured downloading image")
-//                                        } else {
-//                                            print("Image downloaded")
-//                                            if let imageData = data {
-//                                                if let imgTwo = UIImage(data: imageData) {
-//                                                    RentalTableViewVC.imageCache.setObject(imgTwo, forKey: self.imageTwoUrl! as NSString)
-//                                                    self.localImageSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo)]
-//                                                    self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                                                    if self.imageThreeUrl != nil {
-//                                                        let refImageThree = Storage.storage().reference(forURL: self.imageThreeUrl!)
-//                                                        refImageThree.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-//                                                            if error != nil {
-//                                                                print("An error has occured downloading image")
-//                                                            } else {
-//                                                                print("Image downloaded")
-//                                                                if let imageData = data {
-//                                                                    if let imgThree = UIImage(data: imageData) {
-//                                                                        RentalTableViewVC.imageCache.setObject(imgThree, forKey: self.imageThreeUrl! as NSString)
-//                                                                        self.localImageSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo), ImageSource(image: imgThree)]
-//                                                                        self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                                                                        if self.imageFourUrl != nil {
-//                                                                            let refImageFour = Storage.storage().reference(forURL: self.imageFourUrl!)
-//                                                                            refImageFour.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-//                                                                                if error != nil {
-//                                                                                    print("An error has occured downloading image")
-//                                                                                } else {
-//                                                                                    print("Image downloaded")
-//                                                                                    if let imageData = data {
-//                                                                                        if let imgFour = UIImage(data: imageData) {
-//                                                                                            RentalTableViewVC.imageCache.setObject(imgFour, forKey: self.imageFourUrl! as NSString)
-//                                                                                            self.localImageSource = [ImageSource(image: imgOne), ImageSource(image: imgTwo), ImageSource(image: imgThree), ImageSource(image: imgFour)]
-//                                                                                            self.imageSlider.setImageInputs(self.localImageSource)
-//                                                                                        }
-//                                                                                    }
-//                                                                                }
-//                                                                            })
-//                                                                        }
-//
-//
-//                                                                    }
-//                                                                }
-//                                                            }
-//                                                        })
-//                                                    }
-//                                                }
-//                                            }
-//                                        }
-//                                    })
-//                                }
-//
-//                            }
-//                        }
-//                    }
-//                })
-//
-//
-//
-//            } else {
-//
-//                    //Load image from Cashe
-//
-//                    let imageOne = RentalTableViewVC.imageCache.object(forKey: imageOneUrl! as NSString)
-//                    self.localImageSource = [ImageSource(image: imageOne!)]
-//                    self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                    if let imageTwoString = self.imageTwoUrl, let imageTwo = RentalTableViewVC.imageCache.object(forKey: imageTwoString as NSString) {
-//                        self.localImageSource = [ImageSource(image: imageOne!), ImageSource(image: imageTwo)]
-//                        self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                        if let imageThreeString = self.imageThreeUrl, let imageThree = RentalTableViewVC.imageCache.object(forKey: imageThreeString as NSString) {
-//                            self.localImageSource = [ImageSource(image: imageOne!), ImageSource(image: imageTwo), ImageSource(image: imageThree)]
-//                            self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                            if let imageFourString = self.imageFourUrl, let imageFour = RentalTableViewVC.imageCache.object(forKey: imageFourString as NSString) {
-//                                self.localImageSource = [ImageSource(image: imageOne!), ImageSource(image: imageTwo), ImageSource(image: imageThree), ImageSource(image: imageFour)]
-//                                self.imageSlider.setImageInputs(self.localImageSource)
-//                            }
-//
-//                        }
-//                    }
-//
-//
-//        }
-//
-//
-//    }
-       
-        
-//        if let imageOneUrl = self.imageOneUrl {
-//            if RentalTableViewVC.imageCache.object(forKey: imageOneUrl as NSString) == nil {
-//                let ref = Storage.storage().reference(forURL: imageOneUrl)
-//                ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
-//                    if error != nil {
-//                        //Error
-//                    } else {
-//                        // Succcess
-//                        if let imageData = data {
-//                            if let imageOne = UIImage(data: imageData) {
-//                             //   RentalTableViewVC.imageCache.setObject(imageOne, forKey: imageOneUrl as NSString)
-//                            //    self.localImageSource = [ImageSource(image: imageOne)]
-//                                self.imageOne = imageOne
-//                                self.localImageSource =  self.appendImageToSlider(img1: imageOne, img2: nil, img3: nil, img4: nil)
-//                              //  self.imageSlider.setImageInputs(source)
-//                                 self.imageSlider.setImageInputs(self.localImageSource)
-//
-//                            }
-//                        }
-//                    }
-//
-//
-//                })
-//           } //else {
-////                let imageOne = RentalTableViewVC.imageCache.object(forKey: imageOneUrl as NSString)
-////                self.localImageSource = [ImageSource(image: imageOne!)]
-////                self.imageSlider.setImageInputs(self.localImageSource)
-////            }
-//
-//
-//
-//        }
-//
-
-        
-        if let imageOneUrl = self.imageOneUrl {
-           // if RentalTableViewVC.imageCache.object(forKey: imageOneUrl as NSString) == nil
-            let ref = Storage.storage().reference(forURL: imageOneUrl)
-            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
-                if error != nil {
-                    // Error
-                } else {
-                    if let imageData = data {
-                        let imageOne = UIImage(data: imageData)
-                        self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: nil , img3: nil, img4: nil))
-                        
-                        
-                        if let imageTwoUrl = self.imageTwoUrl {
-                            let ref = Storage.storage().reference(forURL: imageTwoUrl)
-                            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
-                                if error != nil {
-                                    // Error
-                                } else {
-                                    if let imageData = data {
-                                        let imageTwo = UIImage(data: imageData)
-                                        self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: nil, img4: nil))
-                                        
-                                        if let imageThreeUrl = self.imageThreeUrl {
-                                            let ref = Storage.storage().reference(forURL: imageThreeUrl)
-                                            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
-                                                if error != nil {
-                                                    // Error
-                                                } else {
-                                                    if let imageData = data {
-                                                        let imageThree = UIImage(data: imageData)
-                                                        self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: nil))
-                                                        
-                                                        
-                                                        if let imageFourUrl = self.imageFourUrl {
-                                                            let ref = Storage.storage().reference(forURL: imageFourUrl)
-                                                            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
-                                                                if error != nil {
-                                                                    // Error
-                                                                } else {
-                                                                    if let imageData = data {
-                                                                        let imageFour = UIImage(data: imageData)
-                                                                        self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: imageFour))
-                                                                        
-                                                                    }
-                                                                }
-                                                            })
-                                                        }
-                                                        
-                                                        
-                                                    }
-                                                }
-                                            })
-                                        }
-                                        
-                                        
-                                        
-                                    }
-                                }
-                            })
-                        }
-                        
-                    }
-                }
-            })
-            
-            
-           
-            
-          
-        }
-        
         
 
+
         
-       
-    
+      
         
 
         
@@ -318,6 +101,193 @@ class DetailVC: UIViewController {
         
         
     }
+    
+    
+    func loadImagesIntoImageSlider() {
+        
+        
+        if let imageOneUrl = self.imageOneUrl {
+            if RentalTableViewVC.imageCache.object(forKey: imageOneUrl as NSString) == nil {
+                let ref = Storage.storage().reference(forURL: imageOneUrl)
+                ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                    if error != nil {
+                        // Error
+                    } else {
+                        if let imageData = data {
+                            let imageOne = UIImage(data: imageData)
+                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: nil , img3: nil, img4: nil))
+                            
+                            
+                            if let imageTwoUrl = self.imageTwoUrl {
+                                let ref = Storage.storage().reference(forURL: imageTwoUrl)
+                                ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                                    if error != nil {
+                                        // Error
+                                    } else {
+                                        if let imageData = data {
+                                            let imageTwo = UIImage(data: imageData)
+                                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: nil, img4: nil))
+                                            if let imageTwo = imageTwo {
+                                                RentalTableViewVC.imageCache.setObject(imageTwo, forKey: imageTwoUrl as NSString)
+                                            }
+                                            
+                                            if let imageThreeUrl = self.imageThreeUrl {
+                                                let ref = Storage.storage().reference(forURL: imageThreeUrl)
+                                                ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                                                    if error != nil {
+                                                        // Error
+                                                    } else {
+                                                        if let imageData = data {
+                                                            let imageThree = UIImage(data: imageData)
+                                                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: nil))
+                                                            if let imageThree = imageThree {
+                                                                RentalTableViewVC.imageCache.setObject(imageThree, forKey: imageThreeUrl as NSString)
+                                                            }
+                                                            
+                                                            
+                                                            
+                                                            if let imageFourUrl = self.imageFourUrl {
+                                                                let ref = Storage.storage().reference(forURL: imageFourUrl)
+                                                                ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                                                                    if error != nil {
+                                                                        // Error
+                                                                    } else {
+                                                                        if let imageData = data {
+                                                                            let imageFour = UIImage(data: imageData)
+                                                                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: imageFour))
+                                                                            
+                                                                            if let imageFour = imageFour {
+                                                                                RentalTableViewVC.imageCache.setObject(imageFour, forKey: imageFourUrl as NSString)
+                                                                            }
+                                                                            
+                                                                            
+                                                                        }
+                                                                    }
+                                                                })
+                                                            }
+                                                            
+                                                            
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                    }
+                                })
+                            }
+                            
+                        }
+                    }
+                })
+            } else {
+                if let imageOne = RentalTableViewVC.imageCache.object(forKey: imageOneUrl as NSString) {
+                    self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: nil , img3: nil, img4: nil))
+                    
+                    if let imageTwoUrl = self.imageTwoUrl {
+                        if let imageTwo = RentalTableViewVC.imageCache.object(forKey: imageTwoUrl as NSString) {
+                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: nil, img4: nil))
+                            
+                            if let imageThreeUrl = self.imageThreeUrl {
+                                if let imageThree = RentalTableViewVC.imageCache.object(forKey: imageThreeUrl as NSString) {
+                                    self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: nil))
+                                    
+                                    if let imageFourUrl = self.imageFourUrl {
+                                        if let imageFour = RentalTableViewVC.imageCache.object(forKey: imageFourUrl as NSString) {
+                                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: imageFour))
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            
+                            let ref = Storage.storage().reference(forURL: imageTwoUrl)
+                            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                                if error != nil {
+                                    //Error
+                                } else {
+                                    if let imageData = data {
+                                        if let imageTwo = UIImage(data: imageData) {
+                                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: nil, img4: nil))
+                                            RentalTableViewVC.imageCache.setObject(imageTwo, forKey: imageTwoUrl as NSString)
+                                            
+                                            
+                                            if let imageThreeUrl = self.imageThreeUrl {
+                                                if let imageThree = RentalTableViewVC.imageCache.object(forKey: imageThreeUrl as NSString) {
+                                                    self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: nil))
+                                                } else {
+                                                    let ref = Storage.storage().reference(forURL: imageThreeUrl)
+                                                    ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                                                        if error != nil {
+                                                            //error
+                                                        } else {
+                                                            if let imageData = data {
+                                                                if let imageThree = UIImage(data: imageData) {
+                                                                    self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: nil))
+                                                                    RentalTableViewVC.imageCache.setObject(imageThree, forKey: imageThreeUrl as NSString)
+                                                                    
+                                                                    if let imageFourUrl = self.imageFourUrl {
+                                                                        if let imageFour = RentalTableViewVC.imageCache.object(forKey: imageFourUrl as NSString) {
+                                                                            //If in Cache
+                                                                            self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: imageFour))
+                                                                        } else {
+                                                                            //Download
+                                                                            let ref = Storage.storage().reference(forURL: imageFourUrl)
+                                                                            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                                                                                if error != nil {
+                                                                                    //Error
+                                                                                } else {
+                                                                                    if let imageData = data, let imageFour = UIImage(data: imageData) {
+                                                                                        self.imageSlider.setImageInputs(self.appendImageToSlider(img1: imageOne, img2: imageTwo , img3: imageThree, img4: imageFour))
+                                                                                        RentalTableViewVC.imageCache.setObject(imageFour, forKey: imageFourUrl as NSString)
+                                                                                    }
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    
+                                                                }
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                    }
+                                }
+                            })
+                            
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                }
+            }
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+    }
+    
+    
+    
     
     
     func appendImageToSlider(img1: UIImage?, img2: UIImage?, img3: UIImage?, img4: UIImage?) -> [ImageSource] {
