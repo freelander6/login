@@ -73,6 +73,9 @@ class AdvertFormVC: FormViewController {
     }
     
     var rentalImage: UIImage?
+    var rentalImageTwo : UIImage?
+    var rentalImageThree: UIImage?
+    var rentalImageFour: UIImage?
     
     var databaseRef:DatabaseReference?   //reference to firebase dba
     
@@ -87,16 +90,7 @@ class AdvertFormVC: FormViewController {
     }
 
     
-////     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-////        if segue.identifier == "toLocationInputVC" {
-////            let locationPicker = segue.destination as! LocationPicker
-//            locationPicker.pickCompletion = { (pickedLocationItem) in
-//
-//                self._lat = pickedLocationItem.coordinate?.latitude
-//                self._long = pickedLocationItem.coordinate?.longitude
-//            }
-////        }
-////    }
+
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,39 +106,45 @@ class AdvertFormVC: FormViewController {
     }
     
     
-    func upLoadImageAndDataToFirebase() {
-        
-        if let uploadImage = rentalImage {
-            
-            
-            if let imageData = UIImageJPEGRepresentation(uploadImage, 0.2) {
-                
-                let imageUID = UUID().uuidString
-                let metaData = StorageMetadata()
-                metaData.contentType = "image/jpeg"
-                
-                DataService.ds.StorageREF.child(imageUID).putData(imageData, metadata: metaData) { (metadata, error) in
-                    if error != nil {
-                        print("Error occured uploading data to firebase")
-                    } else {
-                        print("Successfully uploaded image")
-                        
-                        let downloadURL = metadata?.downloadURL()?.absoluteString
-                        
-                        if let url = downloadURL {
-                        self.postDataToFirbase(imgURL: url, imageID: imageUID)
-                            
-                        }
-                    }
-                    
-                }
-                
-            }
-        }
-        
-    }
+//    func upLoadImageAndDataToFirebase() {
+//
+//        if let uploadImage = rentalImage {
+//
+//
+//            if let imageData = UIImageJPEGRepresentation(uploadImage, 0.2) {
+//
+//                let imageUID = UUID().uuidString
+//                let metaData = StorageMetadata()
+//                metaData.contentType = "image/jpeg"
+//
+//                DataService.ds.StorageREF.child(imageUID).putData(imageData, metadata: metaData) { (metadata, error) in
+//                    if error != nil {
+//                        print("Error occured uploading data to firebase")
+//                    } else {
+//                        print("Successfully uploaded image")
+//
+//                        let downloadURL = metadata?.downloadURL()?.absoluteString
+//
+//                        if let url = downloadURL {
+//                        self.postDataToFirbase(imgURL: url, imageID: imageUID)
+//
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//        }
+//
+//    }
     
-    func postDataToFirbase(imgURL: String, imageID: String) {
+    
+    
+    
+    
+    
+    
+    func postDataToFirbase() {
         
         
         
@@ -156,17 +156,17 @@ class AdvertFormVC: FormViewController {
             "rentalPeriod": rentalPeriod as AnyObject,
             "type": type as AnyObject,
             "pets": pets as AnyObject,
-            "imageURL": imgURL as AnyObject,
+         //   "imageURL": imgURL as AnyObject,
             "userID": userID as AnyObject,
             "furnished": furnished as AnyObject,
              "bills": bills as AnyObject,
-            "ImageID": imageID as AnyObject,
+        //    "ImageID": imageID as AnyObject,
             "lat": lat as AnyObject,
             "long": long as AnyObject
         ]
         
         //Post data
-        let postDataToRentals = DataService.ds.DBrefRentals.childByAutoId()
+        let postDataToRentals = DataService.ds.DBrefRentalCurrent
         postDataToRentals.setValue(data)
         
         
@@ -175,6 +175,29 @@ class AdvertFormVC: FormViewController {
         
     }
     
+    
+    func uploadImageToFirebaseStorage(img: UIImage?, imageName: String) {
+        if let image = img {
+            let imageData = UIImageJPEGRepresentation(image, 0.2)
+            let imageID = UUID().uuidString
+            let metaData = StorageMetadata()
+            if let data = imageData {
+                metaData.contentType = "image/jpeg"
+                DataService.ds.StorageREF.child(imageID).putData(data, metadata: metaData, completion: { (meta, error) in
+                    if error != nil {
+                        // Error Occured
+                    } else {
+                        // Uploaded Image
+                        // Upload reference to Rental field in firebase\
+                        let downloadUrl = meta?.downloadURL()?.absoluteString
+                        let imageRef = DataService.ds.DBrefRentalCurrent.child(imageName)
+                        imageRef.setValue(downloadUrl)
+                    }
+                })
+                
+            }
+        }
+    }
     
     
     func loadEurekaForm() {
@@ -486,7 +509,7 @@ class AdvertFormVC: FormViewController {
             <<< SwitchRow("img"){
                 $0.title = "Upload more images"
             }
-            <<< ImageRow(){
+            <<< ImageRow("image2"){
                 
                 $0.hidden = Condition.function(["img"], { form in
                     return !((form.rowBy(tag: "img") as? SwitchRow)?.value ?? false)
@@ -504,7 +527,7 @@ class AdvertFormVC: FormViewController {
                     cell.imageView?.image = UIImage(named: "plus_image")
             }
             
-            <<< ImageRow(){
+            <<< ImageRow("image3"){
                 
                 $0.hidden = Condition.function(["img"], { form in
                     return !((form.rowBy(tag: "img") as? SwitchRow)?.value ?? false)
@@ -523,7 +546,7 @@ class AdvertFormVC: FormViewController {
             }
             
             
-            <<< ImageRow(){
+            <<< ImageRow("image4"){
                 
                 $0.hidden = Condition.function(["img"], { form in
                     return !((form.rowBy(tag: "img") as? SwitchRow)?.value ?? false)
@@ -540,31 +563,13 @@ class AdvertFormVC: FormViewController {
                 .cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "plus_image")
             }
-            
-            
-            <<< ImageRow(){
-                
-                $0.hidden = Condition.function(["img"], { form in
-                    return !((form.rowBy(tag: "img") as? SwitchRow)?.value ?? false)
-                })
-                $0.title = "Upload fifth photo"
-                $0.sourceTypes = .PhotoLibrary
-                $0.clearAction = .no
-                }
-                .cellUpdate { cell, row in
-                    cell.accessoryView?.layer.cornerRadius = 17
-                    cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
-                    
-                }
-                .cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "plus_image")
-        }
+
         
      
-            
-        form +++
+            form +++
             
             Section()
+                // Submit and process form
             <<< ButtonRow() {
                 $0.title = "Submit and list Rental"
                 }
@@ -578,7 +583,21 @@ class AdvertFormVC: FormViewController {
                         print("Form validaton successful")
                         self.getFormValues()
                         self.clearScreen()
-                        self.upLoadImageAndDataToFirebase()
+                        
+                        if let img = self.rentalImage {
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image1")
+                        }
+                        if let img = self.rentalImageTwo {
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image2")
+                        }
+                        if let img = self.rentalImageThree {
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image3")
+                        }
+                        if let img = self.rentalImageFour {
+                            self.uploadImageToFirebaseStorage(img: img, imageName: "image4")
+                        }
+                        
+                        self.postDataToFirbase()
                         
                     }
                 }
@@ -612,16 +631,16 @@ class AdvertFormVC: FormViewController {
         if let description = formValues["rentalDescription"] {self._rentalDescription = description as! String }
         
         if let image = formValues["image1"] {self.rentalImage = image as? UIImage}
-     //   if let imageTwo = formValues["image2"] {self.rentalImage = image as? UIImage}
-      //  if let imageThree = formValues["image3"] {self.rentalImage = image as? UIImage}
-     //   if let imageFour = formValues["image4"] {self.rentalImage = image as? UIImage}
-      //  if let imageFive = formValues["image5"] {self.rentalImage = image as? UIImage}
+        if let imageTwo = formValues["image2"] {self.rentalImageTwo = imageTwo as? UIImage}
+        if let imageThree = formValues["image3"] {self.rentalImageThree = imageThree as? UIImage}
+        if let imageFour = formValues["image4"] {self.rentalImageFour = imageFour as? UIImage}
+
 
         
     }
     
     func clearScreen() {
-        form.setValues(["title" : "", "rent" : nil, "bondValue" : nil, "rentalPeriod" : "", "rentalType" : "", "pet" : "", "furnished": "", "bills": "", "street" : "", "city" : "", "postcode" : "", "houseNumber": "", "rentalDescription" : "", "image1" : nil, "region" : nil])
+        form.setValues(["title" : "", "rent" : nil, "bondValue" : nil, "rentalPeriod" : "", "rentalType" : "", "pet" : "", "furnished": "", "bills": "", "street" : "", "city" : "", "postcode" : "", "houseNumber": "", "rentalDescription" : "", "image1" : nil, "image2": nil, "image3": nil, "image4": nil,  "region" : nil])
         tableView.reloadData()
     }
     

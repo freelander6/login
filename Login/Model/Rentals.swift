@@ -14,7 +14,6 @@ class Rental {
 
     
     private var _title: String!
-    private var _imgURL: String!
     private var _price: String!
     private var _rentalType: String!
     private var _bond: String!
@@ -26,7 +25,10 @@ class Rental {
     private var _furnished: String!
     private var _bills: String!
     private var _views = 0
-    private var _ImageID: String!
+    private var _imageOneUrl: String!
+    private var _imageTwoUrl: String!
+    private var _imageThreeUrl: String!
+    private var _imageFourUrl: String!
     private var _long : Double!
     private var _lat: Double!
 
@@ -37,9 +39,6 @@ class Rental {
         return _title
     }
     
-    var imageURL: String? {
-        return _imgURL
-    }
     
     var price: String? {
         return _price
@@ -84,8 +83,17 @@ class Rental {
         return _views
     }
     
-    var ImageID: String? {
-        return _ImageID
+    var imageOneUrl: String? {
+        return _imageOneUrl
+    }
+    var imageTwoUrl: String? {
+        return _imageTwoUrl
+    }
+    var imageThreeUrl: String? {
+        return _imageThreeUrl
+    }
+    var imageFourUrl: String? {
+        return _imageFourUrl
     }
     
     var long: Double? {
@@ -100,10 +108,9 @@ class Rental {
     
  
     
-    init(title: String, imageURL: String, price: String, rentalType: String, bond: String, rentalPeriod: String, pets: String, description: String, furnished: String, bills: String, views: Int, ImageID: String, long: Double, lat: Double) {
+    init(title: String, price: String, rentalType: String, bond: String, rentalPeriod: String, pets: String, description: String, furnished: String, bills: String, views: Int, imageOneUrl: String, imageTwoUrl: String, imageThreeUrl: String , imageFourUrl: String, long: Double, lat: Double) {
         
         self._title = title
-        self._imgURL = imageURL
         self._price = price
         self._rentalType = rentalType
         self._bond = bond
@@ -113,7 +120,10 @@ class Rental {
         self._furnished = furnished
         self._bills = bills
         self._views = views
-        self._ImageID = ImageID
+        self._imageOneUrl = imageOneUrl
+        self._imageTwoUrl = imageTwoUrl
+        self._imageThreeUrl = imageThreeUrl
+        self._imageFourUrl = imageFourUrl
         self._long = long
         self._lat = lat
       
@@ -125,10 +135,6 @@ class Rental {
         
         if let title = userData["title"] as? String {
             self._title = title
-        }
-        
-        if let imageURL = userData["imageURL"] as? String {
-            self._imgURL = imageURL
         }
         
         if let price = userData["price"] as? String {
@@ -170,9 +176,19 @@ class Rental {
             self._views = views
         }
         
-        if let imageID = userData["ImageID"] as? String {
-            self._ImageID = imageID
+        if let imageOneUrl = userData["image1"] as? String {
+            self._imageOneUrl = imageOneUrl
         }
+        if let imageTwoUrl = userData["image2"] as? String {
+            self._imageTwoUrl = imageTwoUrl
+        }
+        if let imageThreeUrl = userData["image3"] as? String {
+            self._imageThreeUrl = imageThreeUrl
+        }
+        if let imageFourUrl = userData["image4"] as? String {
+            self._imageFourUrl = imageFourUrl
+        }
+        
         
         if let long = userData["long"] as? Double {
             self._long = long

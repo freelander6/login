@@ -29,20 +29,32 @@ class ChatListCell: UITableViewCell {
     func configureCell(houseTitle: String, imgUrl: String?) {
         cellLabel.text = houseTitle
         if let imgUrl = imgUrl {
-            let ref = Storage.storage().reference(forURL: imgUrl)
-            ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-                if error != nil {
-                    print("An error has occured downloading image")
-                } else {
-                    print("Image downloaded")
-                    if let imageData = data {
-                        if let img = UIImage(data: imageData) {
-                            self.userProfileImage.image = img
-                            
+            //If in Cache
+            if let image = RentalTableViewVC.imageCache.object(forKey: imgUrl as NSString) {
+                self.userProfileImage.image = image
+                
+            } else {
+                //If not cached
+                let ref = Storage.storage().reference(forURL: imgUrl)
+                ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                    if error != nil {
+                        print("An error has occured downloading image")
+                    } else {
+                        print("Image downloaded")
+                        if let imageData = data {
+                            if let img = UIImage(data: imageData) {
+                                self.userProfileImage.image = img
+                                RentalTableViewVC.imageCache.setObject(img, forKey: imgUrl as NSString)
+                            }
                         }
                     }
-                }
-            })
+                })
+                
+            }
+            
+            
+            
+          
         }
         
     }

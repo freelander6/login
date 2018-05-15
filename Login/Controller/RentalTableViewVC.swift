@@ -39,6 +39,7 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     var myRentals = [String]()
     
+    var imageURLS = [String]()
 
     var isFilterEnabled: Bool?
     var filterByMinPrice: Float?
@@ -94,8 +95,17 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let filteredRentitle = filteredArrary[value].title {
                 destination.rentalTitle = filteredRentitle
             }
-            if let filteredImageURL = filteredArrary[value].imageURL {
-                destination.imageURL = filteredImageURL
+            if let filteredImageOneUrl = filteredArrary[value].imageOneUrl {
+                destination.imageOneUrl = filteredImageOneUrl
+            }
+            if let filteredImageTwoUrl = filteredArrary[value].imageTwoUrl {
+                destination.imageTwoUrl = filteredImageTwoUrl
+            }
+            if let filteredImageThreeUrl = filteredArrary[value].imageThreeUrl {
+                destination.imageThreeUrl = filteredImageThreeUrl
+            }
+            if let filteredImageFourUrl = filteredArrary[value].imageFourUrl {
+                destination.imageFourUrl = filteredImageFourUrl
             }
             if let filteredRentDescription = filteredArrary[value].description {
                 destination.des = filteredRentDescription
@@ -135,8 +145,17 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
             if let rentalTitleValue = rentalsArray[value].title {
                 destination.rentalTitle = rentalTitleValue
             }
-            if let imageURLValue = rentalsArray[value].imageURL {
-                destination.imageURL = imageURLValue
+            if let imageOneUrl = rentalsArray[value].imageOneUrl {
+                destination.imageOneUrl = imageOneUrl
+            }
+            if let imageTwoUrl = rentalsArray[value].imageTwoUrl {
+                destination.imageTwoUrl = imageTwoUrl
+            }
+            if let imageThreeUrl = rentalsArray[value].imageThreeUrl {
+                destination.imageThreeUrl = imageThreeUrl
+            }
+            if let imageFourUrl = rentalsArray[value].imageFourUrl {
+                destination.imageFourUrl = imageFourUrl
             }
             if let rentalDescriptionValue = rentalsArray[value].description {
                 destination.des = rentalDescriptionValue
@@ -187,10 +206,14 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? RentalCell {
 
+            
+            
+            
+            
             var rentalImage = ""
 
-            if rental.imageURL != nil {
-                rentalImage = rental.imageURL!
+            if rental.imageOneUrl != nil {
+                rentalImage = rental.imageOneUrl!
             }
 
 
@@ -253,6 +276,8 @@ class RentalTableViewVC: UIViewController, UITableViewDataSource, UITableViewDel
      
         
     }
+    
+    
     
     
     func applyFilters(rental: Rental) {

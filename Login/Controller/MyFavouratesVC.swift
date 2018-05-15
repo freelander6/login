@@ -36,8 +36,8 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             var rentalImage = ""
             
-            if favourates.imageURL != nil {
-                rentalImage = favourates.imageURL!
+            if favourates.imageOneUrl != nil {
+                rentalImage = favourates.imageOneUrl!
             }
             
             
@@ -101,8 +101,17 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let rentitle = myFavouates[value].title {
                     destination.rentalTitle = rentitle
                 }
-                if let imageURL = myFavouates[value].imageURL {
-                    destination.imageURL = imageURL
+                if let imageOneUrl = myFavouates[value].imageOneUrl {
+                    destination.imageOneUrl = imageOneUrl
+                }
+                if let imageTwoUrl = myFavouates[value].imageTwoUrl {
+                    destination.imageTwoUrl = imageTwoUrl
+                }
+                if let imageThreeUrl = myFavouates[value].imageThreeUrl {
+                    destination.imageThreeUrl = imageThreeUrl
+                }
+                if let imageFourUrl = myFavouates[value].imageFourUrl {
+                    destination.imageFourUrl = imageFourUrl
                 }
                 if let rentalDescription = myFavouates[value].description {
                     destination.des = rentalDescription
