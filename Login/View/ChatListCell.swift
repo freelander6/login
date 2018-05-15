@@ -59,5 +59,7 @@ class ChatListCell: UITableViewCell {
         
     }
       
-
+    @IBAction func viewListingBtnPressed(_ sender: Any) {
+    }
+    
 }
