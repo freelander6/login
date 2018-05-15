@@ -24,11 +24,16 @@ class MyAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     let myUID = KeychainWrapper.standard.string(forKey: "uid")
     
     var oldImgURL = ""
+    var indicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         picker.delegate = self
+        
+        activityIndicator()
+        indicator.startAnimating()
+        indicator.backgroundColor = UIColor.clear
         
         
         if myUID == nil {
@@ -45,20 +50,36 @@ class MyAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                         }
                         if snap.key == "profileImageURL" {
                             if let url = snap.value as? String {
-                                let ref = Storage.storage().reference(forURL: url)
-                                ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-                                    if error != nil {
-                                        print("An error has occured downloading image")
-                                    } else {
-                                        print("Image downloaded")
-                                        if let imageData = data {
-                                            if let img = UIImage(data: imageData) {
-                                                self.profilePictureImg.image = img
-                                                
+                                
+                                if let cachedImage = RentalTableViewVC.imageCache.object(forKey: url as NSString) {
+                                    self.profilePictureImg.image = cachedImage
+                                    self.indicator.stopAnimating()
+                                    self.indicator.hidesWhenStopped = true
+                                    
+                                } else {
+                                    //Downlaod image
+                                    let ref = Storage.storage().reference(forURL: url)
+                                    ref.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
+                                        if error != nil {
+                                            print("An error has occured downloading image")
+                                        } else {
+                                            print("Image downloaded")
+                                            if let imageData = data {
+                                                if let img = UIImage(data: imageData) {
+                                                    self.profilePictureImg.image = img
+                                                    self.indicator.stopAnimating()
+                                                    self.indicator.hidesWhenStopped = true
+                                                    RentalTableViewVC.imageCache.setObject(img, forKey: url as NSString)
+                                                    
+                                                }
                                             }
                                         }
-                                    }
-                                })
+                                    })
+                                    
+                                }
+                                
+                                
+                              
                             }
                           
                         }
@@ -180,5 +201,15 @@ func removeImgFromFirebaseStorage() {
         
         try! Auth.auth().signOut()
     }
+    
+    func activityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+    }
+    
+    
 }
 
