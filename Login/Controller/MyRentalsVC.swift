@@ -41,6 +41,9 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
+        // Delete items on swipe
+        
+        
         if editingStyle == .delete {
             let postID = myRentals[indexPath.row].postID
            // let imageID = myRentals[indexPath.row].ImageID
@@ -49,11 +52,54 @@ class MyRentalsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let refFBstorage = DataService.ds.StorageREF
             refRental.child(postID!).removeValue()
             refUsers.child(postID!).removeValue()
-        /*    refFBstorage.child(imageID!).delete(completion: { (error) in
-                if error != nil {
-                    print("There was an error deleting the image")
-                }
-            }) */
+            refFBstorage.child("rental_images")
+            
+            //Remove images from Storage
+            
+            if let imageOneUrl = myRentals[indexPath.row].imageOneUrl {
+                let storageRef = Storage.storage().reference(forURL: imageOneUrl)
+                storageRef.delete(completion: { (error) in
+                    if error != nil {
+                        //error deleting
+                    } else {
+                        print("File deleted")
+                    }
+                })
+            }
+            
+            if let imageTwoUrl = myRentals[indexPath.row].imageTwoUrl {
+                let storageRef = Storage.storage().reference(forURL: imageTwoUrl)
+                storageRef.delete(completion: { (error) in
+                    if error != nil {
+                        //error deleting
+                    } else {
+                        print("File deleted")
+                    }
+                })
+            }
+            
+            if let imageThreeUrl = myRentals[indexPath.row].imageThreeUrl {
+                let storageRef = Storage.storage().reference(forURL: imageThreeUrl)
+                storageRef.delete(completion: { (error) in
+                    if error != nil {
+                        //error deleting
+                    } else {
+                        print("File deleted")
+                    }
+                })
+            }
+            
+            if let imageFourUrl = myRentals[indexPath.row].imageFourUrl {
+                let storageRef = Storage.storage().reference(forURL: imageFourUrl)
+                storageRef.delete(completion: { (error) in
+                    if error != nil {
+                        //error deleting
+                    } else {
+                        print("File deleted")
+                    }
+                })
+            }
+
     
             
             // remove the item from the data model

@@ -37,11 +37,7 @@ class DetailVC: UIViewController {
     var postID = ""
     var imageArray = [UIImage]()
 
-    
-    var imageOne: UIImage?
-    var imageTwo: UIImage?
-    var imageThree: UIImage?
-    var imageFour: UIImage?
+
 
     var localImageSource = [ImageSource]()
     
@@ -310,43 +306,6 @@ class DetailVC: UIViewController {
     
         return localImageSrc
     }
-
-    
-    
-    
- //   if RentalTableViewVC.imageCache.object(forKey: imageOneUrl! as NSString) == nil {
-    //                let refImageOne = Storage.storage().reference(forURL: imageOneUrl!)
-    //                refImageOne.getData(maxSize:  2 * 1024 * 1024, completion: { (data, error) in
-    //                    if error != nil {
-    //                        print("An error has occured downloading image")
-    //                    } else {
-    //                        print("Image downloaded")
-    //                        if let imageData = data {
-    //                            if let imgOne = UIImage(data: imageData) {
-    //                                //  self.imageArray.append(img)
-    //                                RentalTableViewVC.imageCache.setObject(imgOne, forKey: self.imageOneUrl! as NSString)
-    //                                self.localImageSource = [ImageSource(image: imgOne)]
-    //                                self.imageSlider.setImageInputs(self.localImageSource)
-//
-//    func downloadImageFromUrl(url : String) -> UIImage? {
-//        var imageToReturn: UIImage?
-//        let ref = Storage.storage().reference(forURL: url)
-//        ref.getData(maxSize: 2 * 1024 * 1024) { (data, error) in
-//            if error != nil {
-//                print("Error occured downloading image")
-//            } else {
-//                if let imageData = data {
-//                    if let image = UIImage(data: imageData) {
-//                        imageToReturn = image
-//                    }
-//                }
-//            }
-//        }
-//        return imageToReturn
-//    }
-    
-    
-    
 
     
     
