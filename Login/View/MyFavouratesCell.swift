@@ -12,7 +12,7 @@ import Firebase
 class MyFavouratesCell: UITableViewCell {
 
     var rental: Rental?
-    
+    var indicator = UIActivityIndicatorView()
 
     
     @IBOutlet weak var title: UILabel!
@@ -22,6 +22,12 @@ class MyFavouratesCell: UITableViewCell {
     
     func configureCell(rental : Rental, image : UIImage?) {
         
+        indicator.frame = self.rentalImage.bounds
+        self.rentalImage.addSubview(indicator)
+        indicator.backgroundColor = UIColor.clear
+        indicator.color = UIColor.gray
+        indicator.startAnimating()
+        
         if let title = rental.title {
             self.title.text = title
         }
@@ -29,6 +35,9 @@ class MyFavouratesCell: UITableViewCell {
         if image != nil {
             //Image already in cache
             self.rentalImage.image = image
+            indicator.stopAnimating()
+            indicator.removeFromSuperview()
+            
         } else {
             // download image from Firebase
             let ref = Storage.storage().reference(forURL: rental.imageOneUrl!)
@@ -41,6 +50,8 @@ class MyFavouratesCell: UITableViewCell {
                         if let img = UIImage(data: imageData) {
                             self.rentalImage.image = img
                             RentalTableViewVC.imageCache.setObject(img, forKey: rental.imageOneUrl! as NSString)
+                            self.indicator.stopAnimating()
+                            self.indicator.removeFromSuperview()
                         }
                     }
                 }
@@ -50,6 +61,11 @@ class MyFavouratesCell: UITableViewCell {
         }
         
     }
+    
+    
+
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

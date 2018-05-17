@@ -13,10 +13,12 @@ import FirebaseStorage
 class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
+
     
     var rentalsArray = [Rental]()
     var myFavouates = [Rental]()
     
+
     
     @IBOutlet weak var myFavouratesTableView: UITableView!
     
@@ -137,8 +139,17 @@ class MyFavouratesVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         performSegue(withIdentifier: "toDetailVC", sender: nil)
     }
     
+    
+
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+
+        
         
         myFavouratesTableView.delegate = self
         myFavouratesTableView.dataSource = self
