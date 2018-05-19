@@ -13,9 +13,9 @@ class RoundedImage: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.borderWidth = 0.5
+    //    layer.borderWidth = 0.5
         layer.masksToBounds = false
-        layer.borderColor =  UIColor.gray.cgColor  //UIColor.black.cgColor
+     //   layer.borderColor =  UIColor.gray.cgColor  //UIColor.black.cgColor
         layer.cornerRadius = frame.height/2
         clipsToBounds = true
         
